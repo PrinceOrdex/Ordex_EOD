@@ -129,3 +129,7 @@
 .added .fas, .added p{
     color: #0eb35a;
 }
+
+.nav-pills .nav-link.active{
+    background-image: linear-gradient(lightblue,white,lightblue) !important;
+}

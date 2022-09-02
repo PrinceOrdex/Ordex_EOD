@@ -46,6 +46,50 @@ const Eod = () => {
                     </a>
                   </li>
                 </ul>
+
+                <div
+                  class="nav flex-column nav-pills me-3"
+                  id="v-pills-tab"
+                  role="tablist"
+                  aria-orientation="vertical"
+                >
+                  <button
+                    class="nav-link active"
+                    id="v-pills-eod-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-eod"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-eod"
+                    aria-selected="true"
+                  >
+                    Home
+                  </button>
+                  <button
+                    class="nav-link"
+                    id="v-pills-history-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-history"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-history"
+                    aria-selected="false"
+                  >
+                    Profile
+                  </button>
+                  <button
+                    class="nav-link"
+                    id="v-pills-config-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-config"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-config"
+                    aria-selected="false"
+                  >
+                    Disabled
+                  </button>
+                </div>
               </div>
               <a
                 href="#"
@@ -53,37 +97,33 @@ const Eod = () => {
               >
                 <span className="fs-5 d-none d-sm-inline">Menu</span>
               </a>
-              <ul
+              {/* <ul
                 className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                 id="menu"
               >
                 <li className="nav-item">
-                  {/* <NavLink to="/" className="nav-link align-middle px-0">
-                    <span className="ms-1 d-none d-sm-inline">EOD</span>
-                  </NavLink> */}
-
                   <a className="nav-link align-middle px-0">
+                    <i className="fs-4 bi-house"></i>
                     <span className="ms-1 d-none d-sm-inline">EOD</span>
                   </a>
-                  {/* <i className="fs-4 bi-house"></i> */}
                 </li>
 
                 <li>
                   <a href="#" className="nav-link px-0 align-middle">
-                    {/* <i className="fs-4 bi-table"></i> */}
+                    <i className="fs-4 bi-table"></i>
                     <span className="ms-1 d-none d-sm-inline">EOD History</span>
                   </a>
                 </li>
 
                 <li>
                   <a href="#" className="nav-link px-0 align-middle">
-                    {/* <i className="fs-4 bi-people"></i> */}
+                    <i className="fs-4 bi-people"></i>
                     <span className="ms-1 d-none d-sm-inline">
                       Configuration
                     </span>
                   </a>
                 </li>
-              </ul>
+              </ul> */}
               <hr />
               <div className="dropdown pb-4">
                 <a
