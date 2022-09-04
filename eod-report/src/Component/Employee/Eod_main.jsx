@@ -129,7 +129,7 @@ const Eod_main = () => {
               </td>
               <td>1hr 20min</td>
             </tr>
-            <div className="position-relative table-delete"><i class="fa-solid fa-trash"></i></div>
+            <div className="position-absolute table-delete"><i class="fa-solid fa-trash"></i></div>
             <div className="position-absolute table-edit"><i class="fa-regular fa-pen-to-square"></i></div>
             <tr className="position-relative">
               <th scope="row">1</th>
@@ -139,6 +139,7 @@ const Eod_main = () => {
               <td><i class="fa-solid fa-calendar-check"></i></td>
               <td>1hr 20min</td>
             </tr>
+            <div className="position-absolute bottom-0"><i class="fa-solid fa-trash"></i></div>
 
           </tbody>
         </table>
