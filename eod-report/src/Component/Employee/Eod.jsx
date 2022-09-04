@@ -1,5 +1,6 @@
 import React from "react";
 import "./../../css/eod.css";
+import Dropdown from 'react-bootstrap/Dropdown';
 import { NavLink } from "react-router-dom";
 
 import _image_75 from "./../../Image/75.jpg";
@@ -48,7 +49,7 @@ const Eod = () => {
                 </ul>
 
                 <div
-                  class="nav flex-column nav-pills me-3"
+                  class="nav flex-column nav-pills mt-4 left-button"
                   id="v-pills-tab"
                   role="tablist"
                   aria-orientation="vertical"
@@ -63,7 +64,7 @@ const Eod = () => {
                     aria-controls="v-pills-eod"
                     aria-selected="true"
                   >
-                    Home
+                    EOD
                   </button>
                   <button
                     class="nav-link"
@@ -75,7 +76,7 @@ const Eod = () => {
                     aria-controls="v-pills-history"
                     aria-selected="false"
                   >
-                    Profile
+                    EOD History
                   </button>
                   <button
                     class="nav-link"
@@ -87,7 +88,7 @@ const Eod = () => {
                     aria-controls="v-pills-config"
                     aria-selected="false"
                   >
-                    Disabled
+                    Configuration
                   </button>
                 </div>
               </div>
@@ -170,10 +171,19 @@ const Eod = () => {
                     </a>
                   </li>
                 </ul>
+
+
               </div>
             </div>
           </div>
-          <Eod_main />;
+          {/* <Eod_main />; */}
+          <div className="col py-3 bg-white h-100 mb-2 px-5">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-eod" role="tabpanel" aria-labelledby="v-pills-eod-tab" tabindex="0"><Eod_main /></div>
+              <div class="tab-pane fade" id="v-pills-history" role="tabpanel" aria-labelledby="v-pills-history-tab" tabindex="0">v-pills-history-tab</div>
+              <div class="tab-pane fade" id="v-pills-config" role="tabpanel" aria-labelledby="v-pills-config-tab" tabindex="0">v-pills-config-tab</div>
+            </div>
+          </div>
         </div>
       </div>
     </>
