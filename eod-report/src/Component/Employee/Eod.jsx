@@ -1,6 +1,6 @@
 import React from "react";
 import "./../../css/eod.css";
-import Dropdown from 'react-bootstrap/Dropdown';
+// import Dropdown from 'react-bootstrap/Dropdown';
 import { NavLink } from "react-router-dom";
 
 import _image_75 from "./../../Image/75.jpg";
@@ -16,9 +16,13 @@ const Eod = () => {
       <div className="container-fluid">
         <div className="row flex-nowrap bg-dark pt-3">
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 py-3">
-            <div className="d-flex flex-column px-3 pt-2 text-white min-vh-100">
+            <div className="d-flex flex-column px-3 pt-2 min-vh-100">
               <div className="rounded-circle text-center pb-4">
                 <img src={_image_75} alt="hugenerd" />
+                <div className="flex flex-column text-center mt-2">
+                  <p className="mb-0">Abhay Patel</p>
+                  <p style={{ fontSize: "12px" }}>UI/UX Designer</p>
+                </div>
                 <ul
                   className="dropdown-menu dropdown-menu-dark text-small shadow"
                   aria-labelledby="dropdownUser1"
@@ -92,12 +96,12 @@ const Eod = () => {
                   </button>
                 </div>
               </div>
-              <a
+              {/* <a
                 href="#"
                 className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
               >
                 <span className="fs-5 d-none d-sm-inline">Menu</span>
-              </a>
+              </a> */}
               {/* <ul
                 className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                 id="menu"
@@ -125,9 +129,9 @@ const Eod = () => {
                   </a>
                 </li>
               </ul> */}
-              <hr />
+              {/* <hr /> */}
               <div className="dropdown pb-4">
-                <a
+                {/* <a
                   href="#"
                   className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                   id="dropdownUser1"
@@ -142,7 +146,7 @@ const Eod = () => {
                     className="rounded-circle"
                   />
                   <span className="d-none d-sm-inline mx-1">loser</span>
-                </a>
+                </a> */}
                 <ul
                   className="dropdown-menu dropdown-menu-dark text-small shadow"
                   aria-labelledby="dropdownUser1"
@@ -171,17 +175,39 @@ const Eod = () => {
                     </a>
                   </li>
                 </ul>
-
-
               </div>
             </div>
           </div>
           {/* <Eod_main />; */}
           <div className="col py-3 bg-white h-100 mb-2 px-5">
             <div class="tab-content" id="v-pills-tabContent">
-              <div class="tab-pane fade show active" id="v-pills-eod" role="tabpanel" aria-labelledby="v-pills-eod-tab" tabindex="0"><Eod_main /></div>
-              <div class="tab-pane fade" id="v-pills-history" role="tabpanel" aria-labelledby="v-pills-history-tab" tabindex="0">v-pills-history-tab</div>
-              <div class="tab-pane fade" id="v-pills-config" role="tabpanel" aria-labelledby="v-pills-config-tab" tabindex="0">v-pills-config-tab</div>
+              <div
+                class="tab-pane fade show active"
+                id="v-pills-eod"
+                role="tabpanel"
+                aria-labelledby="v-pills-eod-tab"
+                tabindex="0"
+              >
+                <Eod_main />
+              </div>
+              <div
+                class="tab-pane fade"
+                id="v-pills-history"
+                role="tabpanel"
+                aria-labelledby="v-pills-history-tab"
+                tabindex="0"
+              >
+                EOD-history-tab
+              </div>
+              <div
+                class="tab-pane fade"
+                id="v-pills-config"
+                role="tabpanel"
+                aria-labelledby="v-pills-config-tab"
+                tabindex="0"
+              >
+                EOD-configuration-tab
+              </div>
             </div>
           </div>
         </div>

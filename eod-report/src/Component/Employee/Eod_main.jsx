@@ -1,6 +1,53 @@
-import React from "react";
+import { React, useState } from "react";
 
 const Eod_main = () => {
+  const [userData, setData] = useState({
+    project: "",
+    task: "",
+    time: "",
+    status: "",
+    description: "",
+    showicon: "",
+  });
+
+  const [temp, setTemp] = useState([]);
+  const [icon, seticon] = useState(true);
+
+  let name, value;
+  const getInput = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    if (value == "Task in Progress") {
+      seticon(false);
+    } else {
+      seticon(true);
+    }
+    setData({ ...userData, [name]: value, showicon: icon });
+  };
+
+  const getTableData = () => {
+    if (
+      userData.project === "" ||
+      userData.task === "" ||
+      userData.time === "" ||
+      userData.status === "" ||
+      userData.description === ""
+    ) {
+      alert("Plz Fill Data first");
+    } else {
+      setTemp([...temp, userData]);
+      setData({
+        project: "",
+        task: "",
+        time: "",
+        status: "",
+        description: "",
+      });
+    }
+  };
+
+  console.log(userData);
+  console.log(temp);
   return (
     <>
       {/* <div className="col py-3 bg-white h-100 mb-2"> */}
@@ -15,7 +62,7 @@ const Eod_main = () => {
           <input
             type="date"
             id="birthday"
-            name="birthday"
+            name="date"
             className="form-control p-2"
           />
         </form>
@@ -27,11 +74,17 @@ const Eod_main = () => {
             <input
               className="form-control"
               type="text"
-              name="Poject"
+              name="project"
+              value={userData.project}
               id="Project"
               placeholder="Project title here"
+              onChange={getInput}
+              required
             />
           </div>
+          {/* <select name="" id="" className="project col-6">
+            <option value="">XYZ Project for ABC Company</option>
+          </select> */}
         </div>
       </div>
       <div className="row mx-0 px-0 mt-3 justify-content-center">
@@ -42,9 +95,12 @@ const Eod_main = () => {
               <input
                 className="form-control"
                 type="text"
-                name="Poject"
+                name="task"
+                value={userData.task}
                 id="Project"
                 placeholder="Project task here"
+                onChange={getInput}
+                required
               />
             </div>
           </div>
@@ -54,18 +110,28 @@ const Eod_main = () => {
               <div className="cs-form">
                 <input
                   type="time"
+                  name="time"
+                  value={userData.time}
                   className="form-control"
-                  value="hours:minutes"
+                  placeholder="Time"
+                  onChange={getInput}
+                  required
+                  // step="1"
                 />
               </div>
             </div>
             <div className="col-6">
               <p className="mb-1">Status</p>
-              <select className="form-select" required>
-                <option selected disabled>select option</option>
-                <option value="1">Task in Progress</option>
-                <option value="2">Task Completed</option>
-
+              <select
+                className="form-select"
+                name="status"
+                value={userData.status}
+                onChange={getInput}
+                required
+              >
+                <option selected>select option</option>
+                <option value="Task in Progress">Task in Progress</option>
+                <option value="Task Completed">Task Completed</option>
               </select>
             </div>
           </div>
@@ -77,8 +143,12 @@ const Eod_main = () => {
           <div className="description">
             <textarea
               className="form-control"
+              name="description"
+              value={userData.description}
               id="exampleFormControlTextarea1"
               placeholder="Description here"
+              onChange={getInput}
+              required
             ></textarea>
           </div>
         </div>
@@ -88,7 +158,9 @@ const Eod_main = () => {
         <div className="col-10 d-flex ms-5 justify-content-end align-items-center added">
           <i className="fas fa-check me-2"></i>
           <p className="mb-0">Task 3 Added Successfully</p>
-          <button className="px-4 add-button ms-3">Add</button>
+          <button className="px-4 add-button ms-3" onClick={getTableData}>
+            Add
+          </button>
         </div>
       </div>
 
@@ -118,29 +190,83 @@ const Eod_main = () => {
             </tr>
           </thead>
           <tbody className="position-relative">
-            <div className="position-absolute table-edit"><i class="fa-regular fa-pen-to-square"></i></div>
+            {temp.map((data, index) => {
+              return (
+                <>
+                  <div className="position-absolute table-edit">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                  </div>
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{data.project}</td>
+                    <td>{data.task}</td>
+                    <td>{data.description}</td>
+                    <td>
+                      <i
+                        class="fa-solid fa-calendar-check"
+                        style={{ color: "green" }}
+                      ></i>
+                      {/* <i
+                          class="fa-solid fa-hourglass-half"
+                          style={{ color: "orange" }}
+                        ></i> */}
+                    </td>
+                    <td>{data.time}</td>
+                  </tr>
+                  <div className="position-relative">
+                    <div className="position-absolute delete-icon">
+                      <i class="fa-solid fa-trash"></i>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+
+            {/* <div className="position-absolute table-edit">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </div>
             <tr>
               <th scope="row">1</th>
               <td>XYZ Project</td>
               <td>Task Project</td>
               <td>Brief Info About Project</td>
               <td>
-                <i class="fa-solid fa-hourglass-half"></i>
+                <i
+                  class="fa-solid fa-hourglass-half"
+                  style={{ color: "orange" }}
+                ></i>
               </td>
               <td>1hr 20min</td>
-            </tr>
-            <div className="position-absolute table-delete"><i class="fa-solid fa-trash"></i></div>
-            <div className="position-absolute table-edit"><i class="fa-regular fa-pen-to-square"></i></div>
+            </tr> */}
+            {/* <div className="position-relative">
+              <div className="position-absolute delete-icon">
+                <i class="fa-solid fa-trash"></i>
+              </div>
+            </div>
+            <div className="position-absolute table-edit">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </div>
             <tr className="position-relative">
               <th scope="row">1</th>
               <td>XYZ Project</td>
               <td>Task Project</td>
               <td>Brief Info About Project</td>
-              <td><i class="fa-solid fa-calendar-check"></i></td>
+              <td>
+                <i
+                  class="fa-solid fa-calendar-check"
+                  style={{ color: "green" }}
+                ></i>
+              </td>
               <td>1hr 20min</td>
             </tr>
-            <div className="position-absolute bottom-0"><i class="fa-solid fa-trash"></i></div>
-
+            <div className="position-relative">
+              <div className="position-absolute delete-icon">
+                <i class="fa-solid fa-trash"></i>
+              </div>
+            </div> */}
+            {/* <div className="position-absolute bottom-0">
+              <i class="fa-solid fa-trash"></i>
+            </div> */}
           </tbody>
         </table>
       </div>

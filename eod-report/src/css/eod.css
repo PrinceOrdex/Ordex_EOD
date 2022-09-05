@@ -191,6 +191,15 @@ textarea {
 textarea:focus,
 select:focus {
     box-shadow: 0 0 0 rgb(255, 255, 255) !important;
+    border: 0 !important;
+    border-bottom: 2px solid lightblue !important;
+    background-color: #F2F2F2 !important;
+    border-radius: 0;
+}
+
+
+input[type="time"]:focus{
+    box-shadow: 0 0 0 rgb(255, 255, 255) !important;
     border: 0;
     border-bottom: 2px solid lightblue !important;
     background-color: #F2F2F2 !important;
@@ -199,9 +208,13 @@ select:focus {
 
 .table-edit {
     left: -3%;
+    color: #ded7d7;
+    cursor: pointer;
 }
 
-.table-delete {
-    bottom: 55%;
-    right: -3%;
+.delete-icon{
+    right: -755%;
+    bottom: 100%;
+    color: #ded7d7;
+    cursor: pointer;
 }
