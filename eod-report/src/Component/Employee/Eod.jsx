@@ -180,7 +180,7 @@ const Eod = () => {
             </div>
           </div>
           {/* <Eod_main />; */}
-          <div className="col py-3 bg-white mb-3 px-5">
+          <div className="col py-3 bg-white px-5">
             <div class="tab-content" id="v-pills-tabContent">
               <div
                 class="tab-pane fade show active"
@@ -213,10 +213,12 @@ const Eod = () => {
           </div>
         </div>
         <div className="row flex-nowrap bg-dark">
-          <div className="col-10 ms-auto">
-            <div className="flex flex-row">
-              <div>fvgdfvg</div>
-              <div>fdvgdf</div>
+          <div className="col-10 ms-auto d-flex justify-content-between p-3 bottom-background">
+            <div>
+              <button className="btn clear-btn px-3">Clear All</button>
+            </div>
+            <div>
+              <button className="btn submit-data-btn px-5 ">Submit</button>
             </div>
           </div>
         </div>

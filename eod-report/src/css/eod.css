@@ -218,3 +218,17 @@ input[type="time"]:focus{
     color: #ded7d7;
     cursor: pointer;
 }
+
+.bottom-background{
+    background-image: linear-gradient(to left,#a1def4, #a1def4, #a1def4, #F2F2F2,#F2F2F2);
+}
+.clear-btn{
+    border: 2px solid #06beff;
+    color: #06beff;
+}
+
+.submit-data-btn{
+    background-color: #fff;
+    color:#06beff;
+    font-weight: 500;
+}
