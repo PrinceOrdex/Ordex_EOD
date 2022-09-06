@@ -8,6 +8,7 @@ import Eod_main from "./Eod_main";
 
 import Header from "./Header";
 import { useState } from "react";
+import Eod_history from "./Eod_history";
 
 const Eod = () => {
   return (
@@ -179,7 +180,7 @@ const Eod = () => {
             </div>
           </div>
           {/* <Eod_main />; */}
-          <div className="col py-3 bg-white h-100 mb-2 px-5">
+          <div className="col py-3 bg-white mb-3 px-5">
             <div class="tab-content" id="v-pills-tabContent">
               <div
                 class="tab-pane fade show active"
@@ -197,7 +198,7 @@ const Eod = () => {
                 aria-labelledby="v-pills-history-tab"
                 tabindex="0"
               >
-                EOD-history-tab
+                <Eod_history />
               </div>
               <div
                 class="tab-pane fade"
@@ -208,6 +209,14 @@ const Eod = () => {
               >
                 EOD-configuration-tab
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="row flex-nowrap bg-dark">
+          <div className="col-10 ms-auto">
+            <div className="flex flex-row">
+              <div>fvgdfvg</div>
+              <div>fdvgdf</div>
             </div>
           </div>
         </div>

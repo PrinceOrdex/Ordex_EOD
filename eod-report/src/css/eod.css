@@ -213,7 +213,7 @@ input[type="time"]:focus{
 }
 
 .delete-icon{
-    right: -755%;
+    right: -810%;
     bottom: 100%;
     color: #ded7d7;
     cursor: pointer;

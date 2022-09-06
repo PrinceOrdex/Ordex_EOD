@@ -7,22 +7,20 @@ const Eod_main = () => {
     time: "",
     status: "",
     description: "",
-    showicon: "",
   });
 
   const [temp, setTemp] = useState([]);
-  const [icon, seticon] = useState(true);
+  const [editindex, setEditIndex] = useState(null);
+  const [isedit, setIsEdit] = useState(true);
+  const [dataNum, setDataNum] = useState(0);
+  const [hasData, setHasData] = useState(false);
 
   let name, value;
   const getInput = (e) => {
     name = e.target.name;
     value = e.target.value;
-    if (value == "Task in Progress") {
-      seticon(false);
-    } else {
-      seticon(true);
-    }
-    setData({ ...userData, [name]: value, showicon: icon });
+
+    setData({ ...userData, [name]: value });
   };
 
   const getTableData = () => {
@@ -34,8 +32,15 @@ const Eod_main = () => {
       userData.description === ""
     ) {
       alert("Plz Fill Data first");
-    } else {
-      setTemp([...temp, userData]);
+    } else if (!isedit) {
+      setTemp(
+        temp.map((curElem) => {
+          if (curElem.id == editindex) {
+            return { ...curElem, name: userData };
+          }
+          return curElem;
+        })
+      );
       setData({
         project: "",
         task: "",
@@ -43,11 +48,43 @@ const Eod_main = () => {
         status: "",
         description: "",
       });
+
+      setEditIndex(null);
+      setIsEdit(true);
+    } else {
+      const all_data = { id: new Date().getTime().toString(), name: userData };
+
+      setTemp([...temp, all_data]);
+      setData({
+        project: "",
+        task: "",
+        time: "",
+        status: "",
+        description: "",
+      });
+      setDataNum(dataNum + 1);
+      setHasData(true);
     }
   };
 
-  console.log(userData);
-  console.log(temp);
+  const edititem = (ind) => {
+    const item_to_edit = temp.find((curElem) => {
+      return curElem.id == ind;
+    });
+    console.log(item_to_edit);
+    setData(item_to_edit.name);
+    setEditIndex(ind);
+    setIsEdit(false);
+  };
+
+  const deleteitem = (ind) => {
+    const updated_item = temp.filter((curElem, index) => {
+      return ind != index;
+    });
+    setTemp(updated_item);
+    setDataNum(dataNum - 1);
+  };
+
   return (
     <>
       {/* <div className="col py-3 bg-white h-100 mb-2"> */}
@@ -156,27 +193,17 @@ const Eod_main = () => {
 
       <div className="row mx-0 px-0 my-3 ms-5 justify-content-center">
         <div className="col-10 d-flex ms-5 justify-content-end align-items-center added">
-          <i className="fas fa-check me-2"></i>
-          <p className="mb-0">Task 3 Added Successfully</p>
+          <i className={hasData ? "fas fa-check me-2" : "d-none"}></i>
+          <p className={hasData ? "mb-0" : "d-none"}>
+            Task {dataNum} Added Successfully
+          </p>
           <button className="px-4 add-button ms-3" onClick={getTableData}>
             Add
           </button>
         </div>
       </div>
+      <hr className="mt-4" />
 
-      {/* <p className="lead">
-          An example 2-level sidebar with collasible menu items. The menu
-          functions like an "accordion" where only a single menu is be open at a
-          time. While the sidebar itself is not toggle-able, it does
-          responsively shrink in width on smaller screens.
-        </p>
-        <ul className="list-unstyled">
-          <li>
-            <h5>Responsive</h5>
-            shrinks in width, hides text labels and collapses to icons only on
-            mobile
-          </li>
-        </ul> */}
       <div className="container">
         <table class="table border">
           <thead>
@@ -193,80 +220,45 @@ const Eod_main = () => {
             {temp.map((data, index) => {
               return (
                 <>
-                  <div className="position-absolute table-edit">
-                    <i class="fa-regular fa-pen-to-square"></i>
+                  <div className="position-absolute table-edit" key={index}>
+                    <i
+                      className="fa-regular fa-pen-to-square"
+                      onClick={() => edititem(data.id)}
+                    ></i>
                   </div>
                   <tr>
                     <th scope="row">{index + 1}</th>
-                    <td>{data.project}</td>
-                    <td>{data.task}</td>
-                    <td>{data.description}</td>
+                    <td>{data.name.project}</td>
+                    <td>{data.name.task}</td>
+                    <td>{data.name.description}</td>
+
                     <td>
-                      <i
-                        class="fa-solid fa-calendar-check"
-                        style={{ color: "green" }}
-                      ></i>
-                      {/* <i
+                      {data.name.status == "Task Completed" ? (
+                        <i
+                          class="fa-solid fa-calendar-check"
+                          style={{ color: "green" }}
+                        ></i>
+                      ) : (
+                        <i
                           class="fa-solid fa-hourglass-half"
                           style={{ color: "orange" }}
-                        ></i> */}
+                        ></i>
+                      )}
                     </td>
-                    <td>{data.time}</td>
+
+                    <td>{data.name.time}</td>
                   </tr>
                   <div className="position-relative">
                     <div className="position-absolute delete-icon">
-                      <i class="fa-solid fa-trash"></i>
+                      <i
+                        class="fa-solid fa-trash"
+                        onClick={() => deleteitem(index)}
+                      ></i>
                     </div>
                   </div>
                 </>
               );
             })}
-
-            {/* <div className="position-absolute table-edit">
-              <i class="fa-regular fa-pen-to-square"></i>
-            </div>
-            <tr>
-              <th scope="row">1</th>
-              <td>XYZ Project</td>
-              <td>Task Project</td>
-              <td>Brief Info About Project</td>
-              <td>
-                <i
-                  class="fa-solid fa-hourglass-half"
-                  style={{ color: "orange" }}
-                ></i>
-              </td>
-              <td>1hr 20min</td>
-            </tr> */}
-            {/* <div className="position-relative">
-              <div className="position-absolute delete-icon">
-                <i class="fa-solid fa-trash"></i>
-              </div>
-            </div>
-            <div className="position-absolute table-edit">
-              <i class="fa-regular fa-pen-to-square"></i>
-            </div>
-            <tr className="position-relative">
-              <th scope="row">1</th>
-              <td>XYZ Project</td>
-              <td>Task Project</td>
-              <td>Brief Info About Project</td>
-              <td>
-                <i
-                  class="fa-solid fa-calendar-check"
-                  style={{ color: "green" }}
-                ></i>
-              </td>
-              <td>1hr 20min</td>
-            </tr>
-            <div className="position-relative">
-              <div className="position-absolute delete-icon">
-                <i class="fa-solid fa-trash"></i>
-              </div>
-            </div> */}
-            {/* <div className="position-absolute bottom-0">
-              <i class="fa-solid fa-trash"></i>
-            </div> */}
           </tbody>
         </table>
       </div>
