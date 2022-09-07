@@ -10,7 +10,7 @@ const Configuration = () => {
 
       <form className="mt-5 pt-5">
         <div className="row col-12 mx-0 px-0 mt-5 mb-3 align-items-center justify-content-center mentor-id">
-          <label for="inputEmail" className="col-auto form-label mb-0">
+          <label htmlFor="inputEmail" className="col-auto form-label mb-0">
             Mentor1 E-mail Id
           </label>
           <div className="col-4 d-flex px-0" style={{ position: "relative" }}>
@@ -25,7 +25,7 @@ const Configuration = () => {
           </div>
         </div>
         <div className="row col-12 mx-0 px-0 mb-3 align-items-center justify-content-center mentor-id">
-          <label for="inputEmail" className="col-auto form-label mb-0">
+          <label htmlFor="inputEmail" className="col-auto form-label mb-0">
             Mentor2 E-mail Id
           </label>
           <div className="col-4 d-flex px-0" style={{ position: "relative" }}>
@@ -40,7 +40,7 @@ const Configuration = () => {
           </div>
         </div>
         <div className="row col-12 mx-0 px-0 mb-3 align-items-center justify-content-center mentor-id">
-          <label for="inputEmail" className="col-auto form-label mb-0 px-4">
+          <label htmlFor="inputEmail" className="col-auto form-label mb-0 px-4">
             Other E-mail Id
           </label>
           <div className="col-4 d-flex px-0" style={{ position: "relative" }}>

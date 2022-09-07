@@ -85,6 +85,14 @@ const Eod_main = () => {
     setDataNum(dataNum - 1);
   };
 
+  const ClearAllData = () => {
+    setTemp([]);
+    setEditIndex(null);
+    setIsEdit(true);
+    setDataNum(0);
+    setHasData(false);
+  };
+
   return (
     <>
       {/* <div className="col py-3 bg-white h-100 mb-2"> */}
@@ -93,7 +101,7 @@ const Eod_main = () => {
       </div>
       <div className="row col-12 mx-0 px-0 my-3 text-center justify-content-center">
         <form className="col-4 d-flex date-1">
-          <label className="date p-2" for="date">
+          <label className="date p-2" htmlFor="date">
             Date
           </label>
           <input
@@ -166,7 +174,7 @@ const Eod_main = () => {
                 onChange={getInput}
                 required
               >
-                <option selected>select option</option>
+                <option defaultValue>select option</option>
                 <option value="Task in Progress">Task in Progress</option>
                 <option value="Task Completed">Task Completed</option>
               </select>
@@ -265,7 +273,9 @@ const Eod_main = () => {
       <div className="row flex-nowrap bg-dark">
         <div className="col-10 ms-auto d-flex justify-content-between p-3 bottom-background">
           <div>
-            <button className="btn clear-btn px-3">Clear All</button>
+            <button className="btn clear-btn px-3" onClick={ClearAllData}>
+              Clear All
+            </button>
           </div>
           <div>
             <button className="btn submit-data-btn px-5 ">Submit</button>
