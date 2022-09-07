@@ -205,7 +205,7 @@ const Eod_main = () => {
       <hr className="mt-4" />
 
       <div className="container">
-        <table class="table border">
+        <table className="table border">
           <thead>
             <tr>
               <th scope="col">Line</th>
@@ -235,12 +235,12 @@ const Eod_main = () => {
                     <td>
                       {data.name.status == "Task Completed" ? (
                         <i
-                          class="fa-solid fa-calendar-check"
+                          className="fa-solid fa-calendar-check"
                           style={{ color: "green" }}
                         ></i>
                       ) : (
                         <i
-                          class="fa-solid fa-hourglass-half"
+                          className="fa-solid fa-hourglass-half"
                           style={{ color: "orange" }}
                         ></i>
                       )}
@@ -251,7 +251,7 @@ const Eod_main = () => {
                   <div className="position-relative">
                     <div className="position-absolute delete-icon">
                       <i
-                        class="fa-solid fa-trash"
+                        className="fa-solid fa-trash"
                         onClick={() => deleteitem(index)}
                       ></i>
                     </div>
@@ -261,6 +261,16 @@ const Eod_main = () => {
             })}
           </tbody>
         </table>
+      </div>
+      <div className="row flex-nowrap bg-dark">
+        <div className="col-10 ms-auto d-flex justify-content-between p-3 bottom-background">
+          <div>
+            <button className="btn clear-btn px-3">Clear All</button>
+          </div>
+          <div>
+            <button className="btn submit-data-btn px-5 ">Submit</button>
+          </div>
+        </div>
       </div>
       {/* </div> */}
     </>

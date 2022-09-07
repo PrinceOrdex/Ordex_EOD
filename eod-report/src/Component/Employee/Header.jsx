@@ -14,7 +14,7 @@ const Header = () => {
       <nav className="navbar navbar-expand-md bg-light">
         <div className="container-fluid">
           <a href="#" className="navbar-brand">
-            <img src={logo} alt="" srcset="" />
+            <img src={logo} alt="" srcSet="" />
           </a>
           <button
             type="button"
