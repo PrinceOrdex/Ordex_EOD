@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 // import "./custom";
 import "./../../css/style.css";
+import { NavLink } from "react-router-dom";
 // import "./css/style.scss";
 import Logo from "./../../Image/Logo.png";
 
@@ -116,12 +117,20 @@ const Login = () => {
                 </div>
 
                 {/* <!-- Submit button --> */}
-                <button
+                <NavLink to="/eod">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
+                  >
+                    Login
+                  </button>
+                </NavLink>
+                {/* <button
                   type="button"
                   className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
                 >
                   Login
-                </button>
+                </button> */}
               </form>
               {/* <!-- <div className="mt-2">
             <p>Don't have account? <a href="#">Register</a></p>
@@ -197,6 +206,7 @@ const Login = () => {
                 </div>
 
                 {/* <!-- Submit button --> */}
+
                 <button
                   type="button"
                   className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"

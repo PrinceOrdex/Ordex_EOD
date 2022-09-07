@@ -8,12 +8,12 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" component={<Login />} />
-          <Route path="/" />
+          <Route path="/" element={<Login />} />
+          <Route path="/eod" element={<Eod />} />
         </Routes>
       </BrowserRouter>
       {/* <Login /> */}
-      <Eod />
+      {/* <Eod /> */}
     </>
   );
 }
