@@ -188,17 +188,33 @@ p {
   border: 2px solid #0b7db0;
   border-radius: 20px;
   width: auto;
-  a {
+  align-items: center;
+  button {
     color: #fff;
     font-weight: 600;
     padding: 5px;
     text-decoration: none;
   }
   .active {
-    border: 1px solid transparent;
+    border: 1px solid transparent !important;
     border-radius: 20px;
     padding: 5px 10px;
-    background-color: white;
+    margin: 4px 0px;
+    background-color: white !important;
     color: #0b7db0 !important;
   }
+}
+.nav-tabs {
+  border-bottom: none !important;
+  .nav-link {
+    border: none !important;
+  }
+}
+.nav-link {
+  color: #fff !important;
+  transition: none !important;
+}
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+  border: none !important;
 }

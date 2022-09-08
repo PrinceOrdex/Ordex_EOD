@@ -1,5 +1,6 @@
 import React from "react";
-import "./../../css/configuration.css";
+
+import "./../../css/configuration.scss";
 
 const Configuration = () => {
   return (

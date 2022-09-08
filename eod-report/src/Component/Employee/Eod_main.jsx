@@ -83,6 +83,13 @@ const Eod_main = () => {
     });
     setTemp(updated_item);
     setDataNum(dataNum - 1);
+    setData({
+      project: "",
+      task: "",
+      time: "",
+      status: "",
+      description: "",
+    });
   };
 
   const ClearAllData = () => {

@@ -1,5 +1,6 @@
 import React from "react";
-import "./../../css/history.css";
+// import "./../../css/history.css";
+import "./../../css/history.scss";
 
 const Eod_history = () => {
   return (
@@ -23,7 +24,7 @@ const Eod_history = () => {
               Date
             </button>
             <button
-              className="nav-link btn-1"
+              className="nav-link btn-2"
               id="nav-profile-tab"
               data-bs-toggle="tab"
               data-bs-target="#nav-profile"
@@ -72,7 +73,7 @@ const Eod_history = () => {
           aria-labelledby="nav-profile-tab"
         >
           <div className="row col-12 mx-0 px-0 my-3 text-center align-items-end">
-            <div className="col-6 col-sm-5 col-md-4  d-flex">
+            <div className="col-12 col-sm-6 col-md-5 col-lg-4 d-flex">
               <div className="col-12 date-1">
                 <p className="date-report mb-0 text-white">Starting Date</p>
                 <input
@@ -83,13 +84,13 @@ const Eod_history = () => {
                 />
               </div>
             </div>
-            <div className="col-6 col-sm-5 col-md-4  d-flex">
+            <div className="col-12 col-sm-6 col-md-5 col-lg-4 mt-3 mt-sm-0 d-flex">
               <div className="col-12 date-1">
                 <p className="date-report mb-0 text-white">End Date</p>
                 <input type="date" className="form-control p-2" />
               </div>
             </div>
-            <div className="col-2 mt-3 mt-sm-0 d-flex justify-content-start">
+            <div className="col-2 mt-3 mt-md-0 d-flex justify-content-start">
               <button type="submit" className="btn-search text-white">
                 Search
               </button>
@@ -97,6 +98,52 @@ const Eod_history = () => {
           </div>
         </div>
       </div>
+
+      <table className="table border">
+        <thead>
+          <tr>
+            <th scope="col">Line</th>
+            <th scope="col">Project</th>
+            <th scope="col">Task</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">T.W.T</th>
+          </tr>
+        </thead>
+        <tbody className="position-relative">
+          <tr>
+            <th scope="row">1</th>
+            <td>ABC Project</td>
+            <td>XYZ task</td>
+            <td>Task's Description</td>
+
+            <td>
+              <i
+                className="fa-solid fa-hourglass-half"
+                style={{ color: "orange" }}
+              ></i>
+            </td>
+
+            <td>02:30</td>
+          </tr>
+
+          <tr>
+            <th scope="row">2</th>
+            <td>ABC Project</td>
+            <td>PQR task</td>
+            <td>Task's Description</td>
+
+            <td>
+              <i
+                className="fa-solid fa-calendar-check"
+                style={{ color: "green" }}
+              ></i>
+            </td>
+
+            <td>04:30</td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 };

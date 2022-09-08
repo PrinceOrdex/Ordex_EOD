@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 // import "./custom";
-import "./../../css/style.css";
+// import "./../../css/style.css";
 import { NavLink } from "react-router-dom";
-// import "./css/style.scss";
+import "./../../css/style.scss";
 import Logo from "./../../Image/Logo.png";
 
 const Login = () => {
@@ -117,7 +117,7 @@ const Login = () => {
                 </div>
 
                 {/* <!-- Submit button --> */}
-                <NavLink to="/eod">
+                <NavLink to="/">
                   <button
                     type="button"
                     className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
