@@ -1,11 +1,98 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import "./custom";
 // import "./../../css/style.css";
 import { NavLink } from "react-router-dom";
 import "./../../css/style.scss";
 import Logo from "./../../Image/Logo.png";
+import axios from "axios";
+import { Route } from "react-router-dom";
+import PrivateRoutes from "./PrivateRoutes";
+import Eod from "../Employee/Eod";
 
 const Login = () => {
+  const [getLoginAuth, setLoginAuth] = useState(false);
+
+  const initialFormData = Object.freeze({
+    Email: "",
+    Password: "",
+    Role: "",
+    login: true,
+  });
+
+  const [formData, updateFormData] = useState(initialFormData);
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      // Trimming any whitespace
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
+    // console.log(formData);
+    // // ... submit to API or something
+    // const user = {
+    //   // Email: this.Email
+    //   // Headers: { "COntent-Type": "application/json" },
+    //   Body: {
+    //     Email: "shail.dave@ordextechnology.com",
+    //     Password: "Ordex@123",
+    //     Role: "employee",
+    //   },
+    // };
+    // axios.post(`localhost:8000/login`, user).then((res) => {
+    //   console.log(res);
+    //   if (res === 200) {
+    //   } else if (res === 404) {
+    //     updateFormData({
+    //       login: !this.login,
+    //     });
+    //   }
+    //   // console.log(res);
+    //   console.log(res.data);
+    // });
+
+    const obj = {
+      Email: formData.Email,
+      Password: formData.Password,
+      Role: "employee",
+    };
+
+    try {
+      e.preventDefault();
+
+      const res = await axios.post("http://localhost:8000/login", obj);
+
+      console.log("res >>>>>>>>>>>. ", res);
+      console.log(obj);
+      if (res.status == 200) {
+        setLoginAuth(true);
+        <Route element={<PrivateRoutes />}>
+          <Route path="/" element={<Eod />} exact />
+        </Route>;
+      }
+      if (res.status == 401) {
+        setLoginAuth(false);
+      }
+      // if (res.status == 200) {
+      //   alert("Login Successful");
+      //   const data = await res.data;
+      //   console.log("data.......");
+      //   console.log(data);
+      //   // console.log(res);
+      //   // dispatch({ type: "USER", payload: true });
+      //   // navigate('/uhome');
+      // } else {
+      //   alert("Login Failed");
+      // }
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+
   return (
     <>
       <div className="main d-flex justify-content-center justify-content-sm-end align-items-center">
@@ -67,9 +154,11 @@ const Login = () => {
                       <input
                         type="email"
                         id="username"
+                        name="Email"
                         className="form-control"
                         autoComplete="off"
                         required
+                        onChange={handleChange}
                       />
                       <label className="form-label" htmlFor="form2Example1">
                         Email address
@@ -94,9 +183,11 @@ const Login = () => {
                       <input
                         type="password"
                         id="password"
+                        name="Password"
                         className="form-control"
                         autoComplete="off"
                         required
+                        onChange={handleChange}
                       />
                       <label className="form-label" htmlFor="form2Example2">
                         Password
@@ -121,6 +212,7 @@ const Login = () => {
                   <button
                     type="button"
                     className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
+                    onClick={handleSubmit}
                   >
                     Login
                   </button>
@@ -156,9 +248,11 @@ const Login = () => {
                       <input
                         type="email"
                         id="username"
+                        name="Email"
                         className="form-control"
                         autoComplete="off"
                         required
+                        onChange={handleChange}
                       />
                       <label className="form-label" htmlFor="form2Example1">
                         Email address
@@ -183,9 +277,11 @@ const Login = () => {
                       <input
                         type="password"
                         id="password"
+                        name="Password"
                         className="form-control"
                         autoComplete="off"
                         required
+                        onChange={handleChange}
                       />
                       <label className="form-label" htmlFor="form2Example2">
                         Password
@@ -206,13 +302,14 @@ const Login = () => {
                 </div>
 
                 {/* <!-- Submit button --> */}
-
-                <button
-                  type="button"
-                  className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
-                >
-                  Login
-                </button>
+                <NavLink to="/admin/main">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
+                  >
+                    Login
+                  </button>
+                </NavLink>
               </form>
               {/* <!-- <div className="mt-2">
               <p>Don't have account? <a href="#">Register</a></p>
