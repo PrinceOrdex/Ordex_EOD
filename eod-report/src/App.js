@@ -11,9 +11,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          {/* <Route element={<PrivateRoutes />}>
+          <Route element={<PrivateRoutes />}>
             <Route path="/" element={<Eod />} exact />
-          </Route> */}
+          </Route>
           <Route element={<PrivateRoutes />}>
             <Route path="/admin/main" element={<Main />} exact />
           </Route>

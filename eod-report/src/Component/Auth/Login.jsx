@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import "./custom";
 // import "./../../css/style.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./../../css/style.scss";
 import Logo from "./../../Image/Logo.png";
 import axios from "axios";
@@ -10,6 +10,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import Eod from "../Employee/Eod";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [getLoginAuth, setLoginAuth] = useState(false);
 
   const initialFormData = Object.freeze({
@@ -35,7 +36,7 @@ const Login = () => {
     // // ... submit to API or something
     // const user = {
     //   // Email: this.Email
-    //   // Headers: { "COntent-Type": "application/json" },
+    //   // Headers: { "Content-Type": "application/json" },
     //   Body: {
     //     Email: "shail.dave@ordextechnology.com",
     //     Password: "Ordex@123",
@@ -69,6 +70,7 @@ const Login = () => {
       console.log(obj);
       if (res.status == 200) {
         setLoginAuth(true);
+        navigate("/");
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Eod />} exact />
         </Route>;
@@ -208,6 +210,7 @@ const Login = () => {
                 </div>
 
                 {/* <!-- Submit button --> */}
+
                 <NavLink to="/">
                   <button
                     type="button"
