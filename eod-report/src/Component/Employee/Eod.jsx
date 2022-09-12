@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./../../css/eod.scss";
 
 import _image_75 from "./../../Image/75.jpg";
@@ -10,10 +10,10 @@ import Configuration from "./Configuration";
 import Sidebar from "./Sidebar";
 import { Navigate } from "react-router-dom";
 
-const Eod = ({ authorized }) => {
-  if (!authorized) {
-    return <Navigate to="/login" />;
-  }
+const Eod = () => {
+  // if (!authorized) {
+  //   return <Navigate to="/login" />;
+  // }
   return (
     <>
       <Header />
@@ -171,5 +171,6 @@ const Eod = ({ authorized }) => {
     </>
   );
 };
+
 
 export default Eod;

@@ -8,8 +8,6 @@ import axios from "axios";
 import { Route } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
 import Eod from "../Employee/Eod";
-// import { createContext } from "react";
-// export const contextApi = createContext();
 import { useContext } from "react";
 import { ContextApi } from "./Context";
 
@@ -85,11 +83,7 @@ const Login = () => {
         navigate("/login");
       }
       // if (res.status == 200) {
-      //   alert("Login Successful");
-      //   const data = await res.data;
-      //   console.log("data.......");
-      //   console.log(data);
-      //   // console.log(res);
+      //
       //   // dispatch({ type: "USER", payload: true });
       //   // navigate('/uhome');
       // } else {

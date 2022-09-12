@@ -5,13 +5,12 @@ import { ContextApi } from "./Context";
 
 const PrivateRoutes = () => {
   const hasuser = useContext(ContextApi);
+
   console.log("**************User******************");
   console.log(hasuser.user);
-  const haslogin = hasuser.user;
-  console.log(" ****** haslogin ****** " + haslogin);
-  // { haslogin }
-  let auth = { token: true };
-  return auth.token ? <Outlet /> : <Navigate to="/login" />;
+
+  // let auth = { token: true };
+  // return auth.token ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoutes;
