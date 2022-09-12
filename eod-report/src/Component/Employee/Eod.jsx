@@ -8,8 +8,12 @@ import Header from "./Header";
 import Eod_history from "./Eod_history";
 import Configuration from "./Configuration";
 import Sidebar from "./Sidebar";
+import { Navigate } from "react-router-dom";
 
-const Eod = () => {
+const Eod = ({ authorized }) => {
+  if (!authorized) {
+    return <Navigate to="/login" />;
+  }
   return (
     <>
       <Header />

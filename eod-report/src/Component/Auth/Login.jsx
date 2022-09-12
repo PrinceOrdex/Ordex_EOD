@@ -8,11 +8,14 @@ import axios from "axios";
 import { Route } from "react-router-dom";
 import PrivateRoutes from "./PrivateRoutes";
 import Eod from "../Employee/Eod";
+// import { createContext } from "react";
+// export const contextApi = createContext();
+import { useContext } from "react";
+import { ContextApi } from "./Context";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [getLoginAuth, setLoginAuth] = useState(false);
-
+  const haslogin = useContext(ContextApi);
   const initialFormData = Object.freeze({
     Email: "",
     Password: "",
@@ -21,6 +24,7 @@ const Login = () => {
   });
 
   const [formData, updateFormData] = useState(initialFormData);
+  // const [user, SetUser] = useState(false);
 
   const handleChange = (e) => {
     updateFormData({
@@ -69,14 +73,16 @@ const Login = () => {
       console.log("res >>>>>>>>>>>. ", res);
       console.log(obj);
       if (res.status == 200) {
-        setLoginAuth(true);
+        alert("Login Successful");
+        // SetUser(true);
+        haslogin.setUser(true);
         navigate("/");
-        <Route element={<PrivateRoutes />}>
-          <Route path="/" element={<Eod />} exact />
-        </Route>;
       }
       if (res.status == 401) {
-        setLoginAuth(false);
+        // SetUser(false);
+        // setUser(true);
+        haslogin.setUser(false);
+        navigate("/login");
       }
       // if (res.status == 200) {
       //   alert("Login Successful");
@@ -97,6 +103,7 @@ const Login = () => {
 
   return (
     <>
+      {/* <contextApi.Provider value={haslogin}></contextApi.Provider> */}
       <div className="main d-flex justify-content-center justify-content-sm-end align-items-center">
         <div className="box text-center ms-3 me-3 me-sm-5 p-4">
           <div
