@@ -68,13 +68,17 @@ const Login = () => {
 
       const res = await axios.post("http://localhost:8000/login", obj);
 
-      console.log("res >>>>>>>>>>>. ", res);
+      // console.log("res >>>>>>>>>>>. ", res);
       console.log(obj);
       if (res.status == 200) {
         alert("Login Successful");
+        console.log("res >>>>>>>>>>>. ", res);
         // SetUser(true);
         haslogin.setUser(true);
-        navigate("/");
+        navigate("/eod");
+        localStorage.setItem("UserData", JSON.stringify(res.data));
+        // localStorage.removeItem("UserData");
+        // console.log("Hello GetItem " + localStorage.getItem("UserData"));
       }
       if (res.status == 401) {
         // SetUser(false);
@@ -212,7 +216,7 @@ const Login = () => {
 
                 {/* <!-- Submit button --> */}
 
-                <NavLink to="/">
+                <NavLink to="/eod">
                   <button
                     type="button"
                     className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"

@@ -12,11 +12,13 @@ function App() {
       <ContextProvider>
         <BrowserRouter>
           <Routes>
-            <Route exact path="/login" element={<Login />} />
+            <Route element={<PrivateRoutes />}>
+              <Route exact path="/login" element={<Login />} />
+            </Route>
             {/* <Route exact path="/" element={<Eod />} /> */}
 
             <Route element={<PrivateRoutes />}>
-              <Route exact path="/" element={<Eod />} />
+              <Route exact path="/eod" element={<Eod />} />
             </Route>
             <Route element={<PrivateRoutes />}>
               <Route path="/admin/main" element={<Main />} exact />

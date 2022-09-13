@@ -175,11 +175,20 @@ const Eod_main = () => {
 
     axios
       .post("http://localhost:8000/eod/task", {
-        project: userData.project,
-        task: userData.task,
-        time: userData.time,
+        // project: userData.project,
+        // task: userData.task,
+        // time: userData.time,
+        // status: userData.status,
+        // description: userData.description,
+
+        emp_id: 1,
+        project_id: 1,
+        task_title: userData.task,
+        task_desc: userData.description,
         status: userData.status,
-        description: userData.description,
+        worktime: userData.time,
+        created_at: Date().toLocaleDateString(),
+        eod_date: Date().toLocaleDateString(),
       })
       .then((response) => {
         console.log(response.data);
