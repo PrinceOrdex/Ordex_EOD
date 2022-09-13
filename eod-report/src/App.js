@@ -9,16 +9,17 @@ import { ContextProvider } from "./Component/Auth/Context";
 function App() {
   return (
     <>
-      {/* <ContextProvider> */}
+      <ContextProvider>
         <BrowserRouter>
           <Routes>
             <Route exact path="/login" element={<Login />} />
-            <Route exact path="/" element={<Eod />} />
+            {/* <Route exact path="/" element={<Eod />} /> */}
 
-            {/* <Route element={<PrivateRoutes />}>
-            </Route> */}
             <Route element={<PrivateRoutes />}>
-              <Route path="/admin/main" component={<Main />} exact />
+              <Route exact path="/" element={<Eod />} />
+            </Route>
+            <Route element={<PrivateRoutes />}>
+              <Route path="/admin/main" element={<Main />} exact />
             </Route>
             <Route
               path="/*"
@@ -30,7 +31,7 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
-      {/* </ContextProvider> */}
+      </ContextProvider>
       {/* <Login /> */}
       {/* <Eod /> */}
       {/* <Main /> */}

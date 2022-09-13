@@ -1,4 +1,5 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import axios from "axios";
 
 const Eod_main = () => {
   const [userData, setData] = useState({
@@ -15,6 +16,102 @@ const Eod_main = () => {
   const [dataNum, setDataNum] = useState(0);
   const [hasData, setHasData] = useState(false);
 
+  useEffect(() => {
+    let res = fetch(`http://localhost:8000/eod/projects`, {
+      method: "GET",
+      mode: "cors",
+      body: {
+        empid: "1",
+      },
+    });
+    if (res) {
+      console.log(res.data);
+    }
+  }, []);
+
+  const handlesubmit = async (e) => {
+    // let res = await fetch("http://localhost:8000/eod", {
+    // //       // Enter your IP address here
+    //        method:"GET",
+    //       mode: "cors",
+    //       // body: JSON.stringify(userData.task), // body data type must match "Content-Type" header
+    //     });
+
+    //   // Send data to the backend via POST
+    //     // let res = await fetch("http://localhost:8000/eod/projects", {
+    //       // Enter your IP address here
+    //       //  method:"GET",
+    //       // method: "POST",
+    //       // mode: "cors",
+    //       // body:userData.task
+    //       // body: JSON.stringify(obj), // body data type must match "Content-Type" header
+    //     // });
+    //     // if (res) console.log(res);
+    //   };
+    // try {
+    //   e.preventDefault();
+    //   // console.log(task);
+    //   const res = axios.post("http://localhost:8000/eod", {
+    //     project: userData.project,
+    //     task: userData.task,
+    //     time: userData.time,
+    //     status: userData.status,
+    //     description: userData.description,
+    //   });
+    //   console.log(res.data);
+    //   if (res.status === 200) {
+    //     alert(res);
+    //     alert("Data inserted Successfully");
+    //     console.log(res);
+    //   } else if (res.status === 500) {
+    //     alert("Insertion Failed");
+    //   } else {
+    //     alert("Data not found");
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   console.log(err.response.data.error);
+    //   throw err;
+    // }
+
+    const eodd = {
+      project: userData.project,
+      task: userData.task,
+      time: userData.time,
+      status: userData.status,
+      description: userData.description,
+    };
+
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:8000/eod", {
+        project: userData.project,
+        task: userData.task,
+        time: userData.time,
+        status: userData.status,
+        description: userData.description,
+      })
+      .then((response) => {
+        console.log(response.data);
+        console.log(eodd);
+        if (eodd == null && response.status === 200) {
+          alert("pls fill the data");
+          console.log(response);
+        } else if (response.status === 200 && eodd !== null) {
+          alert("Data inserted Successfully");
+          console.log(eodd);
+        } else if (response.status === 500) {
+          alert("Insertion Failed");
+        } else {
+          alert("Data not found");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   let name, value;
   const getInput = (e) => {
     name = e.target.name;
@@ -23,7 +120,7 @@ const Eod_main = () => {
     setData({ ...userData, [name]: value });
   };
 
-  const getTableData = () => {
+  const getTableData = (e) => {
     if (
       userData.project === "" ||
       userData.task === "" ||
@@ -65,6 +162,43 @@ const Eod_main = () => {
       setDataNum(dataNum + 1);
       setHasData(true);
     }
+
+    const eodd = {
+      project: userData.project,
+      task: userData.task,
+      time: userData.time,
+      status: userData.status,
+      description: userData.description,
+    };
+
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:8000/eod/task", {
+        project: userData.project,
+        task: userData.task,
+        time: userData.time,
+        status: userData.status,
+        description: userData.description,
+      })
+      .then((response) => {
+        console.log(response.data);
+        console.log(eodd);
+        if (eodd === "" && response.status === 200) {
+          alert("pls fill the data");
+          console.log(response);
+        } else if (response.status === 200 && eodd !== "") {
+          alert("Task Added Successfully");
+          console.log(eodd);
+        } else if (response.status === 500) {
+          alert("Insertion Failed");
+        } else {
+          alert("Data not found");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const edititem = (ind) => {
@@ -123,16 +257,25 @@ const Eod_main = () => {
         <div className="col-10">
           <p className="mb-1">Project</p>
           <div className="project col-6">
-            <input
-              className="form-control"
-              type="text"
+            <select
               name="project"
-              value={userData.project}
               id="Project"
-              placeholder="Project title here"
+              value={userData.project}
+              className="form-select project col-6"
               onChange={getInput}
               required
-            />
+            >
+              <option defaultValue>select option</option>
+              <option value="XYZ Project for ABC Company">
+                XYZ Project for ABC Company
+              </option>
+              <option value="PQR Project for XYZ Company">
+                PQR Project for XYZ Company
+              </option>
+              <option value="ABc Project for PQR Company">
+                ABc Project for PQR Company
+              </option>
+            </select>
           </div>
           {/* <select name="" id="" className="project col-6">
             <option value="">XYZ Project for ABC Company</option>
@@ -285,7 +428,9 @@ const Eod_main = () => {
             </button>
           </div>
           <div>
-            <button className="btn submit-data-btn px-5 ">Submit</button>
+            <button className="btn submit-data-btn px-5" onClick={handlesubmit}>
+              Submit
+            </button>
           </div>
         </div>
       </div>

@@ -4,13 +4,19 @@ import { useContext } from "react";
 import { ContextApi } from "./Context";
 
 const PrivateRoutes = () => {
-  const hasuser = useContext(ContextApi);
+  const { user, setUser } = useContext(ContextApi);
 
   console.log("**************User******************");
-  console.log(hasuser.user);
+  console.log(user);
+  var haslogin = false;
+  if (user === true) {
+    haslogin = true;
+  }
+  console.log("************  " + haslogin);
+  // const haslogin = hasuser.user;
 
-  // let auth = { token: true };
-  // return auth.token ? <Outlet /> : <Navigate to="/login" />;
+  let auth = { token: haslogin };
+  return auth.token ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoutes;
