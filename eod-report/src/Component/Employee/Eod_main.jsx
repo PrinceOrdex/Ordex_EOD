@@ -25,7 +25,7 @@ const Eod_main = () => {
       .get("http://localhost:8000/eod/task", {
         params: {
           empid: 1,
-          eoddate: "2022-09-14",
+          eoddate: "2022-09-08",
         },
       })
       .then((response) => {
