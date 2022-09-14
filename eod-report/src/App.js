@@ -12,9 +12,8 @@ function App() {
       <ContextProvider>
         <BrowserRouter>
           <Routes>
-            <Route element={<PrivateRoutes />}>
-              <Route exact path="/login" element={<Login />} />
-            </Route>
+            <Route exact path="/" element={<Login />} />
+
             {/* <Route exact path="/" element={<Eod />} /> */}
 
             <Route element={<PrivateRoutes />}>

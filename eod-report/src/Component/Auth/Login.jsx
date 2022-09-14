@@ -76,7 +76,10 @@ const Login = () => {
         // SetUser(true);
         haslogin.setUser(true);
         navigate("/eod");
-        localStorage.setItem("UserData", JSON.stringify(res.data));
+
+        localStorage.setItem("userData", JSON.stringify(res.data));
+        // localStorage.setItem("userData", res.data);
+        // localStorage.setItem("empId", res.data.empId);
         // localStorage.removeItem("UserData");
         // console.log("Hello GetItem " + localStorage.getItem("UserData"));
       }
