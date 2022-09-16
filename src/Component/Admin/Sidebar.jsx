@@ -56,7 +56,7 @@ const Sidebar = () => {
               aria-controls="v-pills-emp-list"
               aria-selected="true"
             >
-              Employees List
+              Employees's List
             </button>
             <button
               className="nav-link"
@@ -94,6 +94,18 @@ const Sidebar = () => {
               aria-selected="false"
             >
               EOD Compliance
+            </button>
+            <button
+              className="nav-link"
+              id="v-pills-edit-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#v-pills-edit"
+              type="button"
+              role="tab"
+              aria-controls="v-pills-edit"
+              aria-selected="false"
+            >
+              Edit Profile
             </button>
           </div>
         </div>

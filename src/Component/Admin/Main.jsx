@@ -9,6 +9,7 @@ import Compliance from "./Compliance";
 
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import Edit_emp_details from "./Edit_emp_details";
 
 const Eod = () => {
   return (
@@ -57,6 +58,15 @@ const Eod = () => {
                 tabIndex="0"
               >
                 <Compliance />
+              </div>
+              <div
+                className="tab-pane fade"
+                id="v-pills-edit"
+                role="tabpanel"
+                aria-labelledby="v-pills-edit-tab"
+                tabIndex="0"
+              >
+                <Edit_emp_details />
               </div>
             </div>
           </div>

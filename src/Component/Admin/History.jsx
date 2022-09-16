@@ -8,7 +8,7 @@ const History = () => {
       <div className="row col-12 mx-0 px-0 text-center border-bottom">
         <h3 className="text-uppercase">end of day history report</h3>
       </div>
-      <div className="row col-12 mx-0 px-0 justify-content-center">
+      <div className="row col-12 mx-0 px-0 justify-content-center border-bottom">
         <div className="col-12 col-lg-3 bg-img">
           <img src={_image_75} alt="" />
           <div className="Empname text-center mt-3">
