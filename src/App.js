@@ -16,9 +16,18 @@ function App() {
 
   const checkLocalStorage = () => {
     if (localStorage.getItem("userData")) {
+      let userData = JSON.parse(localStorage.getItem("userData"));
       dispatch({ type: "LOGIN", payload: true });
-      if (window.location != 'http://localhost:3000/eod') {
-        window.location.replace("/eod");
+
+      if (userData.roleName == "employee" || userData.roleName == "intern") {
+        if (window.location != 'http://localhost:3000/eod') {
+          window.location.replace("/eod");
+        }
+      }
+      if (userData.roleName == "admin") {
+        if (window.location != 'http://localhost:3000/admin/main') {
+          window.location.replace("/admin/main");
+        }
       }
     } else {
       dispatch({ type: "LOGIN", payload: false });

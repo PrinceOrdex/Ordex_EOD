@@ -15,9 +15,10 @@ import { MenuContext } from "../../App";
 const Login = () => {
 
   const { state, dispatch } = useContext(MenuContext);
-  useEffect(() => {
-    // alert(state);
-  }, [])
+
+  let [role, setRole] = useState("employee");
+
+
   const navigate = useNavigate();
   const haslogin = useContext(ContextApi);
   const initialFormData = Object.freeze({
@@ -28,6 +29,8 @@ const Login = () => {
   });
 
   const [formData, updateFormData] = useState(initialFormData);
+
+
   // const [user, SetUser] = useState(false);
 
   const handleChange = (e) => {
@@ -43,7 +46,7 @@ const Login = () => {
     const obj = {
       Email: formData.Email,
       Password: formData.Password,
-      Role: "employee",
+      Role: role,
     };
 
     try {
@@ -91,6 +94,7 @@ const Login = () => {
                   role="tab"
                   aria-controls="nav-home"
                   aria-selected="true"
+                  onClick={() => { setRole("employee") }}
                 >
                   Employee
                 </button>
@@ -103,6 +107,7 @@ const Login = () => {
                   role="tab"
                   aria-controls="nav-profile"
                   aria-selected="false"
+                  onClick={() => { setRole("admin") }}
                 >
                   Admin
                 </button>
