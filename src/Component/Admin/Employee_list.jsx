@@ -4,11 +4,15 @@ import edit_emp from "./../../Image/EditIcon.svg";
 import axios from "axios";
 
 const Employee_list = () => {
+
   const [empData, setEmpData] = useState([]);
+  const [showAllEmpData, setShowAllEmpData] = useState(true);
+  const [showSingleEmpData, setShowSingleEmpData] = useState(false);
+  const [empId, setEmpId] = useState("");
 
   const getEmpData = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/employee");
+      let res = await axios.get("http://localhost:8000/employees");
       // console.log(res.data[0].email);
       setEmpData(res.data);
     } catch (error) {
@@ -16,16 +20,31 @@ const Employee_list = () => {
     }
   };
 
-  const handlesubmit = () => {};
+  const handlesubmit = () => { };
 
   useEffect(() => {
     getEmpData();
   }, []);
 
-  return (
-    <>
+  const SingleEmpData = () => {
+    return (<>
+      <Edit_emp_details empId={empId} />
+    </>);
+  }
+
+
+  const editEmployee = (empId) => {
+    // alert(empId);
+    setEmpId(empId);
+    setShowAllEmpData(false);
+    setShowSingleEmpData(true);
+
+  }
+
+  const AllEmployeesData = () => {
+    return (<>
       <div class="row col-12 mx-0 px-0 text-center border-bottom">
-        <h3 class="text-uppercase">edit details</h3>
+        <h3 class="text-uppercase">EMPLOYEE'S LIST</h3>
       </div>
       <div class="row col-12 mx-0 px-0 justify-content-center mt-3">
         <div className="table-responsive" style={{ width: "80%" }}>
@@ -45,7 +64,7 @@ const Employee_list = () => {
                   E-mail
                 </th>
                 <th scope="col" className="border-top">
-                  Type
+                  Designation
                 </th>
                 <th
                   scope="col"
@@ -67,7 +86,7 @@ const Employee_list = () => {
                       <td>{data.emp_fname + " " + data.emp_lname}</td>
                       <td>{data.email}</td>
 
-                      <td>{data.emp_type}</td>
+                      <td>{data.designation}</td>
 
                       <td
                         style={{ borderRight: "1px solid #dee2e6" }}
@@ -87,7 +106,7 @@ const Employee_list = () => {
                         )}
                       </td>
                       <td className="border-0">
-                        <img src={edit_emp} alt="" width={20} height={20} />
+                        <img src={edit_emp} alt="" width={20} height={20} onClick={() => { editEmployee(data.emp_id) }} />
                       </td>
                     </tr>
                   </>
@@ -97,6 +116,14 @@ const Employee_list = () => {
           </table>
         </div>
       </div>
+    </>);
+  }
+
+  return (
+    <>
+      {showAllEmpData && <AllEmployeesData />}
+      {showSingleEmpData && <SingleEmpData />}
+
     </>
   );
 };

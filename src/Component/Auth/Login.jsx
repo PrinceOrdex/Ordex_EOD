@@ -199,16 +199,9 @@ const Login = () => {
                     Login
                   </button>
                 </NavLink>
-                {/* <button
-                  type="button"
-                  className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
-                >
-                  Login
-                </button> */}
+
               </form>
-              {/* <!-- <div className="mt-2">
-            <p>Don't have account? <a href="#">Register</a></p>
-          </div> --> */}
+
             </div>
             <div
               className="tab-pane fade"
@@ -288,6 +281,7 @@ const Login = () => {
                   <button
                     type="button"
                     className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
+                    onClick={handleSubmit}
                   >
                     Login
                   </button>
