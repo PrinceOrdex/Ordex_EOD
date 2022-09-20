@@ -8,15 +8,18 @@ const Attendance = () => {
   const [absent, setAbsent] = useState([]);
   const [allAttendance, setAllAttendance] = useState([]);
 
+  const getAttendanceByDate = () => {
+  
+}
   const getAllAttandace = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/employee/attendance", {
+      let res = await axios.get("http://localhost:8000/attendance", {
         params: {
-          eod_date: '2022/09/13',
+          eod_date: "2022/09/12",
         },
       });
       setAllAttendance(res.data);
-      console.log("----- All Attandance-Data ------");
+      console.log("-----All Attandance Data------");
       console.log(allAttendance);
     } catch (error) {
       console.log(error);
@@ -24,16 +27,13 @@ const Attendance = () => {
   };
   const getPresent = async () => {
     try {
-      let res = await axios.get(
-        "http://localhost:8000/employee/attendance/present",
-        {
-          params: {
-            eod_date: "2022/09/13",
-          },
-        }
-      );
+      let res = await axios.get("http://localhost:8000/attendance/present", {
+        params: {
+          eod_date: "2022/09/13",
+        },
+      });
       setPresent(res.data);
-      console.log("----- Present-Data  ------");
+      console.log("-----Present-Data ------");
       console.log(present);
     } catch (error) {
       console.log(error);
@@ -42,10 +42,10 @@ const Attendance = () => {
   const getAbsent = async () => {
     try {
       let res = await axios.get(
-        "http://localhost:8000/employee/attendance/absent"
+        "http://localhost:8000/attendance/absent"
       );
       setAbsent(res.data);
-      console.log("----- Absent-Data ----");
+      console.log("----- Absent-Data ------");
       console.log(absent);
     } catch (error) {
       console.log(error);
@@ -77,7 +77,8 @@ const Attendance = () => {
             />
           </div>
           <div className="col-2">
-            <button type="submit" className="btn-search text-white">
+            <button type="submit" className="btn-search text-white"
+            onClick={getAttendanceByDate}>
               Search
             </button>
           </div>
