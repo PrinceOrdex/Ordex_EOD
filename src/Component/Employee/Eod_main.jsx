@@ -3,12 +3,12 @@ import axios from "axios";
 import { MenuContext } from "../../App";
 
 const Eod_main = () => {
-
   const { state, dispatch } = useContext(MenuContext);
   let [options, setOptions] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [eod_date, setEod_date] = useState("");
 
-
+  const [taskStatus, setTaskStatus] = useState(0);
 
   const [userData, setData] = useState({
     project: "",
@@ -21,18 +21,39 @@ const Eod_main = () => {
   // Finding Today's Date.
   const todayDate = () => {
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
 
-    today = yyyy + '-' + mm + '-' + dd;
+    today = yyyy + "-" + mm + "-" + dd;
+    // setEod_date(today);
     return today;
-  }
+  };
 
   const getuserDetails = () => {
     let userData = JSON.parse(localStorage.getItem("userData"));
     return userData;
-  }
+  };
+
+  const fetchTask = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/eod/task", {
+        params: {
+          empid: getuserDetails().empId,
+          eoddate: eod_date,
+        },
+      });
+
+      if (res.status == 200) {
+        setTasks(res.data);
+        setTaskStatus(res.status);
+      } else {
+      }
+    } catch (err) {
+      setTasks([]);
+      console.log(err);
+    }
+  };
 
   const [eodTaskData, setEodTaskData] = useState({
     // empId: getuserDetails().empId,
@@ -42,10 +63,8 @@ const Eod_main = () => {
     taskDesc: "",
     workTime: "",
     // createdAt: todayDate(),
-    eodDate: ""
-
+    eodDate: "",
   });
-
 
   const [temp, setTemp] = useState([]);
   const [editindex, setEditIndex] = useState(null);
@@ -53,27 +72,30 @@ const Eod_main = () => {
   const [dataNum, setDataNum] = useState(0);
   const [hasData, setHasData] = useState(false);
 
-
-
-
-
   const fetchProject = async () => {
-
     const empid = getuserDetails().empId;
     // const empId = userData.empId;
     const res = await axios.get("http://localhost:8000/eod/projects", {
       params: {
-        empid
+        empid,
       },
     });
 
-    setOptions([{ "project_id": "0", "project_name": "Select Project" }, ...res.data]);
-  }
-
+    setOptions([
+      { project_id: "0", project_name: "Select Project" },
+      ...res.data,
+    ]);
+  };
 
   useEffect(() => {
     fetchProject();
+    todayDate();
+    setEod_date(todayDate());
   }, []);
+
+  useEffect(() => {
+    fetchTask();
+  }, [eod_date]);
 
   let name, value;
   const getInput = (e) => {
@@ -116,40 +138,18 @@ const Eod_main = () => {
   //   setHasData(false);
   // };
 
-
-  const fetchTask = async () => {
-    try {
-      const res = await axios.get("http://localhost:8000/eod/task", {
-        params: {
-          empid: getuserDetails().empId,
-          eoddate: eodTaskData.eodDate,
-        },
-      });
-      setTasks(res.data);
-
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-
   const putEodTaskData = async () => {
     try {
-
-      const res = await axios
-        .post("http://localhost:8000/eod/task", {
-          empId: getuserDetails().empId,
-          projectId: eodTaskData.projectId,
-          taskTitle: eodTaskData.taskTitle,
-          status: eodTaskData.status,
-          taskDesc: eodTaskData.taskDesc,
-          workTime: eodTaskData.workTime,
-          createdAt: todayDate(),
-          eodDate: eodTaskData.eodDate
-        });
-
-      console.log(">>>response");
-      console.log(res);
+      const res = await axios.post("http://localhost:8000/eod/task", {
+        empId: getuserDetails().empId,
+        projectId: eodTaskData.projectId,
+        taskTitle: eodTaskData.taskTitle,
+        status: eodTaskData.status,
+        taskDesc: eodTaskData.taskDesc,
+        workTime: eodTaskData.workTime,
+        createdAt: todayDate(),
+        eodDate: eod_date,
+      });
 
       let eodDateTmp = eodTaskData.eodDate;
 
@@ -164,45 +164,34 @@ const Eod_main = () => {
           taskDesc: "",
           workTime: "",
           // createdAt: todayDate(),
-          eodDate: eodDateTmp
-        })
-
-
-
+          eodDate: eod_date,
+        });
       } else {
         alert("Data insertion failed");
       }
-
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const getEodTaskData = (e) => {
-
     e.preventDefault();
 
-    console.log(">>>>eodTaskData");
-    console.log(eodTaskData);
-
-    if (eodTaskData.projectId == "" ||
+    if (
+      eodTaskData.projectId == "" ||
       eodTaskData.taskTitle == "" ||
       eodTaskData.status == "" ||
       eodTaskData.taskDesc == "" ||
       eodTaskData.workTime == "" ||
-      eodTaskData.eodDate == "") {
-
+      eod_date == ""
+    ) {
       alert("Please enter all data");
-
     } else {
       putEodTaskData();
     }
-
-  }
-
+  };
 
   const submitEod = async (e) => {
-
     e.preventDefault();
 
     try {
@@ -210,7 +199,7 @@ const Eod_main = () => {
 
       const res = await axios.post("http://localhost:8000/eod", {
         empId: getuserDetails().empId,
-        eoddate: eodTaskData.eodDate,
+        eoddate: eod_date,
         createdAt: dateString,
       });
 
@@ -219,7 +208,6 @@ const Eod_main = () => {
       } else {
         alert("Problem in Submitting the EOD");
       }
-
     } catch (error) {
       console.log(error);
     }
@@ -241,8 +229,11 @@ const Eod_main = () => {
               type="date"
               id="eodDate"
               name="eodDate"
-              value={eodTaskData.eodDate}
-              onChange={getInput}
+              value={eod_date}
+              onChange={(e) => {
+                setEod_date(e.target.value);
+                fetchTask();
+              }}
               className="form-control p-2"
             />
           </div>
@@ -268,7 +259,6 @@ const Eod_main = () => {
                 })}
               </select>
             </div>
-
           </div>
         </div>
         <div className="row mx-0 px-0 mt-3 justify-content-center">
@@ -300,7 +290,6 @@ const Eod_main = () => {
                     placeholder="Time"
                     onChange={getInput}
                     required
-                  // step="1"
                   />
                 </div>
               </div>
@@ -349,44 +338,44 @@ const Eod_main = () => {
             </button>
           </div>
         </div>
-
       </form>
-
 
       <hr className="mt-4" />
 
       <div className="container">
-        <table className="table border">
-          <thead>
-            <tr>
-              <th scope="col">Sr.no</th>
-              <th scope="col">Project</th>
-              <th scope="col">Task</th>
-              <th scope="col">Description</th>
-              <th scope="col">Status</th>
-              <th scope="col">T.W.T</th>
-            </tr>
-          </thead>
-          <tbody className="position-relative">
-            {tasks.map((elem, index) => (
+        {tasks.length == 0 ? (
+          "No Data Available"
+        ) : (
+          <table className="table border">
+            <thead>
               <tr>
-                <td>{index + 1}</td>
-                <td>{elem.project_name}</td>
-                <td>{elem.task_title}</td>
-                <td>{elem.task_desc}</td>
-                <td>{elem.status}</td>
-                <td>{elem.worktime}</td>
+                <th scope="col">Sr.no</th>
+                <th scope="col">Project</th>
+                <th scope="col">Task</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">T.W.T</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="position-relative">
+              {tasks.map((elem, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{elem.project_name}</td>
+                  <td>{elem.task_title}</td>
+                  <td>{elem.task_desc}</td>
+                  <td>{elem.status}</td>
+                  <td>{elem.worktime}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
       <div className="row flex-nowrap bg-dark">
         <div className="col-10 ms-auto d-flex justify-content-between p-3 bottom-background">
           <div>
-            <button className="btn clear-btn px-3">
-              Clear All
-            </button>
+            <button className="btn clear-btn px-3">Clear All</button>
           </div>
           <div>
             <button className="btn submit-data-btn px-5" onClick={submitEod}>
