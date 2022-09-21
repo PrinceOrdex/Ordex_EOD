@@ -263,7 +263,7 @@ const Eod_main = () => {
         <div className="row mx-0 px-0 mt-3 justify-content-center">
           <div className="col-10 d-lg-flex justify-content-center">
             <div className="col-12 col-lg-6">
-              <p className="mb-1">T ask</p>
+              <p className="mb-1">Task</p>
               <div className="project col-12">
                 <input
                   className="form-control"
