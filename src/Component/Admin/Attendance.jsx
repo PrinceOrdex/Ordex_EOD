@@ -29,6 +29,9 @@ const Attendance = () => {
 
   let [eodDate, setEodDate] = useState(todayDate());
 
+  const getAttendanceByDate = () => {
+
+  }
   const getAllAttandace = async () => {
     try {
       let res = await axios.get("http://localhost:8000/attendance", {
@@ -187,97 +190,97 @@ const Attendance = () => {
             />
           </div>
           <div className="col-2">
-            <button type="submit" className="btn-search text-white" onClick={getData}>
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
+  <button type="submit" className="btn-search text-white" onClick={getData}>
+      Search
+    </button>
+  </div>
+        </div >
+      </div >
 
-      <div className="table-responsive mx-auto" style={{ width: "90%" }}>
-        <table className="table border-end-0">
-          <thead>
-            <tr className="border-start">
-              <th scope="col" className="border-top">
-                Sr No.
-              </th>
-              <th scope="col" className="border-top">
-                Date
-              </th>
-              <th scope="col" className="border-top">
-                Emp.Code
-              </th>
-              <th scope="col" className="border-top">
-                Name
-              </th>
-              <th scope="col" className="border-top">
-                Email
-              </th>
-              <th scope="col" className="border-top">
-                Type
-              </th>
-              <th scope="col" className="border-top">
-                Attendance
-              </th>
-              <th
-                scope="col"
-                className="border-top"
-                style={{ borderRight: "1px solid #dee2e6" }}
-              >
-                T.W.T
-              </th>
-              <th className="border-0"></th>
-            </tr>
-          </thead>
+  <div className="table-responsive mx-auto" style={{ width: "90%" }}>
+    <table className="table border-end-0">
+      <thead>
+        <tr className="border-start">
+          <th scope="col" className="border-top">
+            Sr No.
+          </th>
+          <th scope="col" className="border-top">
+            Date
+          </th>
+          <th scope="col" className="border-top">
+            Emp.Code
+          </th>
+          <th scope="col" className="border-top">
+            Name
+          </th>
+          <th scope="col" className="border-top">
+            Email
+          </th>
+          <th scope="col" className="border-top">
+            Type
+          </th>
+          <th scope="col" className="border-top">
+            Attendance
+          </th>
+          <th
+            scope="col"
+            className="border-top"
+            style={{ borderRight: "1px solid #dee2e6" }}
+          >
+            T.W.T
+          </th>
+          <th className="border-0"></th>
+        </tr>
+      </thead>
 
-          <tbody className="">
-            {(tableData.length != 0 ? <>
-              {tableData.map((elem, index) => {
-                return (<>
-                  <tr className="border-start">
-                    <th scope="row">{index + 1}</th>
-                    <td>{(elem.eod_date ? elem.eod_date : "Date Unavailable")}</td>
-                    <td>{elem.emp_code}</td>
-                    <td>{elem.emp_fname} {elem.emp_lname}</td>
+      <tbody className="">
+        {(tableData.length != 0 ? <>
+          {tableData.map((elem, index) => {
+            return (<>
+              <tr className="border-start">
+                <th scope="row">{index + 1}</th>
+                <td>{(elem.eod_date ? elem.eod_date : "Date Unavailable")}</td>
+                <td>{elem.emp_code}</td>
+                <td>{elem.emp_fname} {elem.emp_lname}</td>
 
-                    <td>{elem.email}</td>
-                    <td>{elem.emp_type}</td>
-                    <td className="text-center">
-                      {(elem.eod_date ? <img
-                        src={presentIcon}
-                        alt="present"
-                        width={20}
-                        height={20}
-                      /> : <img
-                        src={absentIcon}
-                        alt="absent"
-                        width={20}
-                        height={20}
-                      />)}
-                    </td>
-                    <td
-                      style={{ borderRight: "1px solid #dee2e6" }}
-                      className="text-center"
-                    >
-                      {(elem.total_work_time ? elem.total_work_time : "T.W.T unavailable")}
-                    </td>
-                    <td className="border-0">
-                    </td>
-                  </tr>
-                </>);
+                <td>{elem.email}</td>
+                <td>{elem.emp_type}</td>
+                <td className="text-center">
+                  {(elem.eod_date ? <img
+                    src={presentIcon}
+                    alt="present"
+                    width={20}
+                    height={20}
+                  /> : <img
+                    src={absentIcon}
+                    alt="absent"
+                    width={20}
+                    height={20}
+                  />)}
+                </td>
+                <td
+                  style={{ borderRight: "1px solid #dee2e6" }}
+                  className="text-center"
+                >
+                  {(elem.total_work_time ? elem.total_work_time : "T.W.T unavailable")}
+                </td>
+                <td className="border-0">
+                </td>
+              </tr>
+            </>);
 
-              })}
-            </>
+          })}
+        </>
 
 
-              : <tr className="text-center"><th style={{ borderRight: "1px solid #dee2e6", borderLeft: "1px solid #dee2e6" }}
-                className="text-center" colSpan="8"> No Data Available. </th> </tr>)}
+          : <tr className="text-center"><th style={{ borderRight: "1px solid #dee2e6", borderLeft: "1px solid #dee2e6" }}
+            className="text-center" colSpan="8"> No Data Available. </th> </tr>)}
 
-          </tbody>
+      </tbody>
 
-        </table>
+    </table>
 
-      </div>
+  </div>
     </>
   );
 };
