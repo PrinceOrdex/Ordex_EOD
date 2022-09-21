@@ -272,7 +272,7 @@ const Login = () => {
                       required
                       onChange={handleChange}
                       />
-                          <label className="floating-label">Password</label>
+                          <label className="floating-label ">Password</label>
                     </div>
                   </div>
                 </div>
