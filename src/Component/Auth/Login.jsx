@@ -73,7 +73,7 @@ const Login = () => {
 
   return (
     <>
-      {/* <contextApi.Provider value={haslogin}></contextApi.Provider> */}
+      {/* {/ <contextApi.Provider value={haslogin}></contextApi.Provider> /} */}
       <div className="main d-flex justify-content-center justify-content-sm-end align-items-center">
         <div className="box text-center ms-3 me-3 me-sm-5 p-4">
           <div
@@ -128,7 +128,7 @@ const Login = () => {
                 <h4>Login as Employee</h4>
               </div>
               <form className="mt-4">
-                {/* <!-- Email input --> */}
+                {/ <!-- Email input --> /}
                 <div className="row px-0 mx-0 d-flex justify-content-center">
                   {/* <div className="col-10">
                     <div className="form-outline mb-4">
@@ -154,7 +154,7 @@ const Login = () => {
                     </div>
                   </div>
 
-                  {/* <!-- Password input --> */}
+                  {/ <!-- Password input --> /}
                   {/* <div className="col-10">
                     <div className="form-outline mb-4">
                       <input
@@ -188,7 +188,7 @@ const Login = () => {
                   </div>
                 </div>
 
-                {/* <!-- Submit button --> */}
+                {/ <!-- Submit button --> /}
 
                 <NavLink to="/">
                   <button
@@ -219,7 +219,7 @@ const Login = () => {
                 <h4>Login as Admin</h4>
               </div>
               <form className="mt-4">
-                {/* <!-- Email input --> */}
+                {/ <!-- Email input --> /}
                 <div className="row px-0 mx-0 d-flex justify-content-center">
                   {/* <div className="col-10">
                     <div className="form-outline mb-4">
@@ -244,7 +244,7 @@ const Login = () => {
                     </div>
                   </div>
 
-                  {/* <!-- Password input --> */}
+                  {/ <!-- Password input --> /}
                   {/* <div className="col-10">
                     <div className="form-outline mb-4">
                       <input
@@ -277,7 +277,7 @@ const Login = () => {
                   </div>
                 </div>
 
-                {/* <!-- Submit button --> */}
+                {/ <!-- Submit button --> /}
                 <NavLink to="/admin/main">
                   <button
                     type="button"
