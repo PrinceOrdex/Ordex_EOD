@@ -128,7 +128,6 @@ const Login = () => {
                 <h4>Login as Employee</h4>
               </div>
               <form className="mt-4">
-                {/ <!-- Email input --> /}
                 <div className="row px-0 mx-0 d-flex justify-content-center">
                   {/* <div className="col-10">
                     <div className="form-outline mb-4">
@@ -149,12 +148,11 @@ const Login = () => {
 
                   <div className="col-10 px-0">
                     <div className="floating-label-group">
-                      <input type="text" id="username" name="Email" className="form-control" autocomplete="off" required onChange={handleChange}/>
+                      <input type="text" id="username" name="Email" className="form-control" autocomplete="off" required onChange={handleChange} />
                       <label className="floating-label">Email address</label>
                     </div>
                   </div>
 
-                  {/ <!-- Password input --> /}
                   {/* <div className="col-10">
                     <div className="form-outline mb-4">
                       <input
@@ -175,20 +173,19 @@ const Login = () => {
                   <div className="col-10 px-0">
                     <div className="floating-label-group">
                       <input
-                      type="password"
-                      id="password"
-                      name="Password"
-                      className="form-control"
-                      autocomplete="off"
-                      required
-                      onChange={handleChange}
+                        type="password"
+                        id="password"
+                        name="Password"
+                        className="form-control"
+                        autocomplete="off"
+                        required
+                        onChange={handleChange}
                       />
                       <label className="floating-label">Password</label>
                     </div>
                   </div>
                 </div>
 
-                {/ <!-- Submit button --> /}
 
                 <NavLink to="/">
                   <button
@@ -202,7 +199,7 @@ const Login = () => {
 
               </form>
               <div className="mt-2">
-                <a href="#" className="text-center d-flex justify-content-center" style={{textDecoration: "none",fontWeight: '500', color: '#767171'}}>Forgot Password ?</a>
+                <a href="#" className="text-center d-flex justify-content-center" style={{ textDecoration: "none", fontWeight: '500', color: '#767171' }}>Forgot Password ?</a>
               </div>
 
             </div>
@@ -219,7 +216,6 @@ const Login = () => {
                 <h4>Login as Admin</h4>
               </div>
               <form className="mt-4">
-                {/ <!-- Email input --> /}
                 <div className="row px-0 mx-0 d-flex justify-content-center">
                   {/* <div className="col-10">
                     <div className="form-outline mb-4">
@@ -239,12 +235,11 @@ const Login = () => {
                   </div> */}
                   <div className="col-10 px-0">
                     <div className="floating-label-group">
-                      <input type="text" id="username" className="form-control" name="Email" autocomplete="off" required onChange={handleChange}/>
+                      <input type="text" id="username" className="form-control" name="Email" autocomplete="off" required onChange={handleChange} />
                       <label className="floating-label">Email address</label>
                     </div>
                   </div>
 
-                  {/ <!-- Password input --> /}
                   {/* <div className="col-10">
                     <div className="form-outline mb-4">
                       <input
@@ -264,20 +259,19 @@ const Login = () => {
                   <div className="col-10 px-0">
                     <div className="floating-label-group">
                       <input
-                      type="password"
-                      id="password"
-                      name="Password"
-                      className="form-control"
-                      autocomplete="off"
-                      required
-                      onChange={handleChange}
+                        type="password"
+                        id="password"
+                        name="Password"
+                        className="form-control"
+                        autocomplete="off"
+                        required
+                        onChange={handleChange}
                       />
-                          <label className="floating-label ">Password</label>
+                      <label className="floating-label">Password</label>
                     </div>
                   </div>
                 </div>
 
-                {/ <!-- Submit button --> /}
                 <NavLink to="/admin/main">
                   <button
                     type="button"
@@ -289,7 +283,7 @@ const Login = () => {
                 </NavLink>
               </form>
               <div className="mt-2">
-                <a href="#" className="text-center d-flex justify-content-center" style={{textDecoration: "none",fontWeight: '500', color: '#767171'}}>Forgot Password ?</a>
+                <a href="#" className="text-center d-flex justify-content-center" style={{ textDecoration: "none", fontWeight: '500', color: '#767171' }}>Forgot Password ?</a>
               </div>
               {/* <!-- <div className="mt-2">
               <p>Don't have account? <a href="#">Register</a></p>

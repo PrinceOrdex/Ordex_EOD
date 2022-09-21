@@ -4,6 +4,18 @@
     box-sizing: border-box;
 }
 
+.loadingPopup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(../loading.gif) center center no-repeat #101010;
+    opacity: 0.9;
+    display: block;
+}
+
 .navbar-brand img {
     width: 200px;
 }
@@ -198,7 +210,7 @@ select:focus {
 }
 
 
-input[type="time"]:focus{
+input[type="time"]:focus {
     box-shadow: 0 0 0 rgb(255, 255, 255) !important;
     border: 0;
     border-bottom: 2px solid lightblue !important;
@@ -212,23 +224,24 @@ input[type="time"]:focus{
     cursor: pointer;
 }
 
-.delete-icon{
+.delete-icon {
     right: -810%;
     bottom: 100%;
     color: #ded7d7;
     cursor: pointer;
 }
 
-.bottom-background{
-    background-image: linear-gradient(to left,#a1def4, #a1def4, #a1def4, #F2F2F2,#F2F2F2);
+.bottom-background {
+    background-image: linear-gradient(to left, #a1def4, #a1def4, #a1def4, #F2F2F2, #F2F2F2);
 }
-.clear-btn{
+
+.clear-btn {
     border: 2px solid #06beff;
     color: #06beff;
 }
 
-.submit-data-btn{
+.submit-data-btn {
     background-color: #fff;
-    color:#06beff;
+    color: #06beff;
     font-weight: 500;
 }
