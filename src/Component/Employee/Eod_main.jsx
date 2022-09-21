@@ -6,6 +6,9 @@ const Eod_main = () => {
   const { state, dispatch } = useContext(MenuContext);
   let [options, setOptions] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [eod_date, setEod_date] = useState("");
+
+  const [taskStatus, setTaskStatus] = useState(0);
 
   const [userData, setData] = useState({
     project: "",
@@ -29,6 +32,26 @@ const Eod_main = () => {
   const getuserDetails = () => {
     let userData = JSON.parse(localStorage.getItem("userData"));
     return userData;
+  };
+
+  const fetchTask = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/eod/task", {
+        params: {
+          empid: getuserDetails().empId,
+          eoddate: eod_date,
+        },
+      });
+
+      if (res.status == 200) {
+        setTasks(res.data);
+        setTaskStatus(res.status);
+      } else {
+      }
+    } catch (err) {
+      setTasks([]);
+      console.log(err);
+    }
   };
 
   const [eodTaskData, setEodTaskData] = useState({
@@ -65,7 +88,13 @@ const Eod_main = () => {
 
   useEffect(() => {
     fetchProject();
+    todayDate();
+    setEod_date(todayDate());
   }, []);
+
+  useEffect(() => {
+    fetchTask();
+  }, [eod_date]);
 
   let name, value;
   const getInput = (e) => {
@@ -108,20 +137,6 @@ const Eod_main = () => {
   //   setHasData(false);
   // };
 
-  const fetchTask = async () => {
-    try {
-      const res = await axios.get("http://localhost:8000/eod/task", {
-        params: {
-          empid: getuserDetails().empId,
-          eoddate: eodTaskData.eodDate,
-        },
-      });
-      setTasks(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const putEodTaskData = async () => {
     try {
       const res = await axios.post("http://localhost:8000/eod/task", {
@@ -132,11 +147,8 @@ const Eod_main = () => {
         taskDesc: eodTaskData.taskDesc,
         workTime: eodTaskData.workTime,
         createdAt: todayDate(),
-        eodDate: eodTaskData.eodDate,
+        eodDate: eod_date,
       });
-
-      console.log(">>>response");
-      console.log(res);
 
       let eodDateTmp = eodTaskData.eodDate;
 
@@ -151,7 +163,7 @@ const Eod_main = () => {
           taskDesc: "",
           workTime: "",
           // createdAt: todayDate(),
-          eodDate: eodDateTmp,
+          eodDate: eod_date,
         });
       } else {
         alert("Data insertion failed");
@@ -164,16 +176,13 @@ const Eod_main = () => {
   const getEodTaskData = (e) => {
     e.preventDefault();
 
-    console.log(">>>>eodTaskData");
-    console.log(eodTaskData);
-
     if (
       eodTaskData.projectId == "" ||
       eodTaskData.taskTitle == "" ||
       eodTaskData.status == "" ||
       eodTaskData.taskDesc == "" ||
       eodTaskData.workTime == "" ||
-      eodTaskData.eodDate == ""
+      eod_date == ""
     ) {
       alert("Please enter all data");
     } else {
@@ -189,7 +198,7 @@ const Eod_main = () => {
 
       const res = await axios.post("http://localhost:8000/eod", {
         empId: getuserDetails().empId,
-        eoddate: eodTaskData.eodDate,
+        eoddate: eod_date,
         createdAt: dateString,
       });
 
@@ -219,8 +228,11 @@ const Eod_main = () => {
               type="date"
               id="eodDate"
               name="eodDate"
-              value={eodTaskData.eodDate}
-              onChange={getInput}
+              value={eod_date}
+              onChange={(e) => {
+                setEod_date(e.target.value);
+                fetchTask();
+              }}
               className="form-control p-2"
             />
           </div>
@@ -331,30 +343,34 @@ const Eod_main = () => {
       <hr className="mt-4" />
 
       <div className="container">
-        <table className="table border">
-          <thead>
-            <tr>
-              <th scope="col">Sr.no</th>
-              <th scope="col">Project</th>
-              <th scope="col">Task</th>
-              <th scope="col">Description</th>
-              <th scope="col">Status</th>
-              <th scope="col">T.W.T</th>
-            </tr>
-          </thead>
-          <tbody className="position-relative">
-            {tasks.map((elem, index) => (
+        {tasks.length == 0 ? (
+          "No Data Available"
+        ) : (
+          <table className="table border">
+            <thead>
               <tr>
-                <td>{index + 1}</td>
-                <td>{elem.project_name}</td>
-                <td>{elem.task_title}</td>
-                <td>{elem.task_desc}</td>
-                <td>{elem.status}</td>
-                <td>{elem.worktime}</td>
+                <th scope="col">Sr.no</th>
+                <th scope="col">Project</th>
+                <th scope="col">Task</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">T.W.T</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="position-relative">
+              {tasks.map((elem, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{elem.project_name}</td>
+                  <td>{elem.task_title}</td>
+                  <td>{elem.task_desc}</td>
+                  <td>{elem.status}</td>
+                  <td>{elem.worktime}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
       <div className="row flex-nowrap bg-dark">
         <div className="col-10 ms-auto d-flex justify-content-between p-3 bottom-background">
