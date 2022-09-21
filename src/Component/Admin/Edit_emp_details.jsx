@@ -71,6 +71,7 @@ const Edit_emp_details = (props) => {
 
       if (res.status == 200) {
         alert("Emp Updated Successfully");
+        window.location.reload();
       } else {
         alert("Updation failed")
       }

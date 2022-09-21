@@ -152,11 +152,11 @@
     color: #0eb35a;
 }
 
-.nav-pills .nav-link {
+#sidebar .nav-pills .nav-link {
     color: #000;
 }
 
-.left-button .nav-link.active {
+#sidebar .left-button .nav-link.active {
     background-image: linear-gradient(to bottom, white, #a1def4, #a1def4, #a1def4, white) !important;
     /* text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue; */
     text-shadow: 1px 1px 2px black, 0 0 1px blue, 0 0 1px darkblue;
@@ -175,7 +175,7 @@
 }
 
 
-input[type="text"]:focus {
+#task input[type="text"]:focus {
     box-shadow: 0 0 0 rgb(255, 255, 255) !important;
     border: 0;
     border-bottom: 2px solid lightblue !important;
