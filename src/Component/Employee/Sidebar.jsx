@@ -4,7 +4,7 @@ import _image_75 from "./../../Image/75.jpg";
 const Sidebar = () => {
   return (
     <>
-      <div className="d-flex flex-column px-3 pt-2 min-vh-100">
+      <div className="d-flex flex-column px-3 pt-2 min-vh-100" id="sidebar">
         <div className="rounded-circle text-center pb-4">
           <img src={_image_75} alt="hugenerd" />
           <div className="flex flex-column text-center mt-2">

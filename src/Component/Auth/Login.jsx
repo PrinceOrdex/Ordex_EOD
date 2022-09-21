@@ -130,7 +130,7 @@ const Login = () => {
               <form className="mt-4">
                 {/* <!-- Email input --> */}
                 <div className="row px-0 mx-0 d-flex justify-content-center">
-                  <div className="col-10">
+                  {/* <div className="col-10">
                     <div className="form-outline mb-4">
                       <input
                         type="email"
@@ -144,22 +144,18 @@ const Login = () => {
                       <label className="form-label" htmlFor="form2Example1">
                         Email address
                       </label>
-                      <div className="form-notch">
-                        <div
-                          className="form-notch-leading"
-                          style={{ width: "9px", borderRight: "0" }}
-                        ></div>
-                        <div
-                          className="form-notch-middle"
-                          style={{ width: "88.8px" }}
-                        ></div>
-                        <div className="form-notch-trailing"></div>
-                      </div>
+                    </div>
+                  </div> */}
+
+                  <div className="col-10 px-0">
+                    <div className="floating-label-group">
+                      <input type="text" id="username" name="Email" className="form-control" autocomplete="off" required onChange={handleChange}/>
+                      <label className="floating-label">Email address</label>
                     </div>
                   </div>
 
                   {/* <!-- Password input --> */}
-                  <div className="col-10">
+                  {/* <div className="col-10">
                     <div className="form-outline mb-4">
                       <input
                         type="password"
@@ -173,17 +169,21 @@ const Login = () => {
                       <label className="form-label" htmlFor="form2Example2">
                         Password
                       </label>
-                      <div className="form-notch">
-                        <div
-                          className="form-notch-leading"
-                          style={{ width: "9px", borderRight: "0" }}
-                        ></div>
-                        <div
-                          className="form-notch-middle"
-                          style={{ width: "64.8px" }}
-                        ></div>
-                        <div className="form-notch-trailing"></div>
-                      </div>
+                    </div>
+                  </div> */}
+
+                  <div className="col-10 px-0">
+                    <div className="floating-label-group">
+                      <input
+                      type="password"
+                      id="password"
+                      name="Password"
+                      className="form-control"
+                      autocomplete="off"
+                      required
+                      onChange={handleChange}
+                      />
+                      <label className="floating-label">Password</label>
                     </div>
                   </div>
                 </div>
@@ -201,6 +201,9 @@ const Login = () => {
                 </NavLink>
 
               </form>
+              <div className="mt-2">
+                <a href="#" className="text-center d-flex justify-content-center" style={{textDecoration: "none",fontWeight: '500', color: '#767171'}}>Forgot Password ?</a>
+              </div>
 
             </div>
             <div
@@ -218,7 +221,7 @@ const Login = () => {
               <form className="mt-4">
                 {/* <!-- Email input --> */}
                 <div className="row px-0 mx-0 d-flex justify-content-center">
-                  <div className="col-10">
+                  {/* <div className="col-10">
                     <div className="form-outline mb-4">
                       <input
                         type="email"
@@ -232,22 +235,17 @@ const Login = () => {
                       <label className="form-label" htmlFor="form2Example1">
                         Email address
                       </label>
-                      <div className="form-notch">
-                        <div
-                          className="form-notch-leading"
-                          style={{ width: "9px", borderRight: "0" }}
-                        ></div>
-                        <div
-                          className="form-notch-middle"
-                          style={{ width: "88.8px" }}
-                        ></div>
-                        <div className="form-notch-trailing"></div>
-                      </div>
+                    </div>
+                  </div> */}
+                  <div className="col-10 px-0">
+                    <div className="floating-label-group">
+                      <input type="text" id="username" className="form-control" name="Email" autocomplete="off" required onChange={handleChange}/>
+                      <label className="floating-label">Email address</label>
                     </div>
                   </div>
 
                   {/* <!-- Password input --> */}
-                  <div className="col-10">
+                  {/* <div className="col-10">
                     <div className="form-outline mb-4">
                       <input
                         type="password"
@@ -261,17 +259,20 @@ const Login = () => {
                       <label className="form-label" htmlFor="form2Example2">
                         Password
                       </label>
-                      <div className="form-notch">
-                        <div
-                          className="form-notch-leading"
-                          style={{ width: "9px", borderRight: "0" }}
-                        ></div>
-                        <div
-                          className="form-notch-middle"
-                          style={{ width: "64.8px" }}
-                        ></div>
-                        <div className="form-notch-trailing"></div>
-                      </div>
+                    </div>
+                  </div> */}
+                  <div className="col-10 px-0">
+                    <div className="floating-label-group">
+                      <input
+                      type="password"
+                      id="password"
+                      name="Password"
+                      className="form-control"
+                      autocomplete="off"
+                      required
+                      onChange={handleChange}
+                      />
+                          <label className="floating-label">Password</label>
                     </div>
                   </div>
                 </div>
@@ -287,6 +288,9 @@ const Login = () => {
                   </button>
                 </NavLink>
               </form>
+              <div className="mt-2">
+                <a href="#" className="text-center d-flex justify-content-center" style={{textDecoration: "none",fontWeight: '500', color: '#767171'}}>Forgot Password ?</a>
+              </div>
               {/* <!-- <div className="mt-2">
               <p>Don't have account? <a href="#">Register</a></p>
             </div> --> */}
