@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { MenuContext } from "../../App";
+import Swal from "sweetalert2";
 
 const Eod_main = () => {
   const { state, dispatch } = useContext(MenuContext);
@@ -17,6 +18,21 @@ const Eod_main = () => {
     status: "",
     description: "",
   });
+
+
+  //------------ Loader Code Start------------
+  const [loader, setLoader] = useState(false)
+
+  useEffect(() => {
+    setLoader(true)
+    setTimeout(() => {
+      setLoader(false);
+    }, 1500);
+  }, []);
+
+  //------------ Loader Code End ------------
+
+
 
   // Finding Today's Date.
   const todayDate = () => {
@@ -35,7 +51,9 @@ const Eod_main = () => {
   };
 
   const fetchTask = async () => {
+    setLoader(true)
     try {
+      setLoader(true)
       const res = await axios.get("http://localhost:8000/eod/task", {
         params: {
           empid: getuserDetails().empId,
@@ -44,14 +62,19 @@ const Eod_main = () => {
       });
 
       if (res.status == 200) {
+        setDataNum(res.data.length)
+        // setHasData(true)
         setTasks(res.data);
         setTaskStatus(res.status);
+        setLoader(false)
       } else {
       }
     } catch (err) {
       setTasks([]);
       console.log(err);
+      setLoader(false)
     }
+    setLoader(false)
   };
 
   const [eodTaskData, setEodTaskData] = useState({
@@ -149,11 +172,8 @@ const Eod_main = () => {
         createdAt: todayDate(),
         eodDate: eod_date,
       });
-
-      let eodDateTmp = eodTaskData.eodDate;
-
+      setLoader(false)
       if (res.status === 200) {
-        alert("data inserted successfully!");
         fetchTask();
         setEodTaskData({
           // empId: getuserDetails().empId,
@@ -165,17 +185,26 @@ const Eod_main = () => {
           // createdAt: todayDate(),
           eodDate: eod_date,
         });
+        setHasData(true)
       } else {
-        alert("Data insertion failed");
+        setLoader(false)
+        // alert("Data insertion failed");
+        Swal.fire({
+          type: "error",
+          icon: "error",
+          title: "Data insertion failed",
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#06bdff',
+        })
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const getEodTaskData = (e) => {
-    e.preventDefault();
-
+  const getEodTaskData = async (e) => {
+    e.preventDefault()
+    setLoader(true)
     if (
       eodTaskData.projectId == "" ||
       eodTaskData.taskTitle == "" ||
@@ -184,16 +213,27 @@ const Eod_main = () => {
       eodTaskData.workTime == "" ||
       eod_date == ""
     ) {
-      alert("Please enter all data");
+      // alert("Please enter all data");
+      Swal.fire({
+        type: "warning",
+        icon: "warning",
+        title: "Please enter all data",
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#06bdff',
+      })
+      setLoader(false)
     } else {
-      putEodTaskData();
+      setLoader(true)
+      await putEodTaskData();
     }
   };
 
   const submitEod = async (e) => {
+    setLoader(true)
     e.preventDefault();
 
     try {
+      setLoader(true)
       const dateString = todayDate();
 
       const res = await axios.post("http://localhost:8000/eod", {
@@ -203,17 +243,35 @@ const Eod_main = () => {
       });
 
       if (res.status === 200) {
-        alert("EOD Submitted Successfully");
+        setLoader(false)
+        Swal.fire({
+          type: "success",
+          icon: "success",
+          title: "EOD submitted successfully",
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#06bdff',
+        })
+        // alert("EOD Submitted Successfully");
       } else {
-        alert("Problem in Submitting the EOD");
+        Swal.fire({
+          type: "warning",
+          icon: "warning",
+          title: "Something went wrong",
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#06bdff',
+        })
+        // alert("Problem in Submitting the EOD");
+        setLoader(false)
       }
     } catch (error) {
       console.log(error);
+      setLoader(false)
     }
   };
 
   return (
     <>
+      {loader ? <div className="loadingPopup"></div> : null}
       {/* <div className="col py-3 bg-white h-100 mb-2"> */}
       <div className="row col-12 mx-0 px-0 text-center border-bottom">
         <h3>END OF DAY REPORT</h3>
@@ -228,7 +286,7 @@ const Eod_main = () => {
               type="date"
               id="eodDate"
               name="eodDate"
-              value={eod_date}
+              value={eod_date} max={todayDate()}
               onChange={(e) => {
                 setEod_date(e.target.value);
                 fetchTask();
@@ -264,7 +322,7 @@ const Eod_main = () => {
           <div className="col-10 d-lg-flex justify-content-center">
             <div className="col-12 col-lg-6">
               <p className="mb-1">Task</p>
-              <div className="project col-12">
+              <div className="project col-12" id="task">
                 <input
                   className="form-control"
                   type="text"
@@ -289,7 +347,7 @@ const Eod_main = () => {
                     placeholder="Time"
                     onChange={getInput}
                     required
-                    // step="1"
+                  // step="1"
                   />
                 </div>
               </div>
@@ -302,7 +360,7 @@ const Eod_main = () => {
                   onChange={getInput}
                   required
                 >
-                  <option defaultValue>select option</option>
+                  <option defaultValue>Select Option</option>
                   <option value="INPROGRESS">Task in Progress</option>
                   <option value="COMPLETED">Task Completed</option>
                 </select>
@@ -349,7 +407,7 @@ const Eod_main = () => {
           <table className="table border">
             <thead>
               <tr>
-                <th scope="col">Sr.no</th>
+                <th scope="col">Sr. no</th>
                 <th scope="col">Project</th>
                 <th scope="col">Task</th>
                 <th scope="col">Description</th>
@@ -359,7 +417,7 @@ const Eod_main = () => {
             </thead>
             <tbody className="position-relative">
               {tasks.map((elem, index) => (
-                <tr>
+                <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{elem.project_name}</td>
                   <td>{elem.task_title}</td>
@@ -375,7 +433,8 @@ const Eod_main = () => {
       <div className="row flex-nowrap bg-dark">
         <div className="col-10 ms-auto d-flex justify-content-between p-3 bottom-background">
           <div>
-            <button className="btn clear-btn px-3">Clear All</button>
+            <button className="btn clear-btn px-3" onClick={() => { setEodTaskData({ projectId: "", taskTitle: "", status: "", taskDesc: "", workTime: "" }); setHasData(false); }}>
+              Clear All</button>
           </div>
           <div>
             <button className="btn submit-data-btn px-5" onClick={submitEod}>

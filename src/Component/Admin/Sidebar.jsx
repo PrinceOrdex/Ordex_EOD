@@ -95,7 +95,7 @@ const Sidebar = () => {
             >
               EOD Compliance
             </button>
-            <button
+            {/* <button
               className="nav-link"
               id="v-pills-edit-tab"
               data-bs-toggle="pill"
@@ -106,7 +106,7 @@ const Sidebar = () => {
               aria-selected="false"
             >
               Edit Profile
-            </button>
+            </button> */}
           </div>
         </div>
 

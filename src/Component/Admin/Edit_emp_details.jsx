@@ -63,8 +63,8 @@ const Edit_emp_details = (props) => {
         type: empData.emp_type,
         status: empData.status,
         update_at: todayDate(),
-        skill_id: empData.emp_skill_id,
-        project_id: 4,
+        // skill_id: empData.emp_skill_id,
+        // project_id: 4,
         emp_id: empData.emp_id,
       }
       );
