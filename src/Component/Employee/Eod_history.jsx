@@ -6,12 +6,11 @@ import moment from "moment";
 import Swal from "sweetalert2";
 
 const Eod_history = () => {
-
   //------------ Loader Code Start------------
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    setLoader(true)
+    setLoader(true);
     setTimeout(() => {
       setLoader(false);
     }, 1500);
@@ -22,84 +21,83 @@ const Eod_history = () => {
 
   const todayDate = () => {
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
-    today = dd + '-' + mm + '-' + yyyy;
-    today = yyyy + '-' + mm + '-' + dd;
+    today = dd + "-" + mm + "-" + yyyy;
+    today = yyyy + "-" + mm + "-" + dd;
     return today;
-  }
+  };
 
-  const [eodDate, setEodDate] = useState(todayDate())
+  const [eodDate, setEodDate] = useState(todayDate());
 
-  const [startDate, setStartDate] = useState("")
-  const [endDate, setEndDate] = useState("")
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState([]);
 
   const getuserDetails = () => {
     let userData = JSON.parse(localStorage.getItem("userData"));
     return userData;
-  }
+  };
 
   const fetchTask = async () => {
-
     try {
-      setLoader(true)
+      setLoader(true);
       if (eodDate) {
         const res = await axios.get("http://localhost:8000/eod/task", {
           params: {
             empid: getuserDetails().empId,
-            eoddate: eodDate
+            eoddate: eodDate,
           },
         });
         setTasks(res.data);
-        setLoader(false)
-      }
-      else {
+        setLoader(false);
+      } else {
         Swal.fire({
           title: "Error",
           type: "error",
           icon: "error",
           text: "Select Date",
-        })
-          .then(() => setLoader(false))
+        }).then(() => setLoader(false));
       }
     } catch (err) {
-      setTasks([])
-      setLoader(false)
+      setTasks([]);
+      setLoader(false);
     }
-  }
+  };
 
   const fetchDateRange = async () => {
     try {
-      setLoader(true)
-      if (startDate && endDate) {
-        const res = await axios.get("http://localhost:8000/eod/task/daterange", {
-          params: {
-            emp_id: getuserDetails().empId,
-            start_date: startDate,
-            end_date: endDate
-          },
-        });
+      setLoader(true);
+      if ((startDate && endDate) && (endDate > startDate)) {
+        const res = await axios.get(
+          "http://localhost:8000/eod/task/daterange",
+          {
+            params: {
+              emp_id: getuserDetails().empId,
+              start_date: startDate,
+              end_date: endDate,
+            },
+          }
+        );
         setTasks(res.data);
-        setLoader(false)
-      }
-      else {
-        setLoader(false)
+        setLoader(false);
+      } else {
+        setLoader(false);
         Swal.fire({
           type: "error",
           icon: "error",
           title: "Please select valid date",
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#06bdff',
-        })
+          confirmButtonText: "OK",
+          confirmButtonColor: "#06bdff",
+        });
       }
     } catch (err) {
-      setTasks([])
-      setLoader(false)
+      setTasks([]);
+      setLoader(false);
     }
-  }
+  };
 
   useEffect(() => {
     fetchTask();
@@ -123,7 +121,9 @@ const Eod_history = () => {
               role="tab"
               aria-controls="nav-home"
               aria-selected="true"
-              onClick={() => { fetchTask(); }}
+              onClick={() => {
+                fetchTask();
+              }}
             >
               Date
             </button>
@@ -139,10 +139,11 @@ const Eod_history = () => {
               // onClick={() => { setTasks([]); }}
               onClick={() => {
                 if (startDate && endDate) {
-                  fetchDateRange()
-                }
-                else {
-                  setTasks([]); setStartDate(""); setEndDate("")
+                  fetchDateRange();
+                } else {
+                  setTasks([]);
+                  setStartDate("");
+                  setEndDate("");
                 }
               }}
             >
@@ -169,13 +170,20 @@ const Eod_history = () => {
                   id="birthday"
                   name="birthday"
                   className="form-control p-2"
-                  defaultValue={eodDate} max={todayDate()}
-                  onChange={e => setEodDate(e.target.value)}
+                  defaultValue={eodDate}
+                  max={todayDate()}
+                  onChange={(e) => setEodDate(e.target.value)}
                   required
                 />
               </div>
               <div className="col-2">
-                <button type="submit" className="btn-search text-white" onClick={() => { fetchTask() }}>
+                <button
+                  type="submit"
+                  className="btn-search text-white"
+                  onClick={() => {
+                    fetchTask();
+                  }}
+                >
                   Search
                 </button>
               </div>
@@ -197,20 +205,31 @@ const Eod_history = () => {
                   id="birthday"
                   name="birthday"
                   className="form-control p-2"
-                  value={startDate} max={todayDate()}
-                  onChange={e => setStartDate(e.target.value)}
+                  value={startDate}
+                  max={todayDate()}
+                  onChange={(e) => setStartDate(e.target.value)}
                 />
               </div>
             </div>
             <div className="col-12 col-sm-6 col-md-5 col-lg-4 mt-3 mt-sm-0 d-flex">
               <div className="col-12 date-1">
                 <p className="date-report mb-0 text-white">End Date</p>
-                <input type="date" className="form-control p-2" value={endDate}
-                  onChange={e => setEndDate(e.target.value)} min={startDate} max={todayDate()} />
+                <input
+                  type="date"
+                  className="form-control p-2"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  min={startDate}
+                  max={todayDate()}
+                />
               </div>
             </div>
             <div className="col-2 mt-3 mt-md-0 d-flex justify-content-start">
-              <button type="submit" className="btn-search text-white" onClick={fetchDateRange}>
+              <button
+                type="submit"
+                className="btn-search text-white"
+                onClick={fetchDateRange}
+              >
                 Search
               </button>
             </div>
@@ -231,39 +250,39 @@ const Eod_history = () => {
           </tr>
         </thead>
         <tbody className="position-relative">
-
-          {tasks.length != 0 ?
-            (tasks.map((elem, index) => (
-
+          {tasks.length != 0 ? (
+            tasks.map((elem, index) => (
               <tr>
                 <td>{index + 1}</td>
-                <td>{moment(elem.eod_date).format('DD-MM-YYYY')}</td>
+                <td>{moment(elem.eod_date).format("DD-MM-YYYY")}</td>
                 <td>{elem.project_name}</td>
                 <td>{elem.task_title}</td>
                 <td>{elem.task_desc}</td>
-                <td>{elem.status == "COMPLETED" ?
-                  <i
-                    className="fa-solid fa-calendar-check"
-                    style={{ color: "green" }}
-                    title="Complete"
-                  ></i>
-                  :
-                  <i
-                    className="fa-solid fa-hourglass-half"
-                    style={{ color: "orange" }}
-                    title="Work in progress"
-                  ></i>
-                }</td>
+                <td>
+                  {elem.status == "COMPLETED" ? (
+                    <i
+                      className="fa-solid fa-calendar-check"
+                      style={{ color: "green" }}
+                      title="Complete"
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-hourglass-half"
+                      style={{ color: "orange" }}
+                      title="Work in progress"
+                    ></i>
+                  )}
+                </td>
                 <td>{elem.worktime}</td>
               </tr>
-            )))
-            :
-            (
-              <tr>
-                <th colSpan={7} style={{ textAlign: 'center' }}>No Data Available</th>
-              </tr>
-            )}
-
+            ))
+          ) : (
+            <tr>
+              <th colSpan={7} style={{ textAlign: "center" }}>
+                No Data Available
+              </th>
+            </tr>
+          )}
         </tbody>
       </table>
     </>

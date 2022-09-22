@@ -2,14 +2,22 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import edit_emp from "./../../Image/EditIcon.svg";
+import moment from "moment";
+import Swal from "sweetalert2";
 
 const Compliance = () => {
-  const [compliance, setCompliance] = useState([]);
-  const [complianceDateRange, setComplianceDateRange] = useState([]);
-  const [dateRange, setDateRange] = useState(false);
-  const [eodDate, setEodDate] = useState("");
-  const [eodStartDate, setEodStartDate] = useState("");
-  const [eodEndDate, setEodEndDate] = useState("");
+  //------------ Loader Code Start------------
+  const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+    }, 1500);
+    setLoader(false);
+  }, []);
+
+  //------------ Loader Code End ------------
 
   const todayDate = () => {
     var today = new Date();
@@ -21,49 +29,74 @@ const Compliance = () => {
     return today;
   };
 
+  const [compliance, setCompliance] = useState([]);
+  const [eodDate, setEodDate] = useState(todayDate());
+  const [eodStartDate, setEodStartDate] = useState("");
+  const [eodEndDate, setEodEndDate] = useState("");
+  // const [complianceDateRange, setComplianceDateRange] = useState([]);
+  // const [dateRange, setDateRange] = useState(false);
+
   const getEODCompliance = async () => {
-    setDateRange(false);
+    // setDateRange(false);
     try {
+      setLoader(true);
+
       let res = await axios.get("http://localhost:8000/eod/compliance", {
         params: {
           eod_date: eodDate,
         },
       });
       setCompliance(res.data);
-      console.log("-----  All Compliance Data  ------");
-      console.log(compliance);
+      setLoader(false);
     } catch (error) {
       setCompliance([]);
+      setLoader(false);
       console.log(error);
     }
   };
 
   const getEODComplianceDateRange = async () => {
-    setDateRange(true);
+    // setDateRange(true);
     try {
-      let res = await axios.get("http://localhost:8000/eod/daterange", {
-        params: {
-          start_date: eodStartDate,
-          end_date: eodEndDate,
-        },
-      });
-      setComplianceDateRange(res.data);
-      console.log("-----All Compliance by date range------");
-      console.log(complianceDateRange);
+      setLoader(true);
+      if (eodStartDate && eodEndDate && eodEndDate > eodStartDate) {
+        let res = await axios.get("http://localhost:8000/eod/daterange", {
+          params: {
+            start_date: eodStartDate,
+            end_date: eodEndDate,
+          },
+        });
+        setCompliance(res.data);
+        setLoader(false);
+      } else {
+        setLoader(false);
+        Swal.fire({
+          type: "error",
+          icon: "error",
+          title: "Please select valid date",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#06bdff",
+        });
+      }
     } catch (error) {
-      setComplianceDateRange([]);
+      setCompliance([]);
+      setLoader(false);
       console.log(error);
     }
   };
 
   useEffect(() => {
-    // getEODCompliance();
-    // getEODComplianceDateRange();
-    todayDate();
-    setEodDate(todayDate());
-    setEodStartDate(todayDate());
-    setEodEndDate(todayDate());
+    getEODCompliance();
   }, []);
+
+  // useEffect(() => {
+  //   // getEODCompliance();
+  //   // getEODComplianceDateRange();
+  //   todayDate();
+  //   setEodDate(todayDate());
+  //   setEodStartDate(todayDate());
+  //   setEodEndDate(todayDate());
+  // }, []);
 
   // useEffect(() => {
   //   getEODCompliance();
@@ -71,6 +104,7 @@ const Compliance = () => {
 
   return (
     <>
+      {loader ? <div className="loadingPopup"></div> : null}
       <div className="row col-12 mx-0 px-0 text-center border-bottom">
         <h3 className="text-uppercase">end of day report</h3>
       </div>
@@ -86,6 +120,9 @@ const Compliance = () => {
               role="tab"
               aria-controls="nav-home"
               aria-selected="true"
+              onClick={() => {
+                getEODCompliance();
+              }}
             >
               Date
             </button>
@@ -98,6 +135,15 @@ const Compliance = () => {
               role="tab"
               aria-controls="nav-profile"
               aria-selected="false"
+              onClick={() => {
+                if (eodStartDate && eodEndDate) {
+                  getEODComplianceDateRange();
+                } else {
+                  setCompliance([]);
+                  setEodStartDate("");
+                  setEodEndDate("");
+                }
+              }}
             >
               Date Range
             </button>
@@ -122,18 +168,18 @@ const Compliance = () => {
                   id="birthday"
                   name="birthday"
                   className="form-control p-2"
-                  value={eodDate}
-                  onChange={(e) => {
-                    setEodDate(e.target.value);
-                    getEODCompliance();
-                  }}
+                  defaultValue={eodDate}
+                  max={todayDate()}
+                  onChange={(e) => setEodDate(e.target.value)}
                 />
               </div>
               <div className="col-2">
                 <button
                   type="submit"
                   className="btn-search text-white"
-                  onClick={getEODCompliance}
+                  onClick={() => {
+                    getEODCompliance();
+                  }}
                 >
                   Search
                 </button>
@@ -157,10 +203,8 @@ const Compliance = () => {
                   name="birthday"
                   className="form-control p-2"
                   value={eodStartDate}
-                  onChange={(e) => {
-                    setEodStartDate(e.target.value);
-                    getEODComplianceDateRange();
-                  }}
+                  max={todayDate()}
+                  onChange={(e) => setEodStartDate(e.target.value)}
                 />
               </div>
             </div>
@@ -171,10 +215,9 @@ const Compliance = () => {
                   type="date"
                   className="form-control p-2"
                   value={eodEndDate}
-                  onChange={(e) => {
-                    setEodEndDate(e.target.value);
-                    // getEODComplianceDateRange();
-                  }}
+                  min={eodStartDate}
+                  max={todayDate()}
+                  onChange={(e) => setEodEndDate(e.target.value)}
                 />
               </div>
             </div>
@@ -191,143 +234,86 @@ const Compliance = () => {
         </div>
       </div>
 
-      {dateRange == true ? (
-        <div className="table-responsive mx-auto" style={{ width: "80%" }}>
-          {complianceDateRange.length == 0 ? (
-            "No Data Available. Please Check The Date First"
-          ) : (
-            <table className="table border-end-0">
-              <thead>
-                <tr className="border-start">
-                  <th scope="col" className="border-top">
-                    Sr No.
-                  </th>
-                  <th scope="col" className="border-top">
-                    Date
-                  </th>
-                  <th scope="col" className="border-top">
-                    Emp.Code
-                  </th>
-                  <th scope="col" className="border-top">
-                    Name
-                  </th>
-                  <th scope="col" className="border-top">
-                    Email
-                  </th>
+      <div className="table-responsive mx-auto" style={{ width: "10 0%" }}>
+        <table className="table border-end-0">
+          <thead>
+            <tr className="border-start">
+              <th scope="col" className="border-top">
+                Sr.no
+              </th>
+              <th scope="col" className="border-top">
+                Date
+              </th>
+              <th scope="col" className="border-top">
+                Submitted on
+              </th>
+              <th scope="col" className="border-top">
+                Emp.Code
+              </th>
+              <th scope="col" className="border-top">
+                Name
+              </th>
+              <th scope="col" className="border-top">
+                Email
+              </th>
+              <th
+                scope="col"
+                className="border-top"
+                style={{ borderRight: "1px solid #dee2e6" }}
+              >
+                Type
+              </th>
+              <th className="border-0"></th>
+            </tr>
+          </thead>
+          <tbody className="">
+            {compliance.length != 0 ? (
+              compliance.map((data, index) => {
+                return (
+                  <>
+                    <tr className="border-start">
+                      <th scope="row">{index + 1}</th>
+                      <td>{moment(data.eod_date).format("DD-MM-YYYY")}</td>
+                      <td>{moment(data.created_at).format("DD-MM-YYYY")}</td>
+                      <td>{data.emp_code}</td>
+                      <td>{data.emp_fname + " " + data.emp_lname}</td>
+                      <td>{data.email}</td>
+                      <td style={{ borderRight: "1px solid #dee2e6" }}>
+                        {data.emp_type}
+                      </td>
 
-                  <th
-                    scope="col"
-                    className="border-top"
-                    style={{ borderRight: "1px solid #dee2e6" }}
-                  >
-                    Type
-                  </th>
-                  <th className="border-0"></th>
-                </tr>
-              </thead>
-              <tbody className="">
-                {complianceDateRange.map((data, index) => {
-                  return (
-                    <>
-                      <tr className="border-start">
-                        <th scope="row">{index + 1}</th>
-                        <td>{data.eod_date}</td>
-                        <td>{data.emp_code}</td>
-                        <td>{data.emp_fname + " " + data.emp_lname}</td>
-
-                        <td>{data.email}</td>
-                        <td style={{ borderRight: "1px solid #dee2e6" }}>
-                          {data.emp_type}
-                        </td>
-
-                        <td className="border-0">
-                          <img
-                            src={edit_emp}
-                            alt=""
-                            width={20}
-                            height={20}
-                            // onClick={() => {
-                            //   editEmployee(data.emp_id);
-                            // }}
-                          />
-                        </td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-        </div>
-      ) : (
-        <div className="table-responsive mx-auto" style={{ width: "80%" }}>
-          {compliance.length == 0 ? (
-            "No Data Available"
-          ) : (
-            <table className="table border-end-0">
-              <thead>
-                <tr className="border-start">
-                  <th scope="col" className="border-top">
-                    Sr No.
-                  </th>
-                  <th scope="col" className="border-top">
-                    Date
-                  </th>
-                  <th scope="col" className="border-top">
-                    Emp.Code
-                  </th>
-                  <th scope="col" className="border-top">
-                    Name
-                  </th>
-                  <th scope="col" className="border-top">
-                    Email
-                  </th>
-
-                  <th
-                    scope="col"
-                    className="border-top"
-                    style={{ borderRight: "1px solid #dee2e6" }}
-                  >
-                    Type
-                  </th>
-                  <th className="border-0"></th>
-                </tr>
-              </thead>
-              <tbody className="">
-                {compliance.map((data, index) => {
-                  return (
-                    <>
-                      <tr className="border-start">
-                        <th scope="row">{index + 1}</th>
-                        <td>{data.eod_date}</td>
-                        <td>{data.emp_code}</td>
-                        <td>{data.emp_fname + " " + data.emp_lname}</td>
-
-                        <td>{data.email}</td>
-                        <td style={{ borderRight: "1px solid #dee2e6" }}>
-                          {data.emp_type}
-                        </td>
-
-                        <td className="border-0">
-                          <img
-                            src={edit_emp}
-                            alt=""
-                            width={20}
-                            height={20}
-                            // onClick={() => {
-                            //   editEmployee(data.emp_id);
-                            // }}
-                          />
-                        </td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-        </div>
-      )}
+                      <td className="border-0">
+                        <img
+                          src={edit_emp}
+                          alt=""
+                          width={20}
+                          height={20}
+                          // onClick={() => {
+                          //   editEmployee(data.emp_id);
+                          // }}
+                        />
+                      </td>
+                    </tr>
+                  </>
+                );
+              })
+            ) : (
+              <tr>
+                <th
+                  colSpan={7}
+                  style={{
+                    textAlign: "center",
+                    borderRight: "1px solid #dee2e6",
+                    borderLeft: "1px solid #dee2e6",
+                  }}
+                >
+                  No Data Available
+                </th>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

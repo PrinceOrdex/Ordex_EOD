@@ -4,6 +4,17 @@
     box-sizing: border-box;
 }
 
+.loadingPopup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(../loading.gif) center center no-repeat #101010;
+    opacity: 0.9;
+    display: block;
+}
 
 .date-1 .form-control{
     border-radius: 0rem !important;
