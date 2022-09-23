@@ -76,7 +76,11 @@ const Configuration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true)
-    if (mentor.email1 && !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mentor.email1))) {
+    if (!mentor.email1) {
+      setLoader(false)
+      msg("warning", "warning", "Mentor 1 field is mandatory")
+    }
+    else if (mentor.email1 && !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mentor.email1))) {
       setLoader(false)
       msg("warning", "warning", "Please enter valid email address for mentor 1")
     }

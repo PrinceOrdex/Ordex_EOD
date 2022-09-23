@@ -29,11 +29,13 @@ const Login = () => {
   });
 
   const [formData, updateFormData] = useState(initialFormData);
+  const [invalidLoginMsg, setInvalidLoginMsg] = useState(false);
 
 
   // const [user, SetUser] = useState(false);
 
   const handleChange = (e) => {
+    setInvalidLoginMsg(false);
     updateFormData({
       ...formData,
       // Trimming any whitespace
@@ -56,16 +58,22 @@ const Login = () => {
 
       if (res.status == 200) {
 
+        // alert("setting")
         localStorage.setItem("userData", JSON.stringify(res.data));
         dispatch({ type: "LOGIN", payload: true });
 
         navigate("/eod");
       }
-      if (res.status == 401) {
-
-        navigate("/login");
+      else {
+        setInvalidLoginMsg(true);
       }
+      // if (res.status == 401) {
+
+      //   navigate("/login");
+      // }
+
     } catch (err) {
+      setInvalidLoginMsg(true);
       console.log(err);
       throw err;
     }
@@ -129,46 +137,14 @@ const Login = () => {
               </div>
               <form className="mt-4">
                 <div className="row px-0 mx-0 d-flex justify-content-center">
-                  {/* <div className="col-10">
-                    <div className="form-outline mb-4">
-                      <input
-                        type="email"
-                        id="username"
-                        name="Email"
-                        className="form-control"
-                        autoComplete="off"
-                        required
-                        onChange={handleChange}
-                      />
-                      <label className="form-label" htmlFor="form2Example1">
-                        Email address
-                      </label>
-                    </div>
-                  </div> */}
 
                   <div className="col-10 px-0">
                     <div className="floating-label-group">
-                      <input type="text" id="username" name="Email" className="form-control" autocomplete="off" required onChange={handleChange} />
+                      <input type="email" id="username" name="Email" className="form-control" autoComplete="off" required onChange={handleChange} />
                       <label className="floating-label">Email address</label>
                     </div>
                   </div>
 
-                  {/* <div className="col-10">
-                    <div className="form-outline mb-4">
-                      <input
-                        type="password"
-                        id="password"
-                        name="Password"
-                        className="form-control"
-                        autoComplete="off"
-                        required
-                        onChange={handleChange}
-                      />
-                      <label className="form-label" htmlFor="form2Example2">
-                        Password
-                      </label>
-                    </div>
-                  </div> */}
 
                   <div className="col-10 px-0">
                     <div className="floating-label-group">
@@ -177,7 +153,7 @@ const Login = () => {
                         id="password"
                         name="Password"
                         className="form-control"
-                        autocomplete="off"
+                        autoComplete="off"
                         required
                         onChange={handleChange}
                       />
@@ -195,11 +171,16 @@ const Login = () => {
                   >
                     Login
                   </button>
+
                 </NavLink>
+
+                {(invalidLoginMsg && role == "employee" ? <div className="container text-center text-danger">
+                  <p>Invalid Credentials</p>
+                </div> : null)}
 
               </form>
               <div className="mt-2">
-                <a href="#" className="text-center d-flex justify-content-center" style={{ textDecoration: "none", fontWeight: '500', color: '#767171' }}>Forgot Password ?</a>
+                <NavLink to="/forgotpassword" className="text-center d-flex justify-content-center" style={{ textDecoration: "none", fontWeight: '500', color: '#767171' }}>Forgot Password ?</NavLink>
               </div>
 
             </div>
@@ -217,45 +198,15 @@ const Login = () => {
               </div>
               <form className="mt-4">
                 <div className="row px-0 mx-0 d-flex justify-content-center">
-                  {/* <div className="col-10">
-                    <div className="form-outline mb-4">
-                      <input
-                        type="email"
-                        id="username"
-                        name="Email"
-                        className="form-control"
-                        autoComplete="off"
-                        required
-                        onChange={handleChange}
-                      />
-                      <label className="form-label" htmlFor="form2Example1">
-                        Email address
-                      </label>
-                    </div>
-                  </div> */}
+
                   <div className="col-10 px-0">
                     <div className="floating-label-group">
-                      <input type="text" id="username" className="form-control" name="Email" autocomplete="off" required onChange={handleChange} />
+                      <input type="email" id="username" className="form-control" name="Email" autoComplete="off" required onChange={handleChange} />
                       <label className="floating-label">Email address</label>
                     </div>
                   </div>
 
-                  {/* <div className="col-10">
-                    <div className="form-outline mb-4">
-                      <input
-                        type="password"
-                        id="password"
-                        name="Password"
-                        className="form-control"
-                        autoComplete="off"
-                        required
-                        onChange={handleChange}
-                      />
-                      <label className="form-label" htmlFor="form2Example2">
-                        Password
-                      </label>
-                    </div>
-                  </div> */}
+
                   <div className="col-10 px-0">
                     <div className="floating-label-group">
                       <input
@@ -263,7 +214,7 @@ const Login = () => {
                         id="password"
                         name="Password"
                         className="form-control"
-                        autocomplete="off"
+                        autoComplete="off"
                         required
                         onChange={handleChange}
                       />
@@ -274,16 +225,22 @@ const Login = () => {
 
                 <NavLink to="/admin/main">
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-primary btn-block mb-3 px-5 py-1 fw-500 login"
                     onClick={handleSubmit}
                   >
                     Login
                   </button>
                 </NavLink>
+                <div className="container text-center text-danger">
+                  {(invalidLoginMsg && role == "admin" ? <div className="container text-center text-danger">
+                    <p>Invalid Credentials</p>
+                  </div> : null)}
+
+                </div>
               </form>
               <div className="mt-2">
-                <a href="#" className="text-center d-flex justify-content-center" style={{ textDecoration: "none", fontWeight: '500', color: '#767171' }}>Forgot Password ?</a>
+                <NavLink to="/forgotpassword" className="text-center d-flex justify-content-center" style={{ textDecoration: "none", fontWeight: '500', color: '#767171' }}>Forgot Password ?</NavLink>
               </div>
               {/* <!-- <div className="mt-2">
               <p>Don't have account? <a href="#">Register</a></p>
