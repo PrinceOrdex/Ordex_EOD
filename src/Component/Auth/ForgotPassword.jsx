@@ -1,8 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import "../../css/forgot-password.css";
+import Swal from 'sweetalert2';
+import { NavLink, useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
+    const navigate = useNavigate();
+    const [loader, setLoader] = useState(false);
 
     let [email, setEmail] = useState("");
     let [msg, setMsg] = useState(false);
@@ -21,25 +25,50 @@ const ForgotPassword = () => {
 
 
     const sendForgotPassMail = async () => {
+        setLoader(true)
         try {
             if (ValidateEmail()) {
                 const res = await axios.post("http://localhost:8000/send/email", { Email: email });
-                setMsg(true);
-
-
-                // console.log(res);
-
+                if (res) {
+                    if (res.status == 200) {
+                        setLoader(false)
+                        Swal.fire({
+                            type: "info",
+                            icon: "info",
+                            title: "Please check your email for reset password",
+                            confirmButtonText: "OK",
+                            confirmButtonColor: "#06bdff",
+                        }).then(() => {
+                            navigate("/");
+                        })
+                    }
+                }
             } else {
-                alert("Invalid email address!");
+                setLoader(false)
+                Swal.fire({
+                    type: "warning",
+                    icon: "warning",
+                    title: "Invalid Email Address",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#06bdff",
+                });
             }
         } catch (err) {
-            setMsg(true);
+            setLoader(false)
             console.log(err);
+            Swal.fire({
+                type: "info",
+                icon: "info",
+                title: "User not found",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#06bdff",
+            });
         }
     }
 
     return (
         <>
+            {loader ? <div className="loadingPopup"></div> : null}
             <div
                 className="main d-flex justify-content-center justify-content-sm-end align-items-center"
             >

@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 // import "../../css/reset-password.css";
+import Swal from 'sweetalert2';
 
 const ResetPassword = () => {
+
+    const [loader, setLoader] = useState(false);
 
     let [cpass, setCPass] = useState("");
     let [npass, setNPass] = useState("");
@@ -12,7 +15,14 @@ const ResetPassword = () => {
     const passValidations = () => {
 
         if (npass != cpass) {
-            alert("New Password and Confirm Password does not match!")
+            setLoader(false)
+            Swal.fire({
+                type: "error",
+                icon: "error",
+                title: "New Password and Confirm Password does not match!",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#06bdff",
+            });
             return false;
         } else {
             var decimal = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
@@ -20,8 +30,15 @@ const ResetPassword = () => {
                 return true;
             }
             else {
-                alert(`password must be of 8 to 15 characters.
-                 At least one lowercase and uppercase letter, one numeric digit, and one special character`)
+                setLoader(false)
+                Swal.fire({
+                    type: "error",
+                    icon: "error",
+                    title: `Password must be of 8 to 15 characters.
+                    At least one lowercase and uppercase letter, one numeric digit, and one special character`,
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#06bdff",
+                });
                 return false;
             }
         }
@@ -32,6 +49,7 @@ const ResetPassword = () => {
 
     const changePass = async (e) => {
         e.preventDefault();
+        setLoader(true)
         try {
             if (passValidations()) {
                 const queryParams = new URLSearchParams(window.location.search);
@@ -46,16 +64,38 @@ const ResetPassword = () => {
                 });
                 console.log(res);
                 if (res.status == 200) {
-                    alert("Your password Changed Successfully!");
-                    navigate('/');
+                    setLoader(false)
+                    Swal.fire({
+                        type: "success",
+                        icon: "success",
+                        title: "Your password Changed Successfully!",
+                        confirmButtonText: "OK",
+                        confirmButtonColor: "#06bdff",
+                    })
+                        .then(() => navigate('/'))
                 } else {
-                    alert("Unable to change Password! Please try again.");
-                    navigate('/forgotpassword');
+                    setLoader(false)
+                    Swal.fire({
+                        type: "error",
+                        icon: "error",
+                        title: "Unable to change Password! Please try again.",
+                        confirmButtonText: "OK",
+                        confirmButtonColor: "#06bdff",
+                    }).then(() =>
+                        navigate('/forgotpassword'))
 
                 }
 
             }
         } catch (err) {
+            setLoader(false)
+            Swal.fire({
+                type: "error",
+                icon: "error",
+                title: "Unable to change Password! Please try again.",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#06bdff",
+            });
             navigate('/forgotpassword');
             console.log(err);
         }
@@ -63,6 +103,7 @@ const ResetPassword = () => {
 
     return (
         <>
+            {loader ? <div className="loadingPopup"></div> : null}
             <div
                 className="main d-flex justify-content-center align-items-center"
             >

@@ -14,6 +14,11 @@ import { MenuContext } from "../../App";
 
 const Login = () => {
 
+  //------------ Loader Code Start------------
+  const [loader, setLoader] = useState(false);
+
+  //------------ Loader Code End ------------
+
   const { state, dispatch } = useContext(MenuContext);
 
   let [role, setRole] = useState("employee");
@@ -52,19 +57,22 @@ const Login = () => {
     };
 
     try {
+      setLoader(true)
       e.preventDefault();
 
       const res = await axios.post("http://localhost:8000/login", obj);
 
       if (res.status == 200) {
-
-        // alert("setting")
         localStorage.setItem("userData", JSON.stringify(res.data));
         dispatch({ type: "LOGIN", payload: true });
-
-        navigate("/eod");
+        setLoader(false)
+        if (role == 'employee')
+          navigate("/eod");
+        else if (role == 'admin')
+          navigate("/admin/main");
       }
       else {
+        setLoader(false)
         setInvalidLoginMsg(true);
       }
       // if (res.status == 401) {
@@ -73,6 +81,7 @@ const Login = () => {
       // }
 
     } catch (err) {
+      setLoader(false)
       setInvalidLoginMsg(true);
       console.log(err);
       throw err;
@@ -81,6 +90,7 @@ const Login = () => {
 
   return (
     <>
+      {loader ? <div className="loadingPopup"></div> : null}
       {/* {/ <contextApi.Provider value={haslogin}></contextApi.Provider> /} */}
       <div className="main d-flex justify-content-center justify-content-sm-end align-items-center">
         <div className="box text-center ms-3 me-3 me-sm-5 p-4">
