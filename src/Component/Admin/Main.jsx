@@ -1,5 +1,5 @@
 import React from "react";
-import "./../../css/eod.css";
+// import "./../../css/eod.css";
 
 import _image_75 from "./../../Image/75.jpg";
 import Employee_list from "./Employee_list";
@@ -10,17 +10,24 @@ import Compliance from "./Compliance";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Edit_emp_details from "./Edit_emp_details";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+
 
 const Eod = () => {
   return (
     <>
-      <Header />
+      {/* <Header />
       <div className="container-fluid">
         <div className="row flex-nowrap bg-dark pt-3">
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 py-3">
             <Sidebar />
-          </div>
+          </div> */}
+          
 
+
+
+
+          {/* 
           <div className="col py-3 bg-white px-5">
             <div className="tab-content" id="v-pills-tabContent">
               <div
@@ -69,9 +76,9 @@ const Eod = () => {
                 <Edit_emp_details />
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div> */}
+        {/* </div>
+      </div> */}
     </>
   );
 };

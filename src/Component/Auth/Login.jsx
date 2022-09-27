@@ -60,7 +60,7 @@ const Login = () => {
       setLoader(true)
       e.preventDefault();
 
-      const res = await axios.post("http://localhost:8000/login", obj);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/login`, obj);
 
       if (res.status == 200) {
         localStorage.setItem("userData", JSON.stringify(res.data));

@@ -40,7 +40,7 @@ const Configuration = () => {
 
   const getMentor = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/additional/mail", {
+      let res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/additional/mail`, {
         params: {
           emp_id: getuserDetails().empId,
         },
@@ -94,7 +94,7 @@ const Configuration = () => {
     }
     else {
       try {
-        const res = await axios.patch("http://localhost:8000/additional/mail", {
+        const res = await axios.patch(`${process.env.REACT_APP_BACKEND_BASE_URL}/additional/mail`, {
           emp_id: getuserDetails().empId,
           email1: mentor.email1,
           email2: mentor.email2,

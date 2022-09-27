@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./../../css/eod.scss";
+// import "./../../css/eod.scss";
 
 import _image_75 from "./../../Image/75.jpg";
 import Eod_main from "./Eod_main";

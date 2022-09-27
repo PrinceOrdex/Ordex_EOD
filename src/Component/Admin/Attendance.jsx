@@ -8,6 +8,8 @@ import edit_emp from "./../../Image/EditIcon.svg";
 import presentIcon from "./../../Image/Present.png";
 import absentIcon from "./../../Image/Absent.jpeg";
 import moment from "moment";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 const Attendance = () => {
   const [present, setPresent] = useState([]);
@@ -41,10 +43,10 @@ const Attendance = () => {
 
   let [eodDate, setEodDate] = useState(todayDate());
 
-  const getAttendanceByDate = () => {};
+  const getAttendanceByDate = () => { };
   const getAllAttandace = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/attendance", {
+      let res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/attendance`, {
         params: {
           eod_date: eodDate,
         },
@@ -63,7 +65,7 @@ const Attendance = () => {
 
   const getPresent = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/attendance/present", {
+      let res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/attendance/present`, {
         params: {
           eod_date: eodDate,
         },
@@ -83,7 +85,7 @@ const Attendance = () => {
 
   const getAbsent = async () => {
     try {
-      let res = await axios.get("http://localhost:8000/attendance/absent", {
+      let res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/attendance/absent`, {
         params: {
           eod_date: eodDate,
         },
@@ -102,6 +104,7 @@ const Attendance = () => {
   };
 
   const getData = () => {
+    // alert("called")
     if (eodDate != "") {
       if (attendanceState == "all") {
         getAllAttandace();
@@ -111,210 +114,238 @@ const Attendance = () => {
         getAbsent();
       }
     } else {
-      // alert("Please Enter EOD Date");
+      alert("Please Enter EOD Date");
+      setTableData([]);
     }
   };
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [eodDate]);
 
   return (
     <>
       {loader ? <div className="loadingPopup"></div> : null}
-      <div className="row col-12 mx-0 px-0 text-center border-bottom">
-        <h3 className="text-uppercase">employee's attendence report</h3>
-      </div>
 
-      <div className="mt-3 d-flex justify-content-end">
-        <nav className="date-btn d-flex justify-content-between" id="btn-top">
-          <div className="nav nav-tabs" id="nav-tab" role="tablist">
-            <button
-              className="nav-link btn-1 active px-4"
-              id="nav-home-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-home"
-              type="button"
-              role="tab"
-              aria-controls="nav-home"
-              aria-selected="true"
-              onClick={() => {
-                setAttendanceState("all");
-              }}
-            >
-              All
-            </button>
-            <button
-              className="nav-link btn-1"
-              id="nav-profile-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-profile"
-              type="button"
-              role="tab"
-              aria-controls="nav-profile"
-              aria-selected="false"
-              onClick={() => {
-                setAttendanceState("present");
-              }}
-            >
-              Present
-            </button>
-            <button
-              className="nav-link btn-1"
-              id="nav-profile-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#nav-profile"
-              type="button"
-              role="tab"
-              aria-controls="nav-profile"
-              aria-selected="false"
-              onClick={() => {
-                setAttendanceState("absent");
-              }}
-            >
-              Absent
-            </button>
-          </div>
-        </nav>
-      </div>
+      <Header />
+      <div className="fixed-left">
+        <div id="wrapper">
+          <Sidebar />
+          <div className="content-page">
+            <div className="content">
+              {/* <Header /> */}
+              <div className="page-content-wrapper">
+                <div className="container-fluid">
+                  <div className="row col-12 px-0 mx-0">
+                    <div className="col-sm-12 px-0">
+                      <div className="page-title-box">
+                        <div className="row col-12 mx-0 px-0 text-center border-bottom">
+                          <h3 className="text-uppercase">employee's attendence report</h3>
+                        </div>
 
-      <div className="row col-12 mx-0 px-0 my-3 justify-content-start border-bottom pb-3">
-        <div className="col-10 col-sm-8 col-md-4 d-flex align-items-end">
-          <div className="col-10 me-2 attendence-date">
-            <p className="attendence-report mb-0 text-white text-center">
-              Attendence Report of Date
-            </p>
-            <input
-              type="date"
-              id="eod_date"
-              name="eod_date"
-              className="form-control p-2"
-              defaultValue={todayDate()}
-              onChange={(e) => {
-                setEodDate(e.target.value);
-              }}
-              value={eodDate}
-            />
-          </div>
-          <div className="col-2">
-            <button
-              type="submit"
-              className="btn-search text-white"
-              onClick={getData}
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
+                        <div className="mt-3 d-flex justify-content-center justify-content-sm-end">
+                          <nav className="date-btn d-flex justify-content-between" id="btn-top">
+                            <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                              <button
+                                className="nav-link btn-1 active px-4"
+                                id="nav-home-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#nav-home"
+                                type="button"
+                                role="tab"
+                                aria-controls="nav-home"
+                                aria-selected="true"
+                                onClick={() => {
+                                  setAttendanceState("all");
+                                  getAllAttandace();
+                                }}
+                              >
+                                All
+                              </button>
+                              <button
+                                className="nav-link btn-1"
+                                id="nav-profile-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#nav-profile"
+                                type="button"
+                                role="tab"
+                                aria-controls="nav-profile"
+                                aria-selected="false"
+                                onClick={() => {
+                                  setAttendanceState("present");
+                                  getPresent();
+                                }}
+                              >
+                                Present
+                              </button>
+                              <button
+                                className="nav-link btn-1"
+                                id="nav-profile-tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#nav-profile"
+                                type="button"
+                                role="tab"
+                                aria-controls="nav-profile"
+                                aria-selected="false"
+                                onClick={() => {
+                                  setAttendanceState("absent");
+                                  getAbsent();
+                                }}
+                              >
+                                Absent
+                              </button>
+                            </div>
+                          </nav>
+                        </div>
 
-      <div className="table-responsive mx-auto" style={{ width: "100%" }}>
-        <table className="table border-end-0">
-          <thead>
-            <tr className="border-start">
-              <th scope="col" className="border-top">
-                Sr No.
-              </th>
-              <th scope="col" className="border-top">
-                Date
-              </th>
-              <th scope="col" className="border-top">
-                Emp.Code
-              </th>
-              <th scope="col" className="border-top">
-                Name
-              </th>
-              <th scope="col" className="border-top">
-                Email
-              </th>
-              <th scope="col" className="border-top">
-                Type
-              </th>
-              <th scope="col" className="border-top">
-                Attendance
-              </th>
-              <th
-                scope="col"
-                className="border-top"
-                style={{ borderRight: "1px solid #dee2e6" }}
+                        <div className="row col-12 mx-0 px-0 my-3 justify-content-center justify-content-sm-start border-bottom pb-3">
+                          <div className="col-10 col-sm-6 col-md-5 d-flex px-0">
+                            <div className="col-12 attendence-date">
+                              <p className="attendence-report mb-0 text-white text-center">
+                                Attendence Report of Date
+                              </p>
+                              <input
+                                type="date"
+                                id="eod_date"
+                                name="eod_date"
+                                className="form-control p-2"
+                                defaultValue={todayDate()}
+                                max={todayDate()}
+                                onChange={(e) => {
+                                  setEodDate(e.target.value);
+                                  // getData();
+                                }}
+                                value={eodDate}
+                              />
+                            </div>
+                            {/* <div className="col-2"> */}
+                              {/* <button
+                type="submit"
+                className="btn-search text-white"
+                onClick={getData}
               >
-                T.W.T
-              </th>
-              <th className="border-0"></th>
-            </tr>
-          </thead>
+                Search
+              </button> */}
+                            </div>
+                          </div>
+                        </div>
 
-          <tbody className="">
-            {tableData.length != 0 ? (
-              <>
-                {tableData.map((elem, index) => {
-                  return (
-                    <>
-                      <tr className="border-start">
-                        <th scope="row">{index + 1}</th>
-                        <td>
-                          {elem.eod_date
-                            ? moment(elem.eod_date).format("DD-MM-YYYY")
-                            : "Date Unavailable"}
-                        </td>
-                        <td>{elem.emp_code}</td>
-                        <td>
-                          {elem.emp_fname} {elem.emp_lname}
-                        </td>
+                        <div className="table-responsive mx-auto" style={{ width: "100%" }}>
+                          <table className="table border-end-0">
+                            <thead>
+                              <tr className="border-start">
+                                <th scope="col" className="border-top">
+                                  Sr No.
+                                </th>
+                                <th scope="col" className="border-top">
+                                  Date
+                                </th>
+                                <th scope="col" className="border-top">
+                                  Emp.Code
+                                </th>
+                                <th scope="col" className="border-top">
+                                  Name
+                                </th>
+                                <th scope="col" className="border-top">
+                                  Email
+                                </th>
+                                <th scope="col" className="border-top">
+                                  Type
+                                </th>
+                                <th scope="col" className="border-top">
+                                  Attendance
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="border-top"
+                                  style={{ borderRight: "1px solid #dee2e6" }}
+                                >
+                                  T.W.T
+                                </th>
+                                <th className="border-0"></th>
+                              </tr>
+                            </thead>
 
-                        <td>{elem.email}</td>
-                        <td>{elem.emp_type}</td>
-                        <td className="text-center">
-                          {elem.eod_date ? (
-                            <img
-                              src={presentIcon}
-                              alt="present"
-                              width={20}
-                              height={20}
-                              title="Present"
-                            />
-                          ) : (
-                            <img
-                              src={absentIcon}
-                              alt="absent"
-                              width={20}
-                              height={20}
-                              title="Absent"
-                            />
-                          )}
-                        </td>
-                        <td
-                          style={{ borderRight: "1px solid #dee2e6" }}
-                          className="text-center"
-                        >
-                          {elem.total_work_time
-                            ? elem.total_work_time
-                            : "T.W.T unavailable"}
-                        </td>
-                        <td className="border-0"></td>
-                      </tr>
-                    </>
-                  );
-                })}
-              </>
-            ) : (
-              <tr className="text-center">
-                <th
-                  style={{
-                    borderRight: "1px solid #dee2e6",
-                    borderLeft: "1px solid #dee2e6",
-                  }}
-                  className="text-center"
-                  colSpan="8"
-                >
-                  {" "}
-                  No Data Available.{" "}
-                </th>{" "}
-              </tr>
-            )}
-          </tbody>
-        </table>
+                            <tbody className="">
+                              {tableData.length != 0 ? (
+                                <>
+                                  {tableData.map((elem, index) => {
+                                    return (
+                                      <>
+                                        <tr className="border-start">
+                                          <th scope="row">{index + 1}</th>
+                                          <td>
+                                            {elem.eod_date
+                                              ? moment(elem.eod_date).format("DD-MM-YYYY")
+                                              : "Date Unavailable"}
+                                          </td>
+                                          <td>{elem.emp_code}</td>
+                                          <td>
+                                            {elem.emp_fname} {elem.emp_lname}
+                                          </td>
+
+                                          <td>{elem.email}</td>
+                                          <td>{elem.emp_type}</td>
+                                          <td className="text-center">
+                                            {elem.eod_date ? (
+                                              <img
+                                                src={presentIcon}
+                                                alt="present"
+                                                width={20}
+                                                height={20}
+                                                title="Present"
+                                              />
+                                            ) : (
+                                              <img
+                                                src={absentIcon}
+                                                alt="absent"
+                                                width={20}
+                                                height={20}
+                                                title="Absent"
+                                              />
+                                            )}
+                                          </td>
+                                          <td
+                                            style={{ borderRight: "1px solid #dee2e6" }}
+                                            className="text-center"
+                                          >
+                                            {elem.total_work_time
+                                              ? elem.total_work_time
+                                              : "T.W.T unavailable"}
+                                          </td>
+                                          <td className="border-0"></td>
+                                        </tr>
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : (
+                                <tr className="text-center">
+                                  <th
+                                    style={{
+                                      borderRight: "1px solid #dee2e6",
+                                      borderLeft: "1px solid #dee2e6",
+                                    }}
+                                    className="text-center"
+                                    colSpan="8"
+                                  >
+                                    {" "}
+                                    No Data Available.{" "}
+                                  </th>{" "}
+                                </tr>
+                              )}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
+      
     </>
   );
 };

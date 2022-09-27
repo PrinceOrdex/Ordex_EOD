@@ -28,7 +28,7 @@ const ForgotPassword = () => {
         setLoader(true)
         try {
             if (ValidateEmail()) {
-                const res = await axios.post("http://localhost:8000/send/email", { Email: email });
+                const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/send/email`, { Email: email });
                 if (res) {
                     if (res.status == 200) {
                         setLoader(false)
@@ -74,7 +74,7 @@ const ForgotPassword = () => {
             >
                 <div className="box text-center ms-3 me-3 me-sm-5 p-4">
                     <div className="d-flex justify-content-center" style={{ "position": "relative" }}>
-                        <div className="btn-top d-flex justify-content-between" id="btn-top">
+                        <div className="button-top d-flex justify-content-between" id="btn-top">
                             <p className="mb-0">Forgot Password?</p>
                         </div>
                     </div>

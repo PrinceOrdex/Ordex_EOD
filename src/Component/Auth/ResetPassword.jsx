@@ -56,7 +56,7 @@ const ResetPassword = () => {
                 const user_id = queryParams.get("user_id");
                 const token = queryParams.get("token");
 
-                const res = await axios.patch("http://localhost:8000/forgot/password", {
+                const res = await axios.patch(`${process.env.REACT_APP_BACKEND_BASE_URL}/forgot/password`, {
                     "user_idF": user_id,
                     "tokenF": token,
                     "password": npass,
@@ -136,6 +136,7 @@ const ResetPassword = () => {
                                             />
                                             <label className="floating-label">New Password</label>
                                         </div>
+                                        
                                     </div>
                                     <div className="col-12">
                                         <div className="floating-label-group">
@@ -153,10 +154,13 @@ const ResetPassword = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="container">
-                                    <p>password must be of 8 to 15 characters. <br />
-                                        At least one lowercase and uppercase letter,<br /> one numeric digit, and one special character.</p>
+                                <div className='row mx-0 px-0 justify-content-center'>
+                                    <div className="col-8 d-flex mb-3" style={{color: "#ff0000"}}>
+                                        <i className="fas fa-circle-info mt-2"></i>
+                                        <p className='mb-0'>password must be of 8 to 15 characters, one lowercase, uppercase letter,numeric digit & special character.</p>
+                                    </div>
                                 </div>
+                                
 
                                 {/* <!-- Submit button --> */}
                                 <button

@@ -54,7 +54,7 @@ const Eod_main = () => {
     setLoader(true)
     try {
       setLoader(true)
-      const res = await axios.get("http://localhost:8000/eod/task", {
+      const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod/task`, {
         params: {
           empid: getuserDetails().empId,
           eoddate: eod_date,
@@ -97,7 +97,7 @@ const Eod_main = () => {
   const fetchProject = async () => {
     const empid = getuserDetails().empId;
     // const empId = userData.empId;
-    const res = await axios.get("http://localhost:8000/eod/projects", {
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod/projects`, {
       params: {
         empid,
       },
@@ -162,7 +162,7 @@ const Eod_main = () => {
 
   const putEodTaskData = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/eod/task", {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod/task`, {
         empId: getuserDetails().empId,
         projectId: eodTaskData.projectId,
         taskTitle: eodTaskData.taskTitle,
@@ -236,7 +236,7 @@ const Eod_main = () => {
       setLoader(true)
       const dateString = todayDate();
 
-      const res = await axios.post("http://localhost:8000/eod", {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod`, {
         empId: getuserDetails().empId,
         eoddate: eod_date,
         createdAt: dateString,

@@ -45,7 +45,7 @@ const Eod_history = () => {
     try {
       setLoader(true);
       if (eodDate) {
-        const res = await axios.get("http://localhost:8000/eod/task", {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod/task`, {
           params: {
             empid: getuserDetails().empId,
             eoddate: eodDate,
@@ -72,7 +72,7 @@ const Eod_history = () => {
       setLoader(true);
       if ((startDate && endDate) && (endDate > startDate)) {
         const res = await axios.get(
-          "http://localhost:8000/eod/task/daterange",
+          `${process.env.REACT_APP_BACKEND_BASE_URL}/eod/task/daterange`,
           {
             params: {
               emp_id: getuserDetails().empId,
@@ -101,7 +101,7 @@ const Eod_history = () => {
 
   useEffect(() => {
     fetchTask();
-  }, []);
+  }, [eodDate]);
 
   return (
     <>
@@ -163,7 +163,7 @@ const Eod_history = () => {
             <div className="col-10 col-sm-8 col-md-5 d-flex align-items-end">
               <div className="col-10 me-2 date-1">
                 <p className="date-report mb-0 text-white">
-                  End of Day Report of Date
+                  End of Day Report Date
                 </p>
                 <input
                   type="date"
@@ -177,7 +177,7 @@ const Eod_history = () => {
                 />
               </div>
               <div className="col-2">
-                <button
+                {/* <button
                   type="submit"
                   className="btn-search text-white"
                   onClick={() => {
@@ -185,7 +185,7 @@ const Eod_history = () => {
                   }}
                 >
                   Search
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

@@ -11,7 +11,7 @@ const Edit_emp_details = (props) => {
 
   const getEmpData = async () => {
 
-    const res = await axios.get("http://localhost:8000/employee", {
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/employee`, {
       params: {
         emp_id: props.empId,
       },
@@ -53,7 +53,7 @@ const Edit_emp_details = (props) => {
     e.preventDefault();
 
     try {
-      const res = await axios.patch("http://localhost:8000/employee", {
+      const res = await axios.patch(`${process.env.REACT_APP_BACKEND_BASE_URL}/employee`, {
         fname: empData.emp_fname,
         mname: empData.emp_midname,
         lname: empData.emp_lname,
@@ -90,106 +90,127 @@ const Edit_emp_details = (props) => {
 
   return (
     <>
-      <div className="row col-12 mx-0 px-0 text-center border-bottom">
-        <h3 className="text-uppercase">edit details</h3>
-      </div>
-      <div className="row col-12 mx-0 px-0 justify-content-center mt-3">
-        <div className="col-12 col-md-4 bg-image">
-          <img src={_image_75} alt="" />
-          <div className="Empname ms-4 text-center mt-3">
-            <h5 style={{ "textTransform": "capitalize" }}>{getFullName()}</h5>
-            <p className="mb-0">Employee Profile</p>
-          </div>
-        </div>
-        <div className="col-12 col-md-8 mt-3 mt-md-0">
-          <form className="admin-edit">
-            <div className="row col-12 mx-0 px-0 mb-3">
-              <div className="col-12 col-sm-8">
-                <label className="mb-1">Employee Code</label>
-                <input
-                  type="text"
-                  name="emp_code"
-                  id="Empcode"
-                  value={empData.emp_code}
-                  className="form-control"
-                  onChange={getData}
-                />
-              </div>
-              <div className="col-12 col-sm-4 mt-3 mt-sm-0">
-                <label className="mb-1">Status</label>
-                <select
-                  className="form-select"
-                  name="status"
-                  value={empData.status}
-                  onChange={getData}
-                  defaultValue={empData.status}
-                >
-                  {/* <option>select option</option> */}
-                  <option value="ACTIVE">ACTIVE</option>
-                  <option value="INACTIVE">INACTIVE</option>
-                </select>
-              </div>
-            </div>
-            <div className="row col-12 mx-0 px-0 mb-3">
-              <div className="col-12 col-sm-8">
-                <label className="mb-1">Name</label>
-                <input
-                  type="text"
-                  name="emp_fname"
-                  id="Empname"
-                  value={empData.emp_fname}
-                  className="form-control"
-                  onChange={getData}
-                />
-              </div>
-              <div className="col-12 col-sm-4 mt-3 mt-sm-0">
-                <label className="mb-1">Type</label>
-                <select className="form-select" name="emp_type" value={empData.emp_type} defaultValue={empData.emp_type}
-                  onChange={getData}>
-                  <option value="intern">Intern</option>
-                  <option value="employee">Employee</option>
-                  <option value="consultant">Consultant</option>
-                  <option value="admin">admin</option>
 
-                </select>
+      <div className="fixed-left">
+        <div id="wrapper">
+          {/* <Sidebar /> */}
+          <div className="content-page">
+            <div className="content">
+              {/* <Header /> */}
+              <div className="page-content-wrapper">
+                <div className="container-fluid">
+                  <div className="row col-12 px-0 mx-0">
+                    <div className="col-sm-12 px-0">
+                      <div className="page-title-box">
+                        <div className="row col-12 mx-0 px-0 text-center border-bottom">
+                          <h3 className="text-uppercase">edit details</h3>
+                        </div>
+                        <div className="row col-12 mx-0 px-0 justify-content-center mt-3">
+                          <div className="col-12 col-md-4 bg-image">
+                            <img src={_image_75} alt="" />
+                            <div className="Empname ms-4 text-center mt-3">
+                              <h5 style={{ "textTransform": "capitalize" }}>{getFullName()}</h5>
+                              <p className="mb-0">Employee Profile</p>
+                            </div>
+                          </div>
+                          <div className="col-12 col-md-8 mt-3 mt-md-0">
+                            <form className="admin-edit">
+                              <div className="row col-12 mx-0 px-0 mb-3">
+                                <div className="col-12 col-sm-8">
+                                  <label className="mb-1">Employee Code</label>
+                                  <input
+                                    type="text"
+                                    name="emp_code"
+                                    id="Empcode"
+                                    value={empData.emp_code}
+                                    className="form-control"
+                                    onChange={getData}
+                                  />
+                                </div>
+                                <div className="col-12 col-sm-4 mt-3 mt-sm-0">
+                                  <label className="mb-1">Status</label>
+                                  <select
+                                    className="form-select"
+                                    name="status"
+                                    value={empData.status}
+                                    onChange={getData}
+                                    defaultValue={empData.status}
+                                  >
+                                    {/* <option>select option</option> */}
+                                    <option value="ACTIVE">ACTIVE</option>
+                                    <option value="INACTIVE">INACTIVE</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="row col-12 mx-0 px-0 mb-3">
+                                <div className="col-12 col-sm-8">
+                                  <label className="mb-1">Name</label>
+                                  <input
+                                    type="text"
+                                    name="emp_fname"
+                                    id="Empname"
+                                    value={empData.emp_fname}
+                                    className="form-control"
+                                    onChange={getData}
+                                  />
+                                </div>
+                                <div className="col-12 col-sm-4 mt-3 mt-sm-0">
+                                  <label className="mb-1">Type</label>
+                                  <select className="form-select" name="emp_type" value={empData.emp_type} defaultValue={empData.emp_type}
+                                    onChange={getData}>
+                                    <option value="intern">Intern</option>
+                                    <option value="employee">Employee</option>
+                                    <option value="consultant">Consultant</option>
+                                    <option value="admin">admin</option>
+
+                                  </select>
+                                </div>
+                              </div>
+                              <div className="row col-12 mx-0 px-0 mb-3">
+                                <div className="col-12 col-sm-8">
+                                  <label className="mb-1">E-mail Id</label>
+                                  <input
+                                    type="email"
+                                    name="email"
+                                    value={empData.email}
+                                    onChange={getData}
+                                    className="form-control"
+                                    id="inputEmail"
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              <div className="row col-12 mx-0 px-0 mb-3">
+                                <div className="col-12 col-sm-8">
+                                  <label className="mb-1">Post</label>
+                                  <input
+                                    type="text"
+                                    name="post"
+                                    id="Emppost"
+                                    value={empData.post}
+                                    onChange={getData}
+                                    className="form-control"
+                                  />
+                                </div>
+                              </div>
+                              <div className="row col-12 mx-0 px-0 mb-3">
+                                <div className="col-12 col-md-8"></div>
+                                <div className="col-12 col-md-4 mt-3 mt-sm-0 d-flex justify-content-center justify-content-md-end">
+                                  <button type="submit" className="btn-done text-white" onClick={(e) => { updateEmployee(e) }}>
+                                    Done
+                                  </button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="row col-12 mx-0 px-0 mb-3">
-              <div className="col-12 col-sm-8">
-                <label className="mb-1">E-mail Id</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={empData.email}
-                  onChange={getData}
-                  className="form-control"
-                  id="inputEmail"
-                  required
-                />
-              </div>
-            </div>
-            <div className="row col-12 mx-0 px-0 mb-3">
-              <div className="col-12 col-sm-8">
-                <label className="mb-1">Post</label>
-                <input
-                  type="text"
-                  name="post"
-                  id="Emppost"
-                  value={empData.post}
-                  onChange={getData}
-                  className="form-control"
-                />
-              </div>
-            </div>
-            <div className="row col-12 mx-0 px-0 mb-3">
-              <div className="col-12 col-md-8"></div>
-              <div className="col-12 col-md-4 mt-3 mt-sm-0 d-flex justify-content-center justify-content-md-end">
-                <button type="submit" className="btn-done text-white" onClick={(e) => { updateEmployee(e) }}>
-                  Done
-                </button>
-              </div>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </>

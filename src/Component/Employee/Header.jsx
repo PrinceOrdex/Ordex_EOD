@@ -2,9 +2,16 @@ import React from "react";
 import { useState } from "react";
 import logo from "./../../Image/Logo.png";
 import _image_75 from "./../../Image/75.jpg";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isActive, setActive] = useState("false");
+
+  const getuserDetails = () => {
+    let userData = JSON.parse(localStorage.getItem("userData"));
+    return userData;
+  };
+
 
   const handleToggle = () => {
     setActive(!isActive);
@@ -52,7 +59,7 @@ const Header = () => {
                 aria-expanded="false"
               >
                 <img src={_image_75} alt="" srcSet="" className="me-2" />
-                Abhay Patel
+                <span style={{ "textTransform": "capitalize" }}>{`${getuserDetails().empFname} ${getuserDetails().empLname}`}</span>
                 <i
                   onClick={handleToggle}
                   className={
@@ -65,11 +72,11 @@ const Header = () => {
                 aria-labelledby="dropdownMenuButton1"
               >
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
+                  <NavLink className="dropdown-item" to="/logout">
+                    Logout
+                  </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <a className="dropdown-item" href="#">
                     Another action
                   </a>
@@ -78,7 +85,7 @@ const Header = () => {
                   <a className="dropdown-item" href="#">
                     Something else here
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

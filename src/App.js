@@ -11,6 +11,11 @@ import { initialState, reducer } from "./reducer/reducer";
 import ForgotPassword from "./Component/Auth/ForgotPassword";
 import ResetPassword from "./Component/Auth/ResetPassword";
 import Error from "./Component/Auth/Error";
+import Attendance from "./Component/Admin/Attendance";
+import History from "./Component/Admin/History";
+import Compliance from "./Component/Admin/Compliance";
+import Employee_list from "./Component/Admin/Employee_list";
+import Logout from "./Component/Auth/Logout";
 
 export const MenuContext = createContext();
 
@@ -26,13 +31,13 @@ function App() {
       dispatch({ type: "LOGIN", payload: true });
 
       if (userData.roleName == "employee" || userData.roleName == "intern") {
-        if (window.location != 'http://localhost:3000/eod') {
-          window.location.replace("/eod");
+        if (location.pathname != '/eod') {
+          navigate("/eod");
         }
       }
       if (userData.roleName == "admin") {
-        if (window.location != 'http://localhost:3000/admin/main') {
-          window.location.replace("/admin/main");
+        if (location.pathname != '/admin/main') {
+          navigate("/admin/main");
         }
       }
     } else {
@@ -53,7 +58,7 @@ function App() {
         navigate(`/resetpassword?user_id=${user_id}&token=${token}`);
 
       } else {
-        navigate('/*')
+        navigate('/*');
       }
 
 
@@ -101,8 +106,18 @@ function App() {
           <Route exact path="/" element={<Login />} />
           <Route exact path="/forgotpassword" element={<ForgotPassword />} />
           <Route exact path="/resetpassword" element={<ResetPassword />} />
+          <Route exact path="/logout" element={<Logout />} />
+
+          {/*Employee Routes  */}
           <Route exact path="/eod" element={<Eod />} />
-          <Route path="/admin/main" element={<Main />} exact />
+
+          {/* Admin Routes */}
+          <Route exact={true} path="/admin/main" element={<Employee_list />} />
+          <Route path="/admin/attendance" element={<Attendance />} exact />
+          <Route path="/admin/history" element={<History />} exact />
+          <Route path="/admin/compliance" element={<Compliance />} exact />
+
+          {/* Error Page Routes */}
           <Route
             path="/*"
             element={<Error />}
