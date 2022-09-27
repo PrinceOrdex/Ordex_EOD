@@ -229,11 +229,9 @@ const Eod_main = () => {
   };
 
   const submitEod = async (e) => {
-    setLoader(true)
     e.preventDefault();
 
     try {
-      setLoader(true)
       const dateString = todayDate();
 
       const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod`, {
@@ -260,8 +258,7 @@ const Eod_main = () => {
           confirmButtonText: 'OK',
           confirmButtonColor: '#06bdff',
         })
-        // alert("Problem in Submitting the EOD");
-        setLoader(false)
+
       }
     } catch (error) {
       console.log(error);
@@ -329,7 +326,7 @@ const Eod_main = () => {
                   name="taskTitle"
                   value={eodTaskData.taskTitle}
                   id="Project"
-                  placeholder="Project task here"
+                  placeholder="Add project task here"
                   onChange={getInput}
                   required
                 />
@@ -377,7 +374,7 @@ const Eod_main = () => {
                 name="taskDesc"
                 value={eodTaskData.taskDesc}
                 id="exampleFormControlTextarea1"
-                placeholder="Description here"
+                placeholder="Add description here"
                 onChange={getInput}
                 required
               ></textarea>
@@ -422,7 +419,19 @@ const Eod_main = () => {
                   <td>{elem.project_name}</td>
                   <td>{elem.task_title}</td>
                   <td>{elem.task_desc}</td>
-                  <td>{elem.status}</td>
+                  <td>{elem.status == "COMPLETED" ? (
+                    <i
+                      className="fa-solid fa-calendar-check"
+                      style={{ color: "green" }}
+                      title="Complete"
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-hourglass-half"
+                      style={{ color: "orange" }}
+                      title="Work in progress"
+                    ></i>
+                  )}</td>
                   <td>{elem.worktime}</td>
                 </tr>
               ))}
@@ -433,11 +442,15 @@ const Eod_main = () => {
       <div className="row flex-nowrap bg-dark">
         <div className="col-10 ms-auto d-flex justify-content-between p-3 bottom-background">
           <div>
-            <button className="btn clear-btn px-3" onClick={() => { setEodTaskData({ projectId: "", taskTitle: "", status: "", taskDesc: "", workTime: "" }); setHasData(false); }}>
+            <button className="btn clear-btn px-3"
+              disabled={(
+                eodTaskData.projectId != "" || eodTaskData.taskTitle != "" || eodTaskData.status != "" ||
+                eodTaskData.taskDesc != "" || eodTaskData.workTime != "") ? "" : 'disabled'}
+              onClick={() => { setEodTaskData({ projectId: "", taskTitle: "", status: "", taskDesc: "", workTime: "" }); setHasData(false); }}>
               Clear All</button>
           </div>
           <div>
-            <button className="btn submit-data-btn px-5" onClick={submitEod}>
+            <button className="btn submit-data-btn px-5" onClick={submitEod} disabled={tasks.length == 0 ? "disabled" : ''}>
               Submit
             </button>
           </div>

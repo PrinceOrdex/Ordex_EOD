@@ -34,8 +34,7 @@ const ResetPassword = () => {
                 Swal.fire({
                     type: "error",
                     icon: "error",
-                    title: `Password must be of 8 to 15 characters.
-                    At least one lowercase and uppercase letter, one numeric digit, and one special character`,
+                    title: `Password must contain 8 to 15 characters at least one uppercase, one lowercase, one number, and one special character`,
                     confirmButtonText: "OK",
                     confirmButtonColor: "#06bdff",
                 });
@@ -136,7 +135,7 @@ const ResetPassword = () => {
                                             />
                                             <label className="floating-label">New Password</label>
                                         </div>
-                                        
+
                                     </div>
                                     <div className="col-12">
                                         <div className="floating-label-group">
@@ -155,12 +154,12 @@ const ResetPassword = () => {
                                     </div>
                                 </div>
                                 <div className='row mx-0 px-0 justify-content-center'>
-                                    <div className="col-8 d-flex mb-3" style={{color: "#ff0000"}}>
+                                    <div className="col-8 d-flex mb-3" style={{ color: "#ff0000" }}>
                                         <i className="fas fa-circle-info mt-2"></i>
-                                        <p className='mb-0'>password must be of 8 to 15 characters, one lowercase, uppercase letter,numeric digit & special character.</p>
+                                        <p className='mb-0'>Password must contain 8 to 15 characters at least one uppercase, one lowercase, one number, and one special character</p>
                                     </div>
                                 </div>
-                                
+
 
                                 {/* <!-- Submit button --> */}
                                 <button

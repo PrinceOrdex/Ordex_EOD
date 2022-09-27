@@ -4,8 +4,10 @@ import _image_75 from "./../../Image/75.jpg";
 import "./../../css/profile.css";
 import axios from "axios";
 import { useState } from "react";
+import Employee_list from "./Employee_list";
 
 const Edit_emp_details = (props) => {
+  const [loader, setLoader] = useState(false);
 
   const [empData, setEmpData] = useState({});
 
@@ -16,12 +18,9 @@ const Edit_emp_details = (props) => {
         emp_id: props.empId,
       },
     });
-    console.log("-----fatch data-----");
-    console.log(res.data[0]);
     setEmpData(res.data[0]);
 
-    console.log(">>>>>>empdata")
-    console.log(empData);
+    setLoader(false)
   };
 
 
@@ -50,8 +49,8 @@ const Edit_emp_details = (props) => {
 
   const updateEmployee = async (e) => {
 
-    e.preventDefault();
-
+    // e.preventDefault();
+    setLoader(true)
     try {
       const res = await axios.patch(`${process.env.REACT_APP_BACKEND_BASE_URL}/employee`, {
         fname: empData.emp_fname,
@@ -70,15 +69,15 @@ const Edit_emp_details = (props) => {
       );
 
       if (res.status == 200) {
+        setLoader(false)
         alert("Emp Updated Successfully");
-        window.location.reload();
+        // window.location.reload();
       } else {
+        setLoader(false)
         alert("Updation failed")
       }
-
-      console.log(">>>>res status")
-      console.log(res.status);
     } catch (err) {
+      setLoader(false)
       console.log(err);
     }
 
