@@ -4,24 +4,23 @@ import _image_75 from "./../../Image/75.jpg";
 import "./../../css/profile.css";
 import axios from "axios";
 import { useState } from "react";
+import Employee_list from "./Employee_list";
 
 const Edit_emp_details = (props) => {
+  const [loader, setLoader] = useState(false);
 
   const [empData, setEmpData] = useState({});
 
   const getEmpData = async () => {
-
+    setLoader(true)
     const res = await axios.get("http://localhost:8000/employee", {
       params: {
         emp_id: props.empId,
       },
     });
-    console.log("-----fatch data-----");
-    console.log(res.data[0]);
     setEmpData(res.data[0]);
 
-    console.log(">>>>>>empdata")
-    console.log(empData);
+    setLoader(false)
   };
 
 
@@ -50,8 +49,8 @@ const Edit_emp_details = (props) => {
 
   const updateEmployee = async (e) => {
 
-    e.preventDefault();
-
+    // e.preventDefault();
+    setLoader(true)
     try {
       const res = await axios.patch("http://localhost:8000/employee", {
         fname: empData.emp_fname,
@@ -70,15 +69,15 @@ const Edit_emp_details = (props) => {
       );
 
       if (res.status == 200) {
+        setLoader(false)
         alert("Emp Updated Successfully");
-        window.location.reload();
+        // window.location.reload();
       } else {
+        setLoader(false)
         alert("Updation failed")
       }
-
-      console.log(">>>>res status")
-      console.log(res.status);
     } catch (err) {
+      setLoader(false)
       console.log(err);
     }
 
@@ -90,6 +89,7 @@ const Edit_emp_details = (props) => {
 
   return (
     <>
+      {loader ? <div className="loadingPopup"></div> : null}
       <div className="row col-12 mx-0 px-0 text-center border-bottom">
         <h3 className="text-uppercase">edit details</h3>
       </div>
@@ -184,6 +184,9 @@ const Edit_emp_details = (props) => {
             <div className="row col-12 mx-0 px-0 mb-3">
               <div className="col-12 col-md-8"></div>
               <div className="col-12 col-md-4 mt-3 mt-sm-0 d-flex justify-content-center justify-content-md-end">
+                <button className="btn-done text-white" onClick={<Employee_list />}>
+                  Cancel
+                </button> &emsp;
                 <button type="submit" className="btn-done text-white" onClick={(e) => { updateEmployee(e) }}>
                   Done
                 </button>
