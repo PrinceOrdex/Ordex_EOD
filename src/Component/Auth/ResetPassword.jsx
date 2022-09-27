@@ -153,12 +153,12 @@ const ResetPassword = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='row mx-0 px-0 justify-content-center'>
+                                {/* <div className='row mx-0 px-0 justify-content-center'>
                                     <div className="col-8 d-flex mb-3" style={{ color: "#ff0000" }}>
                                         <i className="fas fa-circle-info mt-2"></i>
                                         <p className='mb-0'>Password must contain 8 to 15 characters at least one uppercase, one lowercase, one number, and one special character</p>
                                     </div>
-                                </div>
+                                </div> */}
 
 
                                 {/* <!-- Submit button --> */}

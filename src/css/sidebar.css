@@ -32,6 +32,7 @@
     bottom: 0;
     top: 70px;
     width: 240px;
+    height: 100vh;
     padding: 20px 0;
     transition: all 0.5s ease-in-out;
     background: #f2f2f2;
@@ -43,7 +44,7 @@
     line-height: 70px;
 }
 
-body.fixed-left .side-menu.left {
+.left.side-menu {
     bottom: 50px;
     margin-bottom: -70px;
     margin-top: 0;

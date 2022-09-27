@@ -5,6 +5,7 @@ import _image_75 from "./../../Image/75.jpg";
 import { NavLink } from "react-router-dom";
 // import "./../../css/eod.scss";
 import "./../../css/header.css";
+import Menu from "../../Image/menu.svg";
 
 const Header = () => {
   const [isActive, setActive] = useState("false");
@@ -21,18 +22,18 @@ const Header = () => {
     <>
 
       <div className="topbar">
-          <div className="topbar-left d-none d-md-block">
-            <div
-              className="text-center d-flex justify-content-center align-items-center"
-              style={{lineHeight: "70px"}}
-            >
-              <a href="index.html" className="logo">
-                <img src={logo} alt="" style={{width: "100%"}} />
-              </a>
-            </div>
+        <div className="topbar-left d-none d-md-block">
+          <div
+            className="text-center d-flex justify-content-center align-items-center"
+            style={{ lineHeight: "70px" }}
+          >
+            <a href="index.html" className="logo">
+              <img src={logo} alt="" style={{ width: "100%" }} />
+            </a>
           </div>
+        </div>
 
-          <nav className="navbar-custom d-flex">
+        <nav className="navbar-custom d-flex">
           <ul className="list-inline menu-left mb-0 d-block d-md-none">
             <li className="list-inline-item">
               <button
@@ -40,7 +41,7 @@ const Header = () => {
                 type="button"
                 className="button-menu-mobile open-left"
               >
-                {/* <img src={Menu} /> */}
+                <img src={Menu} />
               </button>
             </li>
           </ul>
@@ -69,7 +70,7 @@ const Header = () => {
                   >
                     <img src={_image_75} alt="" srcSet="" className="me-2 rounded-circle" />
                   </div>
-                  <span className="d-inline-block ml-1" style={{ "textTransform": "capitalize" }}>{`${getuserDetails().empFname} ${getuserDetails().empLname}`}</span>                
+                  <span className="d-inline-block ml-1" style={{ "textTransform": "capitalize" }}>{`${getuserDetails().empFname} ${getuserDetails().empLname}`}</span>
                   {/* <i
                   onClick={handleToggle}
                   className={
@@ -125,9 +126,9 @@ const Header = () => {
               </div>
             </form> */}
 
-            {/* <!-- Dropdown button --> */}
+      {/* <!-- Dropdown button --> */}
 
-            {/* <div className="dropdown">
+      {/* <div className="dropdown">
               <button
                 className="btn dropdown-toggle"
                 type="button"
@@ -152,7 +153,7 @@ const Header = () => {
                     Logout
                   </NavLink>
                 </li> */}
-                {/* <li>
+      {/* <li>
                   <a className="dropdown-item" href="#">
                     Another action
                   </a>
@@ -162,7 +163,7 @@ const Header = () => {
                     Something else here
                   </a>
                 </li> */}
-              {/* </ul>
+      {/* </ul>
             </div>
           </div>
         </div>
