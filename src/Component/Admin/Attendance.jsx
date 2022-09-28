@@ -1,9 +1,9 @@
 import React from "react";
 // import "./../../css/attendence.css";
 import { useState, useEffect } from "react";
-import "./../../css/attendence.scss";
+// import "./../../css/attendence.scss";
 import axios from "axios";
-import "./../../css/attendencenew.scss";
+// import "./../../css/attendencenew.scss";
 import edit_emp from "./../../Image/EditIcon.svg";
 import presentIcon from "./../../Image/Present.png";
 import absentIcon from "./../../Image/Absent.jpeg";
@@ -249,10 +249,11 @@ const Attendance = () => {
                                 </button>
                               </div>
                             </nav>
+                            
                           </div>
 
                           <div className="row col-12 mx-0 px-0 my-3 justify-content-center justify-content-sm-start border-bottom pb-3">
-                            <div className="col-10 col-sm-6 col-md-5 d-flex px-0">
+                            <div className="col-10 col-sm-5 col-md-4 d-flex px-0">
                               <div className="col-12 attendence-date">
                                 <p className="attendence-report mb-0 text-white text-center">
                                   Attendence Report of Date

@@ -68,8 +68,8 @@ const Employee_list = () => {
             <Sidebar />
           </div>
         </div> */}
-        {/* <div className="fixed-left"> */}
-        {/* <div id="wrapper">  */}
+        <div className="fixed-left">
+        <div id="wrapper"> 
         <div className="content-page">
           <div className="content">
             {/* <Header /> */}
@@ -169,8 +169,8 @@ const Employee_list = () => {
             </div>
           </div>
         </div>
-        {/* </div> */}
-        {/* </div>     */}
+        </div>
+        </div>    
         {/* </div> */}
       </>
     );

@@ -4,10 +4,10 @@ import React, { useEffect } from "react";
 import _image_75 from "./../../Image/75.jpg";
 import Eod_main from "./Eod_main";
 
-import Header from "./Header";
+// import Header from "./Header";
 import Eod_history from "./Eod_history";
 import Configuration from "./Configuration";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 import { Navigate } from "react-router-dom";
 
 const Eod = () => {
@@ -16,11 +16,11 @@ const Eod = () => {
   // }
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="container-fluid">
         <div className="row flex-nowrap bg-dark pt-3">
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 py-3">
-            <Sidebar />
+            {/* <Sidebar /> */}
           </div>
           {/* <Eod_main />; */}
           <div className="col py-3 bg-white px-5">

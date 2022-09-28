@@ -2,6 +2,7 @@ import { React, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { MenuContext } from "../../App";
 import Swal from "sweetalert2";
+import "./../../css/eod.css";
 
 const Eod_main = () => {
   const { state, dispatch } = useContext(MenuContext);
@@ -270,192 +271,221 @@ const Eod_main = () => {
     <>
       {loader ? <div className="loadingPopup"></div> : null}
       {/* <div className="col py-3 bg-white h-100 mb-2"> */}
-      <div className="row col-12 mx-0 px-0 text-center border-bottom">
-        <h3>END OF DAY REPORT</h3>
-      </div>
-      <form>
-        <div className="row col-12 mx-0 px-0 my-3 text-center justify-content-center">
-          <div className="col-4 d-flex date-1">
-            <label className="date p-2" htmlFor="date">
-              Date
-            </label>
-            <input
-              type="date"
-              id="eodDate"
-              name="eodDate"
-              value={eod_date} max={todayDate()}
-              onChange={(e) => {
-                setEod_date(e.target.value);
-                fetchTask();
-              }}
-              className="form-control p-2"
-            />
-          </div>
-        </div>
-        <div className="row mx-0 px-0 justify-content-center">
-          <div className="col-10">
-            <p className="mb-1">Project</p>
-            <div className="project col-6">
-              <select
-                name="projectId"
-                id="Project"
-                value={eodTaskData.projectId}
-                className="form-select project col-6"
-                onChange={getInput}
-                required
-              >
-                {options.map((elem, index) => {
-                  return (
-                    <option key={index} value={elem.project_id}>
-                      {elem.project_name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="row mx-0 px-0 mt-3 justify-content-center">
-          <div className="col-10 d-lg-flex justify-content-center">
-            <div className="col-12 col-lg-6">
-              <p className="mb-1">Task</p>
-              <div className="project col-12" id="task">
-                <input
-                  className="form-control"
-                  type="text"
-                  name="taskTitle"
-                  value={eodTaskData.taskTitle}
-                  id="Project"
-                  placeholder="Add project task here"
-                  onChange={getInput}
-                  required
-                />
-              </div>
-            </div>
-            <div className="col-12 col-lg-6 d-flex mt-3 mt-lg-0">
-              <div className="col-6 ms-0 ms-lg-3 me-3">
-                <p className="mb-1">Total Working Time</p>
-                <div className="cs-form">
-                  <input
-                    type="time"
-                    name="workTime"
-                    value={eodTaskData.workTime}
-                    className="form-control"
-                    placeholder="Time"
-                    onChange={getInput}
-                    required
-                  // step="1"
-                  />
+      <div className="fixed-left">
+        <div id="wrapper">
+          {/* <Sidebar /> */}
+          <div className="content-page">
+            <div className="content">
+              {/* <Navbar /> */}
+              <div className="page-content-wrapper">
+                <div className="container-fluid">
+                  <div className="row col-12 px-0 mx-0">
+                    <div className="col-sm-12 px-0">
+                      <div className="page-title-box" id="EOD-report">
+                        <div className="row col-12 mx-0 px-0 text-center border-bottom">
+                          <h3>END OF DAY REPORT</h3>
+                        </div>
+                        <form>
+                          <div className="row col-12 mx-0 px-0 my-3 text-center justify-content-center">
+                            <div className="col-4 d-flex date-1">
+                              <label className="date p-2" htmlFor="date">
+                                Date
+                              </label>
+                              <input
+                                type="date"
+                                id="eodDate"
+                                name="eodDate"
+                                value={eod_date} max={todayDate()}
+                                onChange={(e) => {
+                                  setEod_date(e.target.value);
+                                  fetchTask();
+                                }}
+                                className="form-control p-2"
+                              />
+                            </div>
+                          </div>
+                          <div className="row mx-0 px-0 justify-content-center">
+                            <div className="col-10">
+                              <p className="mb-1">Project</p>
+                              <div className="project col-6">
+                                <select
+                                  name="projectId"
+                                  id="Project"
+                                  value={eodTaskData.projectId}
+                                  className="form-select project col-6"
+                                  onChange={getInput}
+                                  required
+                                >
+                                  {options.map((elem, index) => {
+                                    return (
+                                      <option key={index} value={elem.project_id}>
+                                        {elem.project_name}
+                                      </option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mx-0 px-0 mt-3 justify-content-center">
+                            <div className="col-10 d-lg-flex justify-content-center">
+                              <div className="col-12 col-lg-6">
+                                <p className="mb-1">Task</p>
+                                <div className="project col-12" id="task">
+                                  <input
+                                    className="form-control"
+                                    type="text"
+                                    name="taskTitle"
+                                    value={eodTaskData.taskTitle}
+                                    id="Project"
+                                    placeholder="Add project task here"
+                                    onChange={getInput}
+                                    required
+                                  />
+                                </div>
+                              </div>
+                              <div className="col-12 col-lg-6 d-flex mt-3 mt-lg-0">
+                                <div className="col-6 ms-0 ms-lg-3 me-3">
+                                  <p className="mb-1">Total Working Time</p>
+                                  <div className="cs-form">
+                                    <input
+                                      type="time"
+                                      name="workTime"
+                                      value={eodTaskData.workTime}
+                                      className="form-control"
+                                      placeholder="Time"
+                                      onChange={getInput}
+                                      required
+                                    // step="1"
+                                    />
+                                  </div>
+                                </div>
+                                <div className="col-6">
+                                  <p className="mb-1">Status</p>
+                                  <select
+                                    className="form-select"
+                                    name="status"
+                                    value={eodTaskData.status}
+                                    onChange={getInput}
+                                    required
+                                  >
+                                    <option defaultValue>Select Option</option>
+                                    <option value="INPROGRESS">Task in Progress</option>
+                                    <option value="COMPLETED">Task Completed</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mx-0 px-0 mt-3 justify-content-center">
+                            <div className="col-10">
+                              <p className="mb-1">Description</p>
+                              <div className="description">
+                                <textarea
+                                  className="form-control"
+                                  name="taskDesc"
+                                  value={eodTaskData.taskDesc}
+                                  id="exampleFormControlTextarea1"
+                                  placeholder="Add description here"
+                                  onChange={getInput}
+                                  required
+                                ></textarea>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="row mx-0 px-0 my-3 ms-5 justify-content-center">
+                            <div className="col-10 d-flex ms-5 justify-content-end align-items-center added">
+                              <i className={hasData ? "fas fa-check me-2" : "d-none"}></i>
+                              <p className={hasData ? "mb-0" : "d-none"}>
+                                Task {dataNum} Added Successfully
+                              </p>
+                              <button className="px-4 py-2 add-button ms-3" disabled={(
+                                eodTaskData.projectId != "" || eodTaskData.taskTitle != "" || eodTaskData.status != "" ||
+                                eodTaskData.taskDesc != "" || eodTaskData.workTime != "") ? "" : 'disabled'}
+                                onClick={() => { setEodTaskData({ projectId: "", taskTitle: "", status: "", taskDesc: "", workTime: "" }); setHasData(false); }}>
+                                Clear All
+                              </button>
+                              <button className="px-4 py-2 add-button ms-3" onClick={getEodTaskData}>
+                                Add
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+
+                        <hr className="mt-4" />
+
+                        <div className="container">
+                          {tasks.length == 0 ? (
+                            "No Data Available"
+                          ) : (
+                            <div className="table-responsive">
+                              <table className="table border">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Sr. no</th>
+                                    <th scope="col">Project</th>
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">T.W.T</th>
+                                  </tr>
+                                </thead>
+                                <tbody className="position-relative">
+                                  {tasks.map((elem, index) => (
+                                    <tr key={index}>
+                                      <td>{index + 1}</td>
+                                      <td>{elem.project_name}</td>
+                                      <td>{elem.task_title}</td>
+                                      <td>{elem.task_desc}</td>
+                                      <td>{elem.status == "COMPLETED" ? (
+                                        <i
+                                          className="fa-solid fa-calendar-check"
+                                          style={{ color: "green" }}
+                                          title="Complete"
+                                        ></i>
+                                      ) : (
+                                        <i
+                                          className="fa-solid fa-hourglass-half"
+                                          style={{ color: "orange" }}
+                                          title="Work in progress"
+                                        ></i>
+                                      )}</td>
+                                      <td>{elem.worktime}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          )}
+                        </div>
+                        <div className="row mx-0 px-0">
+                          <div className="col-12 ms-auto d-flex justify-content-end p-3 bottom-background">
+                            {/* <div>
+                              <button className="btn clear-btn px-3"
+                                disabled={(
+                                  eodTaskData.projectId != "" || eodTaskData.taskTitle != "" || eodTaskData.status != "" ||
+                                  eodTaskData.taskDesc != "" || eodTaskData.workTime != "") ? "" : 'disabled'}
+                                onClick={() => { setEodTaskData({ projectId: "", taskTitle: "", status: "", taskDesc: "", workTime: "" }); setHasData(false); }}>
+                                Clear All</button>
+                            </div> */}
+                            <div>
+                              <button className="btn submit-data-btn px-5" onClick={submitEod} disabled={tasks.length == 0 ? "disabled" : ''}>
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="col-6">
-                <p className="mb-1">Status</p>
-                <select
-                  className="form-select"
-                  name="status"
-                  value={eodTaskData.status}
-                  onChange={getInput}
-                  required
-                >
-                  <option defaultValue>Select Option</option>
-                  <option value="INPROGRESS">Task in Progress</option>
-                  <option value="COMPLETED">Task Completed</option>
-                </select>
-              </div>
             </div>
           </div>
         </div>
-        <div className="row mx-0 px-0 mt-3 justify-content-center">
-          <div className="col-10">
-            <p className="mb-1">Description</p>
-            <div className="description">
-              <textarea
-                className="form-control"
-                name="taskDesc"
-                value={eodTaskData.taskDesc}
-                id="exampleFormControlTextarea1"
-                placeholder="Add description here"
-                onChange={getInput}
-                required
-              ></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div className="row mx-0 px-0 my-3 ms-5 justify-content-center">
-          <div className="col-10 d-flex ms-5 justify-content-end align-items-center added">
-            <i className={hasData ? "fas fa-check me-2" : "d-none"}></i>
-            <p className={hasData ? "mb-0" : "d-none"}>
-              Task {dataNum} Added Successfully
-            </p>
-            <button className="px-4 add-button ms-3" onClick={getEodTaskData}>
-              Add
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <hr className="mt-4" />
-
-      <div className="container">
-        {tasks.length == 0 ? (
-          "No Data Available"
-        ) : (
-          <table className="table border">
-            <thead>
-              <tr>
-                <th scope="col">Sr. no</th>
-                <th scope="col">Project</th>
-                <th scope="col">Task</th>
-                <th scope="col">Description</th>
-                <th scope="col">Status</th>
-                <th scope="col">T.W.T</th>
-              </tr>
-            </thead>
-            <tbody className="position-relative">
-              {tasks.map((elem, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{elem.project_name}</td>
-                  <td>{elem.task_title}</td>
-                  <td>{elem.task_desc}</td>
-                  <td>{elem.status == "COMPLETED" ? (
-                    <i
-                      className="fa-solid fa-calendar-check"
-                      style={{ color: "green" }}
-                      title="Complete"
-                    ></i>
-                  ) : (
-                    <i
-                      className="fa-solid fa-hourglass-half"
-                      style={{ color: "orange" }}
-                      title="Work in progress"
-                    ></i>
-                  )}</td>
-                  <td>{elem.worktime}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
       </div>
-      <div className="row flex-nowrap bg-dark">
-        <div className="col-10 ms-auto d-flex justify-content-between p-3 bottom-background">
-          <div>
-            <button className="btn clear-btn px-3"
-              disabled={(
-                eodTaskData.projectId != "" || eodTaskData.taskTitle != "" || eodTaskData.status != "" ||
-                eodTaskData.taskDesc != "" || eodTaskData.workTime != "") ? "" : 'disabled'}
-              onClick={() => { setEodTaskData({ projectId: "", taskTitle: "", status: "", taskDesc: "", workTime: "" }); setHasData(false); }}>
-              Clear All</button>
-          </div>
-          <div>
-            <button className="btn submit-data-btn px-5" onClick={submitEod} disabled={tasks.length == 0 ? "disabled" : ''}>
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
+
       {/* </div> */}
     </>
   );

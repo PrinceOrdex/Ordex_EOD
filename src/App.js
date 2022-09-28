@@ -20,6 +20,9 @@ import Sidebar from "./Component/Employee/Sidebar";
 import AdminSidebar from "./Component/Admin/AdminSidebar";
 import Header from "./Component/Employee/Header";
 import AdminHeader from "./Component/Admin/AdminHeader";
+import Eod_main from "./Component/Employee/Eod_main";
+import Configuration from "./Component/Employee/Configuration";
+import Eod_history from "./Component/Employee/Eod_history";
 export const MenuContext = createContext();
 
 function App() {
@@ -105,12 +108,19 @@ function App() {
   return (
     <>
       {/* Header */}
-      {(userData.roleName == "employee" || userData.roleName == "intern") ? <Header /> : null}
-      {(userData.roleName == "admin") ? <AdminHeader /> : null}
+
+      {(localStorage.getItem("userData")) ? <>{(userData.roleName == "employee" || userData.roleName == "intern") ? <Header /> : null}</> : null}
+
+      {(localStorage.getItem("userData")) ? <>{(userData.roleName == "admin") ? <AdminHeader /> : null}</> : null}
+
+
 
       {/* Sidebar */}
-      {(userData.roleName == "employee" || userData.roleName == "intern") ? <Sidebar /> : null}
-      {(userData.roleName == "admin") ? <AdminSidebar /> : null}
+
+      {(localStorage.getItem("userData")) ? <>{(userData.roleName == "employee" || userData.roleName == "intern") ? <Sidebar /> : null}</> : null}
+
+      {(localStorage.getItem("userData")) ? <>{(userData.roleName == "admin") ? <AdminSidebar /> : null}</> : null}
+
 
       <MenuContext.Provider value={{ state, dispatch }}>
         <Routes>
@@ -120,7 +130,9 @@ function App() {
           <Route exact path="/logout" element={<Logout />} />
 
           {/*Employee Routes  */}
-          <Route exact path="/eod" element={<Eod />} />
+          <Route exact path="/eod" element={<Eod_main />} />
+          <Route exact path="/history" element={<Eod_history />} />
+          <Route exact path="/configuration" element={<Configuration />} />
 
           {/* Admin Routes */}
           <Route exact={true} path="/admin/main" element={<Employee_list />} />
