@@ -7,8 +7,8 @@ import Attendance from "./Attendance";
 import History from "./History";
 import Compliance from "./Compliance";
 
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+// import Header from "./AdminHeader";
+import Sidebar from "./AdminSidebar";
 import Edit_emp_details from "./Edit_emp_details";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
@@ -22,12 +22,12 @@ const Eod = () => {
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 py-3">
             <Sidebar />
           </div> */}
-          
 
 
 
 
-          {/* 
+
+      {/* 
           <div className="col py-3 bg-white px-5">
             <div className="tab-content" id="v-pills-tabContent">
               <div
@@ -77,7 +77,7 @@ const Eod = () => {
               </div>
             </div>
           </div> */}
-        {/* </div>
+      {/* </div>
       </div> */}
     </>
   );

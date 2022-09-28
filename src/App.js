@@ -16,7 +16,10 @@ import History from "./Component/Admin/History";
 import Compliance from "./Component/Admin/Compliance";
 import Employee_list from "./Component/Admin/Employee_list";
 import Logout from "./Component/Auth/Logout";
-
+import Sidebar from "./Component/Employee/Sidebar";
+import AdminSidebar from "./Component/Admin/AdminSidebar";
+import Header from "./Component/Employee/Header";
+import AdminHeader from "./Component/Admin/AdminHeader";
 export const MenuContext = createContext();
 
 function App() {
@@ -98,9 +101,17 @@ function App() {
   }, []);
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  let userData = JSON.parse(localStorage.getItem("userData"));
   return (
     <>
+      {/* Header */}
+      {(userData.roleName == "employee" || userData.roleName == "intern") ? <Header /> : null}
+      {(userData.roleName == "admin") ? <AdminHeader /> : null}
+
+      {/* Sidebar */}
+      {(userData.roleName == "employee" || userData.roleName == "intern") ? <Sidebar /> : null}
+      {(userData.roleName == "admin") ? <AdminSidebar /> : null}
+
       <MenuContext.Provider value={{ state, dispatch }}>
         <Routes>
           <Route exact path="/" element={<Login />} />

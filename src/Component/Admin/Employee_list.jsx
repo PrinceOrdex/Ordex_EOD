@@ -2,8 +2,8 @@ import { React, useEffect, useState } from "react";
 import Edit_emp_details from "./Edit_emp_details";
 import edit_emp from "./../../Image/EditIcon.svg";
 import axios from "axios";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+// import Header from "./AdminHeader";
+// import Sidebar from "./AdminSidebar";
 import "../../css/employee-list.css";
 
 const Employee_list = () => {
@@ -178,12 +178,12 @@ const Employee_list = () => {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
 
       <div className="fixed-left">
         <div id="wrapper">
 
-          <Sidebar />
+          {/* <Sidebar /> */}
 
           {/* <div className="container-fluid"> */}
           {/* <div className="row flex-nowrap bg-dark pt-3">

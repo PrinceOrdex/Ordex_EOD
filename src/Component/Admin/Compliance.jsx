@@ -4,8 +4,8 @@ import axios from "axios";
 import edit_emp from "./../../Image/EditIcon.svg";
 import moment from "moment";
 import Swal from "sweetalert2";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+// import Header from "./AdminHeader";
+// import Sidebar from "./AdminSidebar";
 
 const Compliance = () => {
   //------------ Loader Code Start------------
@@ -100,11 +100,11 @@ const Compliance = () => {
     <>
       {loader ? <div className="loadingPopup"></div> : null}
 
-      <Header />
+      {/* <Header /> */}
 
       <div className="fixed-left">
         <div id="wrapper">
-          <Sidebar />
+          {/* <Sidebar /> */}
           <div className="content-page">
             <div className="content">
               {/* <Header /> */}

@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import "./../../css/header.css";
 import Menu from "../../Image/menu.svg";
 
-const Header = () => {
+const AdminHeader = () => {
   const [isActive, setActive] = useState("false");
 
   const getuserDetails = () => {
@@ -172,4 +172,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default AdminHeader;
