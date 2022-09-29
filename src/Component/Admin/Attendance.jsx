@@ -14,9 +14,9 @@ import History from "./History";
 import Swal from "sweetalert2";
 
 const Attendance = () => {
-  const [present, setPresent] = useState([]);
-  const [absent, setAbsent] = useState([]);
-  const [allAttendance, setAllAttendance] = useState([]);
+  const [allAttendance, setAllAttendance] = useState(true);
+  const [present, setPresent] = useState(false);
+  const [absent, setAbsent] = useState(false);
   let [attendanceState, setAttendanceState] = useState("all");
   let [tableData, setTableData] = useState([]);
 
@@ -65,7 +65,7 @@ const Attendance = () => {
         setTableData(res.data);
         setLoader(false)
       }
-      setAllAttendance(res.data);
+      // setAllAttendance(res.data);
       setLoader(false)
 
     } catch (error) {
@@ -91,7 +91,7 @@ const Attendance = () => {
         setTableData(res.data);
         setLoader(false)
       }
-      setPresent(res.data);
+      // setPresent(res.data);
       setLoader(false)
     } catch (error) {
       setTableData([]);
@@ -116,7 +116,7 @@ const Attendance = () => {
         setTableData(res.data);
         setLoader(false)
       }
-      setAbsent(res.data);
+      // setAbsent(res.data);
       setLoader(false)
       // console.log("----- Present-Data  ------");
       // console.log(present);
@@ -217,7 +217,7 @@ const Attendance = () => {
                                 role="tablist"
                               >
                                 <button
-                                  className="nav-link btn-1 active px-4"
+                                  className={allAttendance ? "nav-link btn-1 active px-4" : "nav-link btn-1 px-4"}
                                   id="nav-home-tab"
                                   data-bs-toggle="tab"
                                   data-bs-target="#nav-home"
@@ -228,12 +228,14 @@ const Attendance = () => {
                                   onClick={() => {
                                     setAttendanceState("all");
                                     getAllAttandace();
+                                    setAbsent(false); setPresent(false); setAllAttendance(true);
                                   }}
+                                // onClick={() => getAllAttandace()}
                                 >
                                   All
                                 </button>
                                 <button
-                                  className="nav-link btn-1"
+                                  className={present ? "nav-link active btn-1" : "nav-link btn-1"}
                                   id="nav-profile-tab"
                                   data-bs-toggle="tab"
                                   data-bs-target="#nav-profile"
@@ -244,12 +246,14 @@ const Attendance = () => {
                                   onClick={() => {
                                     setAttendanceState("present");
                                     getPresent();
+                                    setAllAttendance(false); setAbsent(false); setPresent(true);
                                   }}
+                                // onClick={() => getPresent()}
                                 >
                                   Present
                                 </button>
                                 <button
-                                  className="nav-link btn-1"
+                                  className={absent ? "nav-link active btn-1" : "nav-link btn-1"}
                                   id="nav-profile-tab"
                                   data-bs-toggle="tab"
                                   data-bs-target="#nav-profile"
@@ -260,6 +264,7 @@ const Attendance = () => {
                                   onClick={() => {
                                     setAttendanceState("absent");
                                     getAbsent();
+                                    setAllAttendance(false); setPresent(false); setAbsent(true);
                                   }}
                                 >
                                   Absent
@@ -383,13 +388,6 @@ const Attendance = () => {
                                             <td className="border-0">
                                               {elem.eod_date ? (
                                                 <>
-                                                  {console.log(
-                                                    "-------------" + elem.phoneno
-                                                  )}
-                                                  {console.log(
-                                                    "-------fff------" +
-                                                    elem.emp_fname
-                                                  )}
                                                   <img
                                                     src={edit_emp}
                                                     alt=""
