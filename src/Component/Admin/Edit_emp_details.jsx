@@ -5,6 +5,7 @@ import "./../../css/profile.css";
 import axios from "axios";
 import { useState } from "react";
 import Employee_list from "./Employee_list";
+import Swal from "sweetalert2";
 
 const Edit_emp_details = (props) => {
   const [loader, setLoader] = useState(false);
@@ -69,11 +70,23 @@ const Edit_emp_details = (props) => {
 
       if (res.status == 200) {
         setLoader(false)
-        alert("Emp Updated Successfully");
+        Swal.fire({
+          type: "success",
+          icon: "success",
+          title: "Employee details updated successfully",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#06bdff",
+        });
         // window.location.reload();
       } else {
         setLoader(false)
-        alert("Updation failed")
+        Swal.fire({
+          type: "error",
+          icon: "error",
+          title: "Updation failed",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#06bdff",
+        });
       }
     } catch (err) {
       setLoader(false)

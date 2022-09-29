@@ -11,6 +11,7 @@ import moment from "moment";
 // import Header from "./AdminHeader";
 // import Sidebar from "./Sidebar";
 import History from "./History";
+import Swal from "sweetalert2";
 
 const Attendance = () => {
   const [present, setPresent] = useState([]);
@@ -28,6 +29,14 @@ const Attendance = () => {
   const [email, setEmail] = useState("");
 
   const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+    }, 1500);
+    setLoader(false);
+  }, []);
 
   const todayDate = () => {
     var today = new Date();
@@ -133,7 +142,13 @@ const Attendance = () => {
         setLoader(false)
       }
     } else {
-      alert("Please Enter EOD Date");
+      Swal.fire({
+        type: "warning",
+        icon: "warning",
+        title: "Please Enter EOD Date",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#06bdff",
+      });
       setTableData([]);
       setLoader(false)
     }

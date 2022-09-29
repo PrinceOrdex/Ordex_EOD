@@ -52,7 +52,13 @@ const Compliance = () => {
         setCompliance(res.data);
         setLoader(false);
       } else {
-        alert("please enter EOD Date");
+        Swal.fire({
+          type: "error",
+          icon: "error",
+          title: "Please enter EOD Date",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#06bdff",
+        });
       }
     } catch (error) {
       setCompliance([]);
