@@ -12,14 +12,13 @@ const Edit_emp_details = (props) => {
   const [empData, setEmpData] = useState({});
 
   const getEmpData = async () => {
-
+    setLoader(true)
     const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/employee`, {
       params: {
         emp_id: props.empId,
       },
     });
     setEmpData(res.data[0]);
-
     setLoader(false)
   };
 
@@ -89,7 +88,7 @@ const Edit_emp_details = (props) => {
 
   return (
     <>
-
+      {loader ? <div className="loadingPopup"></div> : null}
       <div className="fixed-left">
         <div id="wrapper">
           {/* <Sidebar /> */}
@@ -195,6 +194,9 @@ const Edit_emp_details = (props) => {
                               <div className="row col-12 mx-0 px-0 mb-3">
                                 <div className="col-12 col-md-8"></div>
                                 <div className="col-12 col-md-4 mt-3 mt-sm-0 d-flex justify-content-center justify-content-md-end">
+                                  <button type="submit" className="btn-done text-white" onClick={<Employee_list />}>
+                                    Cancel
+                                  </button> &emsp;
                                   <button type="submit" className="btn-done text-white" onClick={(e) => { updateEmployee(e) }}>
                                     Done
                                   </button>
