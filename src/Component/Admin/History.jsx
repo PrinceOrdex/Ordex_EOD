@@ -128,7 +128,7 @@ const History = (props) => {
 
   useEffect(() => {
     fetchTask();
-  }, []);
+  }, [eodDate]);
 
   return (
     <>
@@ -250,8 +250,8 @@ const History = (props) => {
                                     id="birthday"
                                     name="eod_date"
                                     className="form-control p-2"
-                                    value={props.date}
-                                    defaultValue={eodDate}
+                                    value={eodDate}
+                                    // defaultValue={eodDate}
                                     max={todayDate()}
                                     onChange={(e) => { setEodDate(e.target.value); fetchTask(); }}
                                     required
@@ -344,7 +344,7 @@ const History = (props) => {
                               <tbody className="position-relative">
                                 {tasks.length != 0 ? (
                                   tasks.map((elem, index) => (
-                                    <tr>
+                                    <tr style={{ borderRight: "1px solid rgb(222, 226, 230)", borderLeft: "1px solid rgb(222, 226, 230)" }}>
                                       <td>{index + 1}</td>
                                       <td>{moment(elem.eod_date).format("DD-MM-YYYY")}</td>
                                       <td>{elem.emp_fname + " " + elem.emp_lname}</td>
@@ -371,7 +371,7 @@ const History = (props) => {
                                   ))
                                 ) : (
                                   <tr>
-                                    <th colSpan={8} style={{ textAlign: "center",borderRight: "1px solid rgb(222, 226, 230)", borderLeft: "1px solid rgb(222, 226, 230)" }}>
+                                    <th colSpan={8} style={{ textAlign: "center", borderRight: "1px solid rgb(222, 226, 230)", borderLeft: "1px solid rgb(222, 226, 230)" }}>
                                       No Data Available
                                     </th>
                                   </tr>

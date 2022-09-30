@@ -347,7 +347,9 @@ const Attendance = () => {
                                                 ? moment(elem.eod_date).format(
                                                   "DD-MM-YYYY"
                                                 )
-                                                : "Date Unavailable"}
+                                                : moment(eodDate).format(
+                                                  "DD-MM-YYYY"
+                                                )}
                                             </td>
                                             <td>{elem.emp_code}</td>
                                             <td>
