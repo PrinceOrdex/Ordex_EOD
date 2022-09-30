@@ -1,5 +1,5 @@
 import React from "react";
-// import "./../../css/attendence.css";
+import "./../../css/attendence.css";
 import { useState, useEffect } from "react";
 // import "./../../css/attendence.scss";
 import axios from "axios";
@@ -182,7 +182,7 @@ const Attendance = () => {
                   <div className="container-fluid">
                     <div className="row col-12 px-0 mx-0">
                       <div className="col-sm-12 px-0">
-                        <div className="page-title-box">
+                        <div className="page-title-box" id="attendence-report"> 
                           <div className="row col-12 mx-0 px-0 text-center border-bottom">
                             <h3 className="text-uppercase">
                               employee's attendence report
@@ -248,8 +248,7 @@ const Attendance = () => {
                                   Absent
                                 </button>
                               </div>
-                            </nav>
-                            
+                            </nav> 
                           </div>
 
                           <div className="row col-12 mx-0 px-0 my-3 justify-content-center justify-content-sm-start border-bottom pb-3">
@@ -282,9 +281,7 @@ const Attendance = () => {
               </button> */}
                             </div>
                           </div>
-                        </div>
-
-                        <div
+                          <div
                           className="table-responsive mx-auto"
                           style={{ width: "100%" }}
                         >
@@ -429,6 +426,9 @@ const Attendance = () => {
                             </tbody>
                           </table>
                         </div>
+                        </div>
+
+                        
                       </div>
                     </div>
                   </div>

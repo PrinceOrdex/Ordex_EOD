@@ -143,7 +143,7 @@ const History = (props) => {
                 <div className="container-fluid">
                   <div className="row col-12 px-0 mx-0">
                     <div className="col-sm-12 px-0">
-                      <div className="page-title-box">
+                      <div className="page-title-box" id="admin-history">
                         {bar == true ? (
                           <>
                             {console.log(props.phone)}
@@ -382,7 +382,7 @@ const History = (props) => {
                                   ))
                                 ) : (
                                   <tr>
-                                    <th colSpan={7} style={{ textAlign: "center" }}>
+                                    <th colSpan={8} style={{ textAlign: "center",borderRight: "1px solid rgb(222, 226, 230)", borderLeft: "1px solid rgb(222, 226, 230)" }}>
                                       No Data Available
                                     </th>
                                   </tr>

@@ -107,7 +107,7 @@
     display: block;
 }
 
-.bg-img{
+#admin-history .bg-img{
     height: 250px;
     width: 250px;
     border: 1px solid transparent;
@@ -117,67 +117,67 @@
     flex-direction: column;
     align-items: center;
 }
-.bg-img img{
+#admin-history .bg-img img{
     border-radius: 50%;
     position: absolute;
     top: 10%;
     /* left: 50%;
     transform: translateX(-50%); */
 }
-.bg-img .Empname{
+#admin-history .bg-img .Empname{
     position: absolute;
     top: 60%;
 }
-.admin-eod p{
+#admin-history .admin-eod p{
     font-size: 16px;
     font-weight: 500;
 }
-.admin-eod .form-control, .admin-eod .form-select{
+#admin-history .admin-eod .form-control, #admin-history .admin-eod .form-select{
     border-radius: 0rem;
 }
-.admin-eod .form-control:focus, .admin-eod .form-select:focus{
+#admin-history .admin-eod .form-control:focus, #admin-history .admin-eod .form-select:focus{
     border: 1px solid #ced4da;
     box-shadow: none;
 }
-.tel,.email{
+#admin-history .tel,.email{
     position: relative;
 }
-.tel i,.email i{
+#admin-history .tel i,#admin-history .email i{
     position: absolute;
     padding: 5px;
     top: 15%;
 }
-.tel .form-control,.email .form-control{
+#admin-history .tel .form-control,#admin-history .email .form-control{
     padding-left: 1.5rem;
 }
 
-.eod-date .form-control{
+#admin-history .eod-date .form-control{
     border-radius: 0rem !important;
 }
-.eod-date .form-control:focus{
+#admin-history .eod-date .form-control:focus{
     box-shadow: none !important;
     border: 1px solid #ced4da !important;
 }
-.eod-report{
+#admin-history .eod-report{
     background-color: #06bdff;
 }
-.bg-date{
+#admin-history .bg-date{
     background-color: #f2f2f2;
     position: relative;
     width: 30%;
 }
-.btn-search{
+#admin-history .btn-search{
     background-color: #06bdff;
     padding: 5px 10px;
     border-radius: 0.375rem;
     border: 1px solid transparent;
 }
 
-input[type="date"] {
+#admin-history input[type="date"] {
     position: relative;
 }
 
-input[type="date"]:after {
+#admin-history input[type="date"]:after {
     font-family: "Font Awesome 5 Free";
     font-weight: 900; 
     content: "\f133";
@@ -185,7 +185,7 @@ input[type="date"]:after {
     padding: 0 5px;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+#admin-history input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     top: 0;
     left: 0;
