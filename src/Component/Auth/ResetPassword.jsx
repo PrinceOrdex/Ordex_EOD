@@ -77,7 +77,7 @@ const ResetPassword = () => {
                     Swal.fire({
                         type: "error",
                         icon: "error",
-                        title: "Unable to change Password! Please try again.",
+                        title: "Your password reset link has expired",
                         confirmButtonText: "OK",
                         confirmButtonColor: "#06bdff",
                     }).then(() =>
@@ -91,7 +91,7 @@ const ResetPassword = () => {
             Swal.fire({
                 type: "error",
                 icon: "error",
-                title: "Unable to change Password! Please try again.",
+                title: "Your password reset link has expired",
                 confirmButtonText: "OK",
                 confirmButtonColor: "#06bdff",
             });

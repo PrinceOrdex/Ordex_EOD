@@ -235,32 +235,42 @@ const Eod_main = () => {
     try {
       const dateString = todayDate();
 
-      const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod`, {
-        empId: getuserDetails().empId,
-        eoddate: eod_date,
-        createdAt: dateString,
-      });
-
-      if (res.status === 200) {
-        setLoader(false)
-        Swal.fire({
-          type: "success",
-          icon: "success",
-          title: "EOD submitted successfully",
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#06bdff',
+      Swal.fire({
+        title: 'Do you want to submit the EOD report?',
+        icon: 'warning',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#06bdff',
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            setLoader(true)
+            const res = axios.post("http://localhost:8000/eod", {
+              empId: getuserDetails().empId,
+              eoddate: eod_date,
+              createdAt: dateString,
+            }).then(() => {
+              if (res) {
+                setLoader(false)
+                Swal.fire({
+                  icon: "success",
+                  title: "EOD submitted successfully",
+                  confirmButtonText: 'OK',
+                  confirmButtonColor: '#06bdff',
+                })
+              } else {
+                Swal.fire({
+                  icon: "warning",
+                  title: "Something went wrong",
+                  confirmButtonText: 'OK',
+                  confirmButtonColor: '#06bdff',
+                })
+                setLoader(false)
+              }
+            })
+          }
         })
-        // alert("EOD Submitted Successfully");
-      } else {
-        Swal.fire({
-          type: "warning",
-          icon: "warning",
-          title: "Something went wrong",
-          confirmButtonText: 'OK',
-          confirmButtonColor: '#06bdff',
-        })
-
-      }
     } catch (error) {
       console.log(error);
       setLoader(false)

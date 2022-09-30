@@ -253,21 +253,10 @@ const History = (props) => {
                                     value={props.date}
                                     defaultValue={eodDate}
                                     max={todayDate()}
-                                    onChange={(e) => { setEodDate(e.target.value); }}
+                                    onChange={(e) => { setEodDate(e.target.value); fetchTask(); }}
                                     required
                                   />
                                 </div>
-                                <div className="col-2">
-                                    <button
-                                      type="submit"
-                                      className="btn-search text-white"
-                                      onClick={() => {
-                                        fetchTask();
-                                      }}
-                                    >
-                                      Search
-                                    </button>
-                                  </div>
                               </div>
                             </div>
                           </div>

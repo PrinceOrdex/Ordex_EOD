@@ -9,22 +9,24 @@ import Autocomplete from '@mui/material/Autocomplete';
 import axios from "axios";
 import { useState } from "react";
 import Employee_list from "./Employee_list";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Edit_emp_details = (props) => {
   const [loader, setLoader] = useState(false);
   const [tValue, setTValue] = useState("fdfds");
+  const navigate = useNavigate();
 
   const [empData, setEmpData] = useState({});
 
   const getEmpData = async () => {
-
+    setLoader(true)
     const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/employee`, {
       params: {
         emp_id: props.empId,
       },
     });
     setEmpData(res.data[0]);
-
     setLoader(false)
   };
 
@@ -75,11 +77,23 @@ const Edit_emp_details = (props) => {
 
       if (res.status == 200) {
         setLoader(false)
-        alert("Emp Updated Successfully");
+        Swal.fire({
+          type: "success",
+          icon: "success",
+          title: "Employee details updated successfully",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#06bdff",
+        });
         // window.location.reload();
       } else {
         setLoader(false)
-        alert("Updation failed")
+        Swal.fire({
+          type: "error",
+          icon: "error",
+          title: "Updation failed",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#06bdff",
+        });
       }
     } catch (err) {
       setLoader(false)
@@ -94,7 +108,7 @@ const Edit_emp_details = (props) => {
 
   return (
     <>
-
+      {loader ? <div className="loadingPopup"></div> : null}
       <div className="fixed-left">
         <div id="wrapper">
           {/* <Sidebar /> */}
@@ -108,7 +122,7 @@ const Edit_emp_details = (props) => {
                       <div className="page-title-box">
                         <div className="row col-12 mx-0 px-0 text-center border-bottom align-items-center">
                           <div className="col-1 px-0 d-flex justify-content-start">
-                            <img src={BACK} alt="" style={{ width: "33px", height: "33px" }} />
+                            <img src={BACK} alt="back" onClick={() => { window.location.reload() }} style={{ width: "33px", height: "33px" }} />
                           </div>
                           <div className="col-11 d-flex justify-content-center">
                             <h3 className="text-uppercase">edit details</h3>
@@ -270,15 +284,14 @@ const Edit_emp_details = (props) => {
                               <div className="row col-12 mx-0 px-0 mb-3">
                                 <div className="col-12 col-md-8"></div>
                                 <div className="col-12 col-md-4 mt-3 mt-sm-0 d-flex justify-content-center justify-content-md-end">
-
                                   <button type="submit" className="btn-done text-white" onClick={(e) => { updateEmployee(e) }}>
                                     Done
                                   </button>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
+                                </div >
+                              </div >
+                            </form >
+                          </div >
+                        </div >
                         <div className="row col-12 mx-0 px-0 justify-content-center admin-edit">
                           <div className="col-12 col-md-4 col-lg-3 px-3 px-md-0">
                             <label className="mb-1">Skills</label>
@@ -289,12 +302,12 @@ const Edit_emp_details = (props) => {
                                 id="Skill"
                                 className="form-control"
                               /> */}
-                              <Stack style={{width: "100%"}}>
+                              <Stack style={{ width: "100%" }}>
                                 <Autocomplete
                                   freeSolo
                                   id="free-solo-2-demo"
                                   disableClearable
-                                  
+
                                   options={top100Films.map((option) => option.title)}
                                   onChange={(event, value) => setTValue(value)}
                                   renderInput={(params) => (
@@ -303,7 +316,7 @@ const Edit_emp_details = (props) => {
                                       variant="standard"
                                       onChange={(e) => { setTValue(e.target.value) }}
                                       value={tValue}
-                                      
+
                                     />
                                   )}
                                 />
@@ -455,15 +468,15 @@ const Edit_emp_details = (props) => {
 
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                      </div >
+                    </div >
+                  </div >
+                </div >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
     </>
   );
 };
@@ -477,32 +490,32 @@ const top100Films = [
   { title: "Schindler's List", year: 1993 },
   { title: 'Pulp Fiction', year: 1994 },
   {
-      title: 'The Lord of the Rings: The Return of the King',
-      year: 2003,
+    title: 'The Lord of the Rings: The Return of the King',
+    year: 2003,
   },
   { title: 'The Good, the Bad and the Ugly', year: 1966 },
   { title: 'Fight Club', year: 1999 },
   {
-      title: 'The Lord of the Rings: The Fellowship of the Ring',
-      year: 2001,
+    title: 'The Lord of the Rings: The Fellowship of the Ring',
+    year: 2001,
   },
   {
-      title: 'Star Wars: Episode V - The Empire Strikes Back',
-      year: 1980,
+    title: 'Star Wars: Episode V - The Empire Strikes Back',
+    year: 1980,
   },
   { title: 'Forrest Gump', year: 1994 },
   { title: 'Inception', year: 2010 },
   {
-      title: 'The Lord of the Rings: The Two Towers',
-      year: 2002,
+    title: 'The Lord of the Rings: The Two Towers',
+    year: 2002,
   },
   { title: "One Flew Over the Cuckoo's Nest", year: 1975 },
   { title: 'Goodfellas', year: 1990 },
   { title: 'The Matrix', year: 1999 },
   { title: 'Seven Samurai', year: 1954 },
   {
-      title: 'Star Wars: Episode IV - A New Hope',
-      year: 1977,
+    title: 'Star Wars: Episode IV - A New Hope',
+    year: 1977,
   },
   { title: 'City of God', year: 2002 },
   { title: 'Se7en', year: 1995 },
@@ -537,8 +550,8 @@ const top100Films = [
   { title: 'Alien', year: 1979 },
   { title: 'Sunset Boulevard', year: 1950 },
   {
-      title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
-      year: 1964,
+    title: 'Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb',
+    year: 1964,
   },
   { title: 'The Great Dictator', year: 1940 },
   { title: 'Cinema Paradiso', year: 1988 },
@@ -560,8 +573,8 @@ const top100Films = [
   { title: 'North by Northwest', year: 1959 },
   { title: 'Vertigo', year: 1958 },
   {
-      title: 'Star Wars: Episode VI - Return of the Jedi',
-      year: 1983,
+    title: 'Star Wars: Episode VI - Return of the Jedi',
+    year: 1983,
   },
   { title: 'Reservoir Dogs', year: 1992 },
   { title: 'Braveheart', year: 1995 },
@@ -574,8 +587,8 @@ const top100Films = [
   { title: 'Lawrence of Arabia', year: 1962 },
   { title: 'Double Indemnity', year: 1944 },
   {
-      title: 'Eternal Sunshine of the Spotless Mind',
-      year: 2004,
+    title: 'Eternal Sunshine of the Spotless Mind',
+    year: 2004,
   },
   { title: 'Amadeus', year: 1984 },
   { title: 'To Kill a Mockingbird', year: 1962 },
