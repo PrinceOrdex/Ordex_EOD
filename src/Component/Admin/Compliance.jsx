@@ -4,6 +4,7 @@ import axios from "axios";
 import edit_emp from "./../../Image/EditIcon.svg";
 import moment from "moment";
 import Swal from "sweetalert2";
+import './../../css/history.scss'
 // import Header from "./AdminHeader";
 // import Sidebar from "./AdminSidebar";
 

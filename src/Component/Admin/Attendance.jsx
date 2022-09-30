@@ -198,7 +198,7 @@ const Attendance = () => {
                 <div className="page-content-wrapper">
                   <div className="container-fluid">
                     <div className="row col-12 px-0 mx-0">
-                      <div className="col-sm-12 px-0">
+                      <div className="col-sm-12 px-0" id="attendence-report">
                         <div className="page-title-box" id="attendence-report">
                           <div className="row col-12 mx-0 px-0 text-center border-bottom">
                             <h3 className="text-uppercase">
