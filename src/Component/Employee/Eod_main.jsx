@@ -186,7 +186,9 @@ const Eod_main = () => {
           // createdAt: todayDate(),
           eodDate: eod_date,
         });
-        setHasData(true)
+        setHasData(true);
+        setTimeout(() => { setHasData(false) }, 7000);
+
       } else {
         setLoader(false)
         // alert("Data insertion failed");
@@ -246,7 +248,7 @@ const Eod_main = () => {
         .then((result) => {
           if (result.isConfirmed) {
             setLoader(true)
-            const res = axios.post("http://localhost:8000/eod", {
+            const res = axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod`, {
               empId: getuserDetails().empId,
               eoddate: eod_date,
               createdAt: dateString,

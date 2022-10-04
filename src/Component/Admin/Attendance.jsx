@@ -186,8 +186,6 @@ const Attendance = () => {
   const AllTask = () => {
     return (
       <>
-        {loader ? <div className="loadingPopup"></div> : null}
-
         {/* <Header /> */}
         <div className="fixed-left">
           <div id="wrapper">
@@ -453,6 +451,8 @@ const Attendance = () => {
 
   return (
     <>
+      {loader ? <div className="loadingPopup">Hello</div> : null}
+
       {showAllTaskData && <AllTask />}
       {showSingleTaskData && <SingleTask />}
     </>
