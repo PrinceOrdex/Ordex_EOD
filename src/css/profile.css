@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -15,6 +15,7 @@
     opacity: 0.9;
     display: block;
 }
+
 /* 
 .bg-image{
     height: 250px;
@@ -122,7 +123,7 @@ input[type="email"]:focus,
     border-radius: 0;
 }
 
-.admin-edit .skill.form-control:focus{
+.admin-edit .skill.form-control:focus {
     box-shadow: none !important;
     border-top: 1px solid #F2F2F2;
     border-left: 1px solid #F2F2F2;
@@ -149,7 +150,7 @@ input[type="email"]:focus,
     text-rendering: auto;
 }
 
-.admin-edit p{
+.admin-edit p {
     font-size: 14px !important;
 }
 
@@ -183,6 +184,7 @@ input[type="email"]:focus,
 
 .skill-box p {
     color: #7f7f7f;
+    width: 85%;
 }
 
 .form-select {
@@ -194,15 +196,15 @@ input[type="email"]:focus,
     padding: 0px !important;
 }
 
-.css-nen11g-MuiStack-root{
+.css-nen11g-MuiStack-root {
     width: 100%;
 }
 
-.css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input{
+.css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
     /* padding: 0px !important; */
 }
 
-.css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input:focus{
+.css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input:focus {
     box-shadow: none !important;
     border-top: 1px solid #F2F2F2;
     border-left: 1px solid #F2F2F2;
@@ -211,14 +213,15 @@ input[type="email"]:focus,
     background-color: #F2F2F2;
     border-radius: 0;
 }
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
     bottom: 0px !important;
     top: -5px !important;
     border: 1px solid #ced4da !important;
     border-radius: 0rem !important;
 }
 
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline:focus{
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline:focus {
     box-shadow: none !important;
     border-top: 1px solid #F2F2F2;
     border-left: 1px solid #F2F2F2;
@@ -228,18 +231,19 @@ input[type="email"]:focus,
     border-radius: 0;
 }
 
-.css-1a1fmpi-MuiInputBase-root-MuiInput-root{
+.css-1a1fmpi-MuiInputBase-root-MuiInput-root {
     border: none !important;
 }
 
-.css-1a1fmpi-MuiInputBase-root-MuiInput-root::before{
-    border-bottom: none !important;
-}
-.css-1a1fmpi-MuiInputBase-root-MuiInput-root::after{
+.css-1a1fmpi-MuiInputBase-root-MuiInput-root::before {
     border-bottom: none !important;
 }
 
-.css-1a1fmpi-MuiInputBase-root-MuiInput-root:focus{
+.css-1a1fmpi-MuiInputBase-root-MuiInput-root::after {
+    border-bottom: none !important;
+}
+
+.css-1a1fmpi-MuiInputBase-root-MuiInput-root:focus {
     border-bottom: 1px solid #add8e6 !important;
     border-top: 1px solid transparent !important;
     border-right: 1px solid transparent !important;
@@ -247,10 +251,10 @@ input[type="email"]:focus,
 }
 
 
-.css-1qqsdnr-MuiAutocomplete-root .MuiInput-root .MuiInput-input{
+.css-1qqsdnr-MuiAutocomplete-root .MuiInput-root .MuiInput-input {
     border: 1px solid #ced4da;
 }
 
-.css-1qqsdnr-MuiAutocomplete-root .MuiInput-root .MuiInput-input{
+.css-1qqsdnr-MuiAutocomplete-root .MuiInput-root .MuiInput-input {
     padding: 7px !important;
 }

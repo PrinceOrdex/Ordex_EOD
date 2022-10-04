@@ -73,7 +73,7 @@ const Compliance = () => {
     try {
       setLoader(true);
       if (eodStartDate && eodEndDate && eodEndDate > eodStartDate) {
-        let res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod/daterange`, {
+        let res = await axios.get(`${process.env.REACT_APP_BACKEND_BASE_URL}/eod/compliance/daterange`, {
           params: {
             start_date: eodStartDate,
             end_date: eodEndDate,
