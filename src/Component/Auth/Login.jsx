@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import "./custom";
-// import "./../../css/style.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./../../css/style.scss";
 import Logo from "./../../Image/Logo.png";
 import axios from "axios";
-import { Route } from "react-router-dom";
-import PrivateRoutes from "./PrivateRoutes";
-import Eod from "../Employee/Eod";
+import Swal from 'sweetalert2';
 import { useContext } from "react";
 import { ContextApi } from "./Context";
 import { MenuContext } from "../../App";
@@ -48,37 +44,56 @@ const Login = () => {
     });
   };
 
+  function ValidateEmail() {
+
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (formData.Email.match(validRegex)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const handleSubmit = async (e) => {
-
-    const obj = {
-      Email: formData.Email,
-      Password: formData.Password,
-      Role: role,
-    };
-
     try {
-      setLoader(true)
-      e.preventDefault();
 
-      const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/login`, obj);
+      if (ValidateEmail()) {
+        const obj = {
+          Email: formData.Email,
+          Password: formData.Password,
+          Role: role,
+        };
 
-      if (res.status == 200) {
-        localStorage.setItem("userData", JSON.stringify(res.data));
-        dispatch({ type: "LOGIN", payload: true });
+
+        setLoader(true)
+        e.preventDefault();
+
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_BASE_URL}/login`, obj);
+
+        if (res.status == 200) {
+          localStorage.setItem("userData", JSON.stringify(res.data));
+          dispatch({ type: "LOGIN", payload: true });
+          setLoader(false)
+          if (role == 'employee')
+            navigate("/eod");
+          else if (role == 'admin')
+            navigate("/admin/main");
+        }
+        else {
+          setLoader(false)
+          setInvalidLoginMsg(true);
+        }
+      } else {
         setLoader(false)
-        if (role == 'employee')
-          navigate("/eod");
-        else if (role == 'admin')
-          navigate("/admin/main");
+        Swal.fire({
+          type: "warning",
+          icon: "warning",
+          title: "Invalid Email Address",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#06bdff",
+        });
       }
-      else {
-        setLoader(false)
-        setInvalidLoginMsg(true);
-      }
-      // if (res.status == 401) {
-
-      //   navigate("/login");
-      // }
 
     } catch (err) {
       setLoader(false)
