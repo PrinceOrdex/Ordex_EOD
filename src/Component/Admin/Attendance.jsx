@@ -169,6 +169,7 @@ const Attendance = () => {
           name={name}
           phoneno={phoneno}
           email={email}
+          temp={true}
         />
       </>
     );

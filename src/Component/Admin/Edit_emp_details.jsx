@@ -570,7 +570,7 @@ const Edit_emp_details = (props) => {
                           </div >
                         </div >
                         <div className="row col-12 mx-0 px-0 justify-content-center admin-edit">
-                          <div className="col-12 col-md-4 col-lg-3 px-3 px-md-0">
+                          <div className="col-12 col-md-5 col-lg-4 px-3 px-md-0">
                             <label className="mb-1">Skills</label>
                             <div className="skill">
                               <Stack style={{ width: "100%" }}>
@@ -598,9 +598,9 @@ const Edit_emp_details = (props) => {
 
                               {empSkill.map((data, index) => {
                                 return (
-                                  <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mt-3 px-1 ps-0 ps-sm-1" key={index} title={data.skill_name}>
-                                    <div className="skill-box p-2">
-                                      <p className="mb-0">{data.skill_name}</p>
+                                  <div className="col-6 mt-3 px-1 ps-0 ps-sm-1" key={index} title={data.skill_name} >
+                                    <div className="skill-box p-2 col-auto" style={{ paddingRight: 20 }}>
+                                      <div className="mb-0" style={{ paddingRight: '2rem' }}>{data.skill_name}</div>
                                       <i className="fas fa-circle-xmark" onClick={() => deleteEmpSkill(data.emp_skill_id)}></i>
                                     </div>
                                   </div>
@@ -611,9 +611,9 @@ const Edit_emp_details = (props) => {
                             </div>
 
                           </div>
-                          <div className="col-12 col-md-8 px-0 px-sm-1">
+                          <div className="col-12 col-md-7 px-0 px-sm-1">
                             <div className="row col-12 mx-0 px-0 mb-3">
-                              <div className="col-12 col-lg-8 ps-3 pe-2">
+                              <div className="col-12 col-lg-7 ps-3 pe-2">
                                 <div className="emp-project">
                                   <label className="mb-1">Project</label>
 

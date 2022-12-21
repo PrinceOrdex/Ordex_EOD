@@ -176,7 +176,7 @@ input[type="email"]:focus,
     color: #e7e6e6;
     border: 1px solid #e7e6e6;
     border-radius: 50%;
-    background-color: #7f7f7f;
+    background-color: gray;
     margin-right: 10px;
     right: 0;
     position: absolute;
@@ -184,7 +184,9 @@ input[type="email"]:focus,
 
 .skill-box p {
     color: #7f7f7f;
-    width: 85%;
+    width: 81%;
+    /* width: auto; */
+    /* background-color: red; */
 }
 
 .form-select {

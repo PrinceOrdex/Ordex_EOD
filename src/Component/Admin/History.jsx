@@ -127,7 +127,7 @@ const History = (props) => {
   }, []);
 
   useEffect(() => {
-    fetchTask();
+    !props.temp && fetchTask();
   }, [eodDate]);
 
   return (
